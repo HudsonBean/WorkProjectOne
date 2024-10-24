@@ -17,10 +17,8 @@ const usersSchema = new mongoose.Schema({
     unique: true,
   },
   emailAdress: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
+    encryptedData: { type: String, required: true },
+    iv: { type: String, required: true },
   },
   password: {
     type: String,
@@ -31,7 +29,8 @@ const usersSchema = new mongoose.Schema({
     default: "Default Profile Picture Path",
   },
   phoneNumber: {
-    type: String,
+    encryptedData: { type: String },
+    iv: { type: String },
   },
   billingInfo: {
     /// Implement later

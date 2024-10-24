@@ -12,5 +12,6 @@ Content-Type: application/json
     "lastName": "Bean",
     "userName": "ZombieKicker7",
     "emailAdress": "hudsonbeandev@gmail.com",
-    "password": "Copsreloaded62$"
+    "password": "Copsreloaded62$",
+    "phoneNumber" : "3164940195"
 }
