@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "Index.js",
   "scripts": {
-    "dev": "nodemon Index.js"
+    "main": "nodemon Index.js"
   },
   "keywords": [],
   "author": "",
@@ -11,8 +11,11 @@
   "description": "",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "nodemon": "^3.1.7",
     "express": "^4.21.1",
-    "mongoose": "^8.7.2"
+    "mongoose": "^8.7.2",
+    "nodemon": "^3.1.7"
+  },
+  "devDependencies": {
+    "chalk": "^5.3.0"
   }
 }

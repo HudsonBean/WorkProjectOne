@@ -1,4 +1,6 @@
 /// Global Variables
+// Chalk
+const { default: chalk } = require("chalk");
 // Dotenv
 require("dotenv").config();
 // Express Server
@@ -16,5 +18,7 @@ db.once("open", () =>
 // Start the Server
 app.use(express.json());
 app.listen(process.env.PORT, () =>
-  console.log(`Server is Listening on Port ${process.env.PORT}`)
+  console.log(
+    `Server is Listening on Port ${process.env.PORT}\nOpen here: Https://localhost/${process.env.PORT}`
+  )
 );
