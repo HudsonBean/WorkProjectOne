@@ -1,7 +1,8 @@
-// Express
+// Global Variables
 const express = require("express");
 const router = express.Router();
 const User = require("../models/users");
+const bcrypt = require("bcrypt");
 
 // Getting all
 router.get("/", async (req, res) => {
@@ -23,7 +24,8 @@ router.post("/", async (req, res) => {
     lastName: req.body.lastName,
     userName: req.body.userName,
     emailAdress: req.body.emailAdress,
-    password: req.body.password,
+    //prettier-ignore
+    password: await bcrypt.hash(req.body.password, 13),
     // Not required
     profilePicture: req.body.firstName,
     phoneNumber: req.body.phoneNumber,
@@ -57,5 +59,4 @@ async function getUser(req, res, next) {
   res.user = user;
   next();
 }
-
 module.exports = router;
