@@ -1,0 +1,15 @@
+GET http://localhost:3000/users
+
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "firstName": "Hudson",
+    "lastName": "Bean",
+    "userName": "ZombieKicker7",
+    "emailAdress": "hudsonbeandev@gmail.com",
+    "password": "Copsreloaded62$"
+}

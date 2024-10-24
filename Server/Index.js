@@ -14,7 +14,13 @@ db.once("open", () =>
 );
 
 // Start the Server
+// Set decoding
 app.use(express.json());
+
+// Routes
+const usersRouter = require("./routes/users");
+app.use("/users", usersRouter);
+
 app.listen(process.env.PORT, () =>
   console.log(`Server is Listening on Port ${process.env.PORT}`)
 );
