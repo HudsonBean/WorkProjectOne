@@ -5,7 +5,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 // MongoDB Database
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); //brew services start mongodb/brew/mongodb-community
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on("error", (err) => console.error(err));
