@@ -5,11 +5,11 @@ GET http://localhost:3000/users
 
 # Decrypt email, phoneNumber, and password
 
-POST http://localhost:3000/users/671b22934987f61c0a5c6006/test
+POST http://localhost:3000/users/671b97990cff9683acc0822e/test
 Content-Type: application/json
 
 {
-    "myPassword": "Copsreloaded62$"
+    "myPassword": "Copsreloaded62"
 }
 
 ###

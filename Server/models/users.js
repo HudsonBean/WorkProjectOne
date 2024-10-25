@@ -18,6 +18,7 @@ const usersSchema = new mongoose.Schema({
   },
   emailAdress: {
     encryptedData: { type: String, required: true },
+    iv: { type: String, required: true },
   },
   password: {
     type: String,
@@ -29,6 +30,7 @@ const usersSchema = new mongoose.Schema({
   },
   phoneNumber: {
     encryptedData: { type: String },
+    iv: { type: String },
   },
   billingInfo: {
     /// Implement later
