@@ -24,14 +24,14 @@ router.post("/", async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     userName: req.body.userName,
-    emailAdress: await encrypt(req.body.emailAdress),
+    emailAdress: await encrypt(req.body.emailAdress), // Encrypt email
     //prettier-ignore
-    password: await bcrypt.hash(req.body.password, 13),
+    password: await bcrypt.hash(req.body.password, 13), // Secure hash encrypt
     // Not required
     profilePicture: req.body.firstName,
     phoneNumber: !req.body.phoneNumber
       ? undefined
-      : await encrypt(req.body.phoneNumber),
+      : await encrypt(req.body.phoneNumber), // Encrypt phoneNumber
     billingInfo: req.body.billingInfo, // Implement later
     websites: req.body.websites, // Implement later
     activePlan: req.body.activePlan,
