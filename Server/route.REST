@@ -3,6 +3,17 @@ GET http://localhost:3000/users
 
 ###
 
+# Decrypt email, phoneNumber, and password
+
+POST http://localhost:3000/users/671b22934987f61c0a5c6006/test
+Content-Type: application/json
+
+{
+    "myPassword": "Copsreloaded62$"
+}
+
+###
+
 # Create user
 POST http://localhost:3000/users
 Content-Type: application/json
@@ -15,3 +26,5 @@ Content-Type: application/json
     "password": "Copsreloaded62$",
     "phoneNumber" : "3164940195"
 }
+
+###

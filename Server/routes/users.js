@@ -50,6 +50,16 @@ router.post("/", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+// Test decryption
+router.post("/:id/test", getUser, async (req, res) => {
+  const user = res.user;
+  // Decrypt email and password
+
+  // Check password
+  //   bcrypt.compare(req.body.myPassword, user.password, (err, response) => {
+  //     res.send(response);
+  //   });
+});
 // Update user
 // Delete a user
 
@@ -67,21 +77,7 @@ async function getUser(req, res, next) {
   res.user = user;
   next();
 }
-async function encrypt(text) {
-  const cipher = crypto.createCipheriv(algorithm, key, iv);
-  let encrypted = cipher.update(text, "utf8", "hex");
-  encrypted += cipher.final("hex");
-  return { iv: iv.toString("hex"), encryptedData: encrypted };
-}
-async function decrypt(encryptedData, ivHex) {
-  const decipher = crypto.createDecipheriv(
-    algorithm,
-    key,
-    Buffer.from(ivHex, "hex")
-  );
-  let decrypted = decipher.update(encryptedData, "hex", "utf8");
-  decrypted += decipher.final("utf8");
-  return decrypted;
-}
+async function encrypt(text) {}
+async function decrypt(encryptedData) {}
 
 module.exports = router;
