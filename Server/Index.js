@@ -1,7 +1,9 @@
 /// Global Variables
+// Bcrypt
+const bcrypt = require("bcrypt");
 // Passport
 const passport = require("passport");
-const localStrategy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 // Express Session
 const session = require("express-session");
 // Dotenv
@@ -36,7 +38,7 @@ app.use(passport.session());
 passport.use(
   new LocalStrategy(
     {
-      emailField: "emailAdress", // or 'email', based on your setup
+      emailField: "emailAdress",
       passwordField: "password",
     },
     async (emailAdress, password, done) => {
@@ -45,10 +47,15 @@ passport.use(
         if (!user) {
           return done(null, false, { message: "Incorrect email adress." });
         }
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-          return done(null, false, { message: "Incorrect password." });
-        }
+        const isMatch = await bcrypt.compare(
+          password,
+          user.password,
+          (err, response) => {
+            if (!response) {
+              return done(null, false, { message: "Incorrect password." });
+            }
+          }
+        );
         return done(null, user);
       } catch (error) {
         return done(error);
@@ -62,7 +69,7 @@ passport.serializeUser((user, done) => {
 });
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id); // user._id
     done(null, user);
   } catch (error) {
     done(error, null);

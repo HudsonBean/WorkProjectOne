@@ -110,6 +110,7 @@ async function getUser(req, res, next) {
   res.user = user;
   next();
 }
+// Encryption functions
 async function encrypt(text) {
   try {
     // Create new IV, decode key from .env file
