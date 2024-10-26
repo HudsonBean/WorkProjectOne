@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     userName: req.body.userName,
-    emailAdress: await encrypt(req.body.emailAdress), // Encrypt email
+    emailAdress: req.body.emailAdress, // Encrypt email
     //prettier-ignore
     password: await bcrypt.hash(req.body.password, 13), // Secure hash encrypt
     // Not required
@@ -49,7 +49,7 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     res.status(400).json({
       message:
-        "Oops! Error occured when trying to register user!\nError message: " +
+        "Oops! Error occured when trying to register user! Error message: " +
         err.message,
     });
   }
@@ -75,11 +75,8 @@ router.get("/logout", (req, res, next) => {
 // Test decryption
 router.post("/:id/test", getUser, async (req, res) => {
   const user = res.user;
-  // Decrypt email and password
-  const emailAdress = await decrypt(
-    user.emailAdress.encryptedData,
-    user.emailAdress.iv
-  );
+  // Decrypt phoneNumber
+  const emailAdress = user.emailAdress;
   const phoneNumber = await decrypt(
     user.phoneNumber.encryptedData,
     user.phoneNumber.iv

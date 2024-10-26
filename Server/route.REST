@@ -15,7 +15,7 @@ Content-Type: application/json
 ###
 
 # Create user
-POST http://localhost:3000/users
+POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
@@ -30,4 +30,4 @@ Content-Type: application/json
 ###
 
 #Get a user
-GET http://localhost:3000/users/671b97990cff9683acc0822e
+GET http://localhost:3000/users/671d790ef0758241b1e7ec15
