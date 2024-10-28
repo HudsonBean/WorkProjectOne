@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     userName: req.body.userName,
-    emailAdress: req.body.emailAdress, // Encrypt email
+    emailAddress: req.body.emailAddress, // Encrypt email
     //prettier-ignore
     password: await bcrypt.hash(req.body.password, 13), // Secure hash encrypt
     // Not required
@@ -76,7 +76,7 @@ router.get("/logout", (req, res, next) => {
 router.post("/:id/test", getUser, async (req, res) => {
   const user = res.user;
   // Decrypt phoneNumber
-  const emailAdress = user.emailAdress;
+  const emailAddress = user.emailAddress;
   const phoneNumber = await decrypt(
     user.phoneNumber.encryptedData,
     user.phoneNumber.iv
@@ -85,7 +85,7 @@ router.post("/:id/test", getUser, async (req, res) => {
   bcrypt.compare(req.body.myPassword, user.password, (err, response) => {
     res.send(
       "email: " +
-        emailAdress +
+        emailAddress +
         "\nphoneNumber: " +
         phoneNumber +
         "\nIs password right: " +
