@@ -1,11 +1,16 @@
 // Global Variables
 const express = require("express");
-const router = express.Router();
-const User = require("../models/users");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const passport = require("passport");
 
-// Get all users
+// Models
+const User = require("../models/users");
+
+// Express Router
+const router = express.Router();
+
+// Get all users NO PAGE DATA
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();
@@ -14,17 +19,17 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-// Get user by id
+// Get user by id PAGE DATA
 router.get("/:id", getUser, async (req, res) => {
   res.send(res.user.firstName);
 });
-// Create new user
-router.post("/", async (req, res) => {
+// Register a new user PAGE DATA
+router.post("/register", async (req, res) => {
   const user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     userName: req.body.userName,
-    emailAdress: await encrypt(req.body.emailAdress), // Encrypt email
+    emailAddress: req.body.emailAddress, // Encrypt email
     //prettier-ignore
     password: await bcrypt.hash(req.body.password, 13), // Secure hash encrypt
     // Not required
@@ -42,17 +47,36 @@ router.post("/", async (req, res) => {
     const newUser = await user.save();
     res.status(201).json(newUser);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(400).json({
+      message:
+        "Oops! Error occured when trying to register user! Error message: " +
+        err.message,
+    });
   }
 });
+// Login a user NO PAGE DATA
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/dashboard", // Redirect to a protected route after successful login
+    failureRedirect: "/users/login", // Redirect to login page if authentication fails
+    failureFlash: true, // Optional: Enable flash messages if you have flash middleware
+  })
+);
+// Logout a user NO PAGE DATA
+router.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    res.redirect("/users/login");
+  });
+});
+// Update user
+// Delete a user
 // Test decryption
 router.post("/:id/test", getUser, async (req, res) => {
   const user = res.user;
-  // Decrypt email and password
-  const emailAdress = await decrypt(
-    user.emailAdress.encryptedData,
-    user.emailAdress.iv
-  );
+  // Decrypt phoneNumber
+  const emailAddress = user.emailAddress;
   const phoneNumber = await decrypt(
     user.phoneNumber.encryptedData,
     user.phoneNumber.iv
@@ -61,7 +85,7 @@ router.post("/:id/test", getUser, async (req, res) => {
   bcrypt.compare(req.body.myPassword, user.password, (err, response) => {
     res.send(
       "email: " +
-        emailAdress +
+        emailAddress +
         "\nphoneNumber: " +
         phoneNumber +
         "\nIs password right: " +
@@ -69,9 +93,6 @@ router.post("/:id/test", getUser, async (req, res) => {
     );
   });
 });
-// Update user
-// Delete a user
-
 // Middlewares
 async function getUser(req, res, next) {
   let user;
@@ -86,6 +107,7 @@ async function getUser(req, res, next) {
   res.user = user;
   next();
 }
+// Encryption functions
 async function encrypt(text) {
   try {
     // Create new IV, decode key from .env file
