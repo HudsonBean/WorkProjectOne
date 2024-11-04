@@ -7,13 +7,23 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./routes/Dashboard";
 import Home from "./routes/Home";
 import ErrorPage from "./routes/ErrorPage";
+import Login from "./routes/Login";
+import Register from "./routes/Register";
 // Use for main page
-const a = true;
+const a = false;
 const Router = createBrowserRouter([
   {
     path: "/",
     element: a == true ? <Dashboard /> : <Home />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 

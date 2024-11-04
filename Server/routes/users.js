@@ -23,60 +23,13 @@ router.get("/", async (req, res) => {
 router.get("/:id", getUser, async (req, res) => {
   res.send(res.user.firstName);
 });
-// Register a new user PAGE DATA
-router.post("/register", async (req, res) => {
-  const user = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    userName: req.body.userName,
-    emailAddress: req.body.emailAddress, // Encrypt email
-    //prettier-ignore
-    password: await bcrypt.hash(req.body.password, 13), // Secure hash encrypt
-    // Not required
-    profilePicture: req.body.firstName,
-    phoneNumber: !req.body.phoneNumber
-      ? undefined
-      : await encrypt(req.body.phoneNumber), // Encrypt phoneNumber
-    billingInfo: req.body.billingInfo, // Implement later
-    websites: req.body.websites, // Implement later
-    activePlan: req.body.activePlan,
-    accountCreationDate: req.body.accountCreationDate,
-    preferences: req.body.preferences,
-  });
-  try {
-    const newUser = await user.save();
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).json({
-      message:
-        "Oops! Error occured when trying to register user! Error message: " +
-        err.message,
-    });
-  }
-});
-// Login a user NO PAGE DATA
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/dashboard", // Redirect to a protected route after successful login
-    failureRedirect: "/users/login", // Redirect to login page if authentication fails
-    failureFlash: true, // Optional: Enable flash messages if you have flash middleware
-  })
-);
-// Logout a user NO PAGE DATA
-router.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err);
-    res.redirect("/users/login");
-  });
-});
 // Update user
 // Delete a user
 // Test decryption
 router.post("/:id/test", getUser, async (req, res) => {
   const user = res.user;
   // Decrypt phoneNumber
-  const emailAddress = user.emailAddress;
+  const email = user.email;
   const phoneNumber = await decrypt(
     user.phoneNumber.encryptedData,
     user.phoneNumber.iv
@@ -85,7 +38,7 @@ router.post("/:id/test", getUser, async (req, res) => {
   bcrypt.compare(req.body.myPassword, user.password, (err, response) => {
     res.send(
       "email: " +
-        emailAddress +
+        email +
         "\nphoneNumber: " +
         phoneNumber +
         "\nIs password right: " +
