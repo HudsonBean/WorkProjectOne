@@ -22,6 +22,11 @@ async function getUser(req, res, next) {
   res.user = user;
   next();
 }
+
+module.exports = router;
+
+// Save for later
+
 async function encrypt(text) {
   try {
     // Create new IV, decode key from .env file
@@ -59,5 +64,3 @@ async function decrypt(encryptedData, ivHex) {
     console.error("OOPS!\n" + err.message);
   }
 }
-
-module.exports = router;
