@@ -26,9 +26,11 @@ db.once("open", () =>
 const User = require("./models/users");
 // Passport initializer
 const initializePassport = require("./passport-config");
-initializePassport(passport, (email) => {
-  User.findOne({ email: email });
-});
+initializePassport(
+  passport,
+  async (email) => await User.find({ email: email }),
+  async (id) => await User.find({ _id: id })
+);
 
 // Set middlewares
 app.use(express.json());
@@ -49,14 +51,17 @@ app.use(passport.session());
 
 // Routes
 const usersRoute = require("./routes/users");
-const users = require("./models/users");
 app.use("/users", usersRoute);
 
 // Login routes
-app.post("/login", (req, res) => {
-  res.send("Thanks!");
-  console.log(req.body);
-});
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/", // See if you can send data to let client know to load dashboard
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
 
 // Register routes
 app.post("/register", async (req, res) => {
@@ -81,16 +86,13 @@ app.post("/register", async (req, res) => {
   });
   try {
     const newUser = await user.save();
-    res.status(201).json(newUser).redirect("/login");
+    res.status(201).json(newUser);
   } catch (err) {
-    res
-      .status(400)
-      .json({
-        message:
-          "Oops! Error occured when trying to register the user! Error message: " +
-          err.message,
-      })
-      .redirect("/register");
+    res.status(400).json({
+      message:
+        "Oops! Error occured when trying to register the user! Error message: " +
+        err.message,
+    });
   }
 });
 
