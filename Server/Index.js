@@ -1,4 +1,6 @@
 /// Global Variables
+// Cors
+const cors = require("cors");
 // Dotenv
 require("dotenv").config();
 // Express Server
@@ -18,6 +20,7 @@ db.once("open", () =>
 // Set app middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 // Routes
 const usersRouter = require("./routes/users");
@@ -25,7 +28,10 @@ app.use("/users", usersRouter);
 
 // Login
 app.post("/login", async (req, res) => {
-  res.redirect("/");
+  res.status(202).json({
+    message: "Successfully logged in ", // + req.user
+    success: true,
+  });
 });
 
 // Register

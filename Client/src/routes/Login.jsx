@@ -1,10 +1,30 @@
+// Imports
+import axios from "axios";
+import { useNavigate } from "react-router";
+
 const Login = () => {
+  // Variables
+  const navigate = useNavigate();
+
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData);
 
-    console.log(payload);
+    axios
+      .post("http://localhost:3000/login", {
+        email: payload.email,
+        password: payload.password,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.success) {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log("Oops an error ocurred!", err);
+      });
   };
   return (
     <div>
