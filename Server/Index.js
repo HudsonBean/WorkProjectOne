@@ -54,14 +54,9 @@ const usersRoute = require("./routes/users");
 app.use("/users", usersRoute);
 
 // Login routes
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/", // See if you can send data to let client know to load dashboard
-    failureRedirect: "/login",
-    failureFlash: true,
-  })
-);
+app.post("/login", passport.authenticate("local"), (req, res) => {
+  res.json(req.user);
+});
 
 // Register routes
 app.post("/register", async (req, res) => {
