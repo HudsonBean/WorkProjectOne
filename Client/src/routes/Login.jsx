@@ -11,12 +11,12 @@ const Login = () => {
     const password = formData.get("password");
     // Attempt login
     axios
-      .post("http://localhost:3000/login")
+      .post("http://localhost:3000/login", {
+        email: email,
+        password: password,
+      })
       .then((res) => {
         console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
       });
   };
 

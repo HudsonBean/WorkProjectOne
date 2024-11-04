@@ -1,4 +1,6 @@
 /// Global Variables
+// Cors
+const cors = require("cors");
 // Flash
 const flash = require("express-flash");
 // Bcrypt
@@ -7,8 +9,6 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 // Express Session
 const session = require("express-session");
-// Express router
-const router = require("rout");
 // Dotenv
 require("dotenv").config();
 // Express Server
@@ -33,6 +33,7 @@ initializePassport(passport, (email) => {
 // Set middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded data
+app.use(cors());
 app.use(flash());
 // Passport session data
 app.use(
@@ -52,17 +53,13 @@ const users = require("./models/users");
 app.use("/users", usersRoute);
 
 // Login routes
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/", // Redirect to a protected route after successful login
-    failureRedirect: "/login", // Redirect to login page if authentication fails
-    failureFlash: true, // Optional: Enable flash messages if you have flash middleware
-  })
-);
+app.post("/login", (req, res) => {
+  res.send("Thanks!");
+  console.log(req.body);
+});
 
 // Register routes
-router.post("/register", async (req, res) => {
+app.post("/register", async (req, res) => {
   const user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -98,7 +95,7 @@ router.post("/register", async (req, res) => {
 });
 
 // Logout routes
-router.get("/logout", (req, res, next) => {
+app.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
     res.redirect("/login");
@@ -107,6 +104,7 @@ router.get("/logout", (req, res, next) => {
 
 // Main page route
 app.get("/", (req, res) => {
+  res.status(200).send("Hello World!");
   if (req.isAuthenticated()) {
     // Send data to let router to know to load dashboard instead
   }
