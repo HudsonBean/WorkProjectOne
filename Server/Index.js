@@ -7,6 +7,8 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 // Express Session
 const session = require("express-session");
+// Express router
+const router = require("rout");
 // Dotenv
 require("dotenv").config();
 // Express Server

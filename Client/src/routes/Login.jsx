@@ -4,27 +4,49 @@ import axios from "axios";
 // Main
 
 const Login = () => {
-  const submitForm = () => {};
+  const submitForm = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    // Attempt login
+    axios
+      .post("http://localhost:3000/login")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
       <p>Login</p>
-      <form>
+      <form onSubmit={submitForm}>
         <label htmlFor="email">
           <h2>Email</h2>
         </label>
-        <input type="email" id="email" placeholder="Enter email address" />
+        <input
+          name="email"
+          type="email"
+          id="email"
+          placeholder="Enter email address"
+        />
         <br />
         <label htmlFor="password">
           <h2>Password</h2>
         </label>
-        <input type="password" id="password" placeholder="Enter password" />
+        <input
+          name="password"
+          type="password"
+          id="password"
+          placeholder="Enter password"
+        />
         <br />
-        <button type="submit" onClick={submitForm}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
         <br />
-        <p>Test</p>
+        <p></p>
       </form>
     </div>
   );
