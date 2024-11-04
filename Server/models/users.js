@@ -16,9 +16,9 @@ const usersSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  emailAdress: {
-    encryptedData: { type: String, required: true },
-    iv: { type: String, required: true },
+  email: {
+    type: String,
+    required: true,
   },
   password: {
     type: String,

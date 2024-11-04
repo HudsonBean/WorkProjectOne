@@ -1,0 +1,10 @@
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "email": "hudsonbeandev@gmail.com",
+    "password": "Copsreloaded62",
+    "firstName": "Hudson",
+    "lastName": "Bean",
+    "userName": "ZombieKicker7"
+}
