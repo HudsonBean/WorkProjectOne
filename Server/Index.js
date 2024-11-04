@@ -20,15 +20,18 @@ db.on("error", (err) => console.error(err));
 db.once("open", () =>
   console.log(`Database is open on ${process.env.DATABASE_URL}`)
 );
+// Models
+const User = require("./models/users");
 // Passport initializer
 const initializePassport = require("./passport-config");
-initializePassport(passport);
-
-// Models
+initializePassport(passport, (email) => {
+  User.findOne({ email: email });
+});
 
 // Set middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded data
+app.use(flash());
 // Passport session data
 app.use(
   session({
@@ -38,6 +41,8 @@ app.use(
     cookie: { secure: false }, // Set to true if using HTTPS in production
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 const usersRoute = require("./routes/users");
