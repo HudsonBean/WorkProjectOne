@@ -1,7 +1,7 @@
 // Global Variables
 const express = require("express");
 const router = express.Router();
-const User = require("../models/users");
+const User = require("../schemas/user");
 
 // Get user by id
 router.get("/:id", getUser, async (req, res) => {

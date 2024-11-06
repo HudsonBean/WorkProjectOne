@@ -1,7 +1,9 @@
 // MongoDB
 const mongoose = require("mongoose");
+// Schemas
+const Encrypted = require("./embedSchemas/encrypted");
 
-// Models
+// Schema
 const usersSchema = new mongoose.Schema({
   firstName: {
     type: String,

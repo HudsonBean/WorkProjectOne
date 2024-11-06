@@ -1,14 +1,14 @@
 # Create user
-POST http://localhost:3000/users
+POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "firstName": "Hudson",
-    "lastName": "Bean",
-    "userName": "ZombieKicker7",
-    "email": "hudsonbeandev@gmail.com",
-    "password": "Copsreloaded62$",
-    "phoneNumber" : "3164940195"
+    "firstName": "John",
+    "lastName": "Doe",
+    "userName": "ILoveFemboys",
+    "email": "dev@dev",
+    "password": "a",
+    "phoneNumber": "22"
 }
 
 ###

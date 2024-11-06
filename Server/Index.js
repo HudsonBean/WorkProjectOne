@@ -1,4 +1,8 @@
 /// Global Variables
+// Crypto
+const crypto = require("crypto");
+// Bcrypt
+const bcrypt = require("bcrypt");
 // Express-flash
 const flash = require("express-flash");
 // Cors
@@ -15,16 +19,16 @@ const mongoose = require("mongoose"); //brew services start mongodb/brew/mongodb
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on("error", (err) => console.error(err));
-db.once("open", () =>
-  console.log(`Database is open on ${process.env.DATABASE_URL}`)
-);
+db.once("open", () => {
+  console.log(`Database is open on ${process.env.DATABASE_URL}`);
+});
 // Passport
 const passport = require("passport");
 const initialize = require("./passport-config");
 initialize(
   passport,
-  (email) => db.users.find({ email: email }),
-  (id) => db.users.find({ _id: id })
+  (email) => db.collections.users.find({ email: email }).toArray(),
+  (id) => db.collections.users.find({ _id: id }).toArray()
 );
 
 // Start the Server
@@ -47,6 +51,9 @@ app.use(passport.session());
 const usersRouter = require("./routes/users");
 app.use("/users", usersRouter);
 
+// Schemas
+const User = require("./schemas/user");
+
 // Login
 app.post(
   "/login",
@@ -59,25 +66,26 @@ app.post(
 
 // Register
 app.post("/register", async (req, res) => {
-  const user = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    userName: req.body.userName,
-    email: req.body.email,
-    //prettier-ignore
-    password: await bcrypt.hash(req.body.password, 13), // Secure hash encrypt
-    // Not required
-    profilePicture: req.body.firstName,
-    phoneNumber: !req.body.phoneNumber
-      ? undefined
-      : await encrypt(req.body.phoneNumber), // Encrypt phoneNumber
-    billingInfo: req.body.billingInfo, // Implement later
-    websites: req.body.websites, // Implement later
-    activePlan: req.body.activePlan,
-    accountCreationDate: req.body.accountCreationDate,
-    preferences: req.body.preferences,
-  });
   try {
+    const phoneNumber = req.body.phoneNumber
+      ? await encrypt(req.body.phoneNumber)
+      : undefined;
+
+    const user = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      userName: req.body.userName,
+      email: req.body.email,
+      password: await bcrypt.hash(req.body.password, 13),
+      profilePicture: req.body.firstName,
+      phoneNumber, // Set encrypted phone number here
+      billingInfo: req.body.billingInfo, // Implement later
+      websites: req.body.websites, // Implement later
+      activePlan: req.body.activePlan,
+      accountCreationDate: req.body.accountCreationDate,
+      preferences: req.body.preferences,
+    });
+
     const newUser = await user.save();
     res.status(201).json(newUser);
   } catch (err) {
