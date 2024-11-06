@@ -28,7 +28,7 @@ const Login = () => {
   };
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form action="http://localhost:3000/login" method="post">
         {/* Email */}
         <div>
           <label htmlFor="email">

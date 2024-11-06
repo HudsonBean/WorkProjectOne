@@ -1,4 +1,6 @@
 /// Global Variables
+// Express-flash
+const flash = require("express-flash");
 // Cors
 const cors = require("cors");
 // Dotenv
@@ -6,6 +8,8 @@ require("dotenv").config();
 // Express Server
 const express = require("express");
 const app = express();
+// Express-session
+const session = require("express-session");
 // MongoDB Database
 const mongoose = require("mongoose"); //brew services start mongodb/brew/mongodb-community
 mongoose.connect(process.env.DATABASE_URL);
@@ -15,24 +19,43 @@ db.once("open", () =>
   console.log(`Database is open on ${process.env.DATABASE_URL}`)
 );
 // Passport
+const passport = require("passport");
+const initialize = require("./passport-config");
+initialize(
+  passport,
+  (email) => db.users.find({ email: email }),
+  (id) => db.users.find({ _id: id })
+);
 
 // Start the Server
 // Set app middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+app.use(flash());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 const usersRouter = require("./routes/users");
 app.use("/users", usersRouter);
 
 // Login
-app.post("/login", async (req, res) => {
-  res.status(202).json({
-    message: "Successfully logged in ", // + req.user
-    success: true,
-  });
-});
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "http://localhost:5173/",
+    failureRedirect: "http://localhost:5173/login",
+    failureFlash: true,
+  })
+);
 
 // Register
 app.post("/register", async (req, res) => {
