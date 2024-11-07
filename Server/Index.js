@@ -97,6 +97,23 @@ app.post("/register", async (req, res) => {
   res.status(201).json(newUser);
 });
 
+// Get current user from session
+app.get("/api/current-user", (req, res) => {
+  if (req.isAuthenticated()) {
+    // Send back the user data, excluding sensitive information like the password
+    res.json({
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      profilePicture: req.user.profilePicture,
+      role: req.user.role,
+      // Include other relevant user data here
+    });
+  } else {
+    res.status(401).json({ message: "Unauthorized" });
+  }
+});
+
 // Encryption functions
 async function encrypt(text) {
   try {
