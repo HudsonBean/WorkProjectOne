@@ -1,10 +1,12 @@
 // Imports
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 const Login = () => {
   // Variables
   const navigate = useNavigate();
+  const [errrorMessage, setErrorMessage] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -12,25 +14,27 @@ const Login = () => {
     const payload = Object.fromEntries(formData);
 
     axios
-      .post("http://localhost:3000/login", {
-        email: payload.email,
-        password: payload.password,
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.success) {
-          navigate("/");
+      .post("http://localhost:3000/login", payload, { withCredentials: true })
+      .then((response) => {
+        console.log(response.data.message);
+        if (response.data.redirect) {
+          navigate(response.data.redirect);
         }
       })
-      .catch((err) => {
-        console.log("Oops an error ocurred!", err);
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage("An unexpected error occurred. Please try again.");
+        }
       });
   };
   return (
     <div>
-      <form action="http://localhost:3000/login" method="post">
+      <form onSubmit={onSubmit}>
         {/* Email */}
         <div>
+          <h1>{errrorMessage}</h1>
           <label htmlFor="email">
             <h2>Email</h2>
           </label>

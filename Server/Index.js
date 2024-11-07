@@ -7,6 +7,11 @@ const bcrypt = require("bcrypt");
 const flash = require("express-flash");
 // Cors
 const cors = require("cors");
+const corsOptions = {
+  origin: "http://localhost:5173",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
 // Dotenv
 require("dotenv").config();
 // Express Server
@@ -35,7 +40,7 @@ initialize(
 // Set app middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(flash());
 app.use(
   session({
@@ -55,42 +60,41 @@ app.use("/users", usersRouter);
 const User = require("./schemas/user");
 
 // Login
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "http://localhost:5173/",
-    failureRedirect: "http://localhost:5173/login",
-    failureFlash: true,
-  })
-);
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return next(err);
+    if (!user) {
+      // Send the flash message as part of the response
+      return res.status(401).json({ message: info.message });
+    }
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      return res
+        .status(200)
+        .json({ message: "Login successful", redirect: "/" });
+    });
+  })(req, res, next);
+});
 
 // Register
 app.post("/register", async (req, res) => {
-  try {
-    const phoneNumber = req.body.phoneNumber
-      ? await encrypt(req.body.phoneNumber)
-      : undefined;
+  const user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: await bcrypt.hash(req.body.password, 13),
+    profilePicture: req.body.profilePicture,
+    phoneNumber: req.body.phoneNumber,
+    role: req.body.role,
+    creationDate: req.body.creationDate,
+    preferences: req.body.preferences,
 
-    const user = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      userName: req.body.userName,
-      email: req.body.email,
-      password: await bcrypt.hash(req.body.password, 13),
-      profilePicture: req.body.firstName,
-      phoneNumber, // Set encrypted phone number here
-      billingInfo: req.body.billingInfo, // Implement later
-      websites: req.body.websites, // Implement later
-      activePlan: req.body.activePlan,
-      accountCreationDate: req.body.accountCreationDate,
-      preferences: req.body.preferences,
-    });
+    // Security
+    loginAttempts: req.body.loginAttempts, // Keep track of login attempts
+    lockUntil: req.body.lockUntil, // Lock the login until implement later
+  });
 
-    const newUser = await user.save();
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+  const newUser = await user.save();
+  res.status(201).json(newUser);
 });
 
 // Encryption functions

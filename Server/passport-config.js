@@ -13,13 +13,12 @@ function initialize(passport, getUserByEmail, getUserById) {
     ) {
       // Get user from email
       const user = (await getUserByEmail(email))[0];
-      if (user.length === 0) {
+      if (!user) {
         return done(null, false, { message: "The email is incorrect!" });
       }
 
       // Found user next check password
       bcrypt.compare(password, user.password, (err, response) => {
-        console.log(password, user.password);
         if (err) return done(err);
         if (response) {
           // Is user

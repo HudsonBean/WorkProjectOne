@@ -3,12 +3,12 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "firstName": "John",
-    "lastName": "Doe",
-    "userName": "ILoveFemboys",
-    "email": "dev@dev",
-    "password": "a",
-    "phoneNumber": "22"
+    "name": {
+        "first": "John",
+        "last": "Doe"
+    },
+    "email": "dev@a",
+    "password": "a"
 }
 
 ###

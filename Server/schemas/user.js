@@ -1,22 +1,17 @@
 // MongoDB
 const mongoose = require("mongoose");
-// Schemas
-const Encrypted = require("./embedSchemas/encrypted");
 
 // Schema
 const usersSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  userName: {
-    type: String,
-    required: true,
-    unique: true,
+  name: {
+    first: {
+      type: String,
+      required: true,
+    },
+    last: {
+      type: String,
+      required: true,
+    },
   },
   email: {
     type: String,
@@ -27,43 +22,36 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // Not required
+  role: {
+    type: String,
+    enum: ["user", "admin", "owner"],
+    required: true,
+    default: "user",
+  },
   profilePicture: {
-    type: String, // Can store a URL for the picture after uploading
-    default: "Default Profile Picture Path",
+    // Implement later
+    type: String,
+    default: "default-pic-url",
   },
   phoneNumber: {
-    encryptedData: { type: String },
-    iv: { type: String },
+    type: String,
   },
-  billingInfo: {
-    /// Implement later
-    // address: String,
-    // lastFourCC: String, // if needed for display
-  },
-  websites: [
-    /// Implement later
-    // {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "Purchase",
-    // },
-  ],
-  activePlan: {
-    /// Implement later
-    type: String, // e.g. 'basic', 'pro', 'enterprise'
-  },
-  accountCreationDate: {
+  creationDate: {
     type: Date,
     required: true,
-    default: Date.now,
+    default: Date.now(),
   },
   preferences: {
-    /// Implement later
     language: {
       type: String,
-      required: true,
       default: "en",
     },
   },
+
+  // Security
+  loginAttempts: { type: Number, default: 0 }, // Keep track of login attempts
+  lockUntil: { type: Date }, // Lock the login until implement later
 });
 
 module.exports = mongoose.model("User", usersSchema);
