@@ -30,14 +30,14 @@ db.once("open", () => {
 // Passport
 const passport = require("passport");
 const initialize = require("./passport-config");
+// Start the Server
+// Set app middlewares
+// Sets up the passport initialization middleware
 initialize(
   passport,
   (email) => db.collections.users.find({ email: email }).toArray(),
   (id) => db.collections.users.find({ _id: id }).toArray()
 );
-
-// Start the Server
-// Set app middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));

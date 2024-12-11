@@ -13,6 +13,7 @@ function initialize(passport, getUserByEmail, getUserById) {
     ) {
       // Get user from email
       const user = (await getUserByEmail(email))[0];
+      print(await getUserByEmail(email));
       if (!user) {
         return done(null, false, { message: "The email is incorrect!" });
       }
