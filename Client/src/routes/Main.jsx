@@ -6,6 +6,9 @@ import axios from "axios";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
 
+// Components
+import Loading from "../components/Loading";
+
 const Main = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,7 +29,12 @@ const Main = () => {
       });
   }, []);
 
-  return user ? <Dashboard /> : <Home />;
+  return (
+    <>
+      {loading && <Loading />}
+      {user ? <Dashboard /> : <Home />}
+    </>
+  );
 };
 
 export default Main;

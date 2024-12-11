@@ -3,12 +3,17 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
+// Components
+import Loading from "../components/Loading";
+
 const Login = () => {
   // Variables
   const navigate = useNavigate();
   const [errrorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData);
@@ -20,6 +25,7 @@ const Login = () => {
         if (response.data.redirect) {
           navigate(response.data.redirect);
         }
+        setLoading(false);
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
@@ -27,10 +33,12 @@ const Login = () => {
         } else {
           setErrorMessage("An unexpected error occurred. Please try again.");
         }
+        setLoading(false);
       });
   };
   return (
     <div>
+      {loading && <Loading />}
       <form onSubmit={onSubmit}>
         {/* Email */}
         <div>
