@@ -76,6 +76,19 @@ app.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
+// Logout
+app.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return res.status(500).send("Error occured when logging out!");
+    }
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid"); // Clear the session cookie
+      res.sendStatus(200); // Indicate success
+    });
+  });
+});
+
 // Register
 app.post("/register", async (req, res) => {
   const user = new User({
