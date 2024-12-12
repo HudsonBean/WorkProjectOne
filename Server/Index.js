@@ -29,11 +29,11 @@ db.once("open", () => {
 });
 // Passport
 const passport = require("passport");
-const initialize = require("./passport-config");
+const initializeLocalStrategy = require("./passport-config");
 // Start the Server
 // Set app middlewares
 // Sets up the passport initialization middleware
-initialize(
+initializeLocalStrategy(
   passport,
   (email) => db.collections.users.find({ email: email }).toArray(),
   (id) => db.collections.users.find({ _id: id }).toArray()
@@ -78,6 +78,7 @@ app.post("/login", (req, res, next) => {
 
 // Logout
 app.get("/logout", (req, res, next) => {
+  print("Hello World!");
   req.logout((err) => {
     if (err) {
       return res.status(500).send("Error occured when logging out!");

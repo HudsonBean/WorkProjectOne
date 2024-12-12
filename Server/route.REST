@@ -12,3 +12,7 @@ Content-Type: application/json
 }
 
 ###
+
+# Get User
+
+GET http://localhost:3000/users/675a191d8455460b36d4cbbd

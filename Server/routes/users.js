@@ -5,7 +5,7 @@ const User = require("../schemas/user");
 
 // Get user by id
 router.get("/:id", getUser, async (req, res) => {
-  res.send(res.user.firstName);
+  res.status(200).send(res.user);
 });
 
 // Middlewares
