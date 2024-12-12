@@ -77,15 +77,26 @@ app.post("/login", (req, res, next) => {
 });
 
 // Logout
-app.get("/logout", (req, res, next) => {
-  print("Hello World!");
+app.post("/logout", (req, res, next) => {
+  console.log("Hello World!");
+
+  // Logout the user using Passport
   req.logout((err) => {
     if (err) {
-      return res.status(500).send("Error occured when logging out!");
+      console.error("Error during logout:", err);
+      return res.status(500).send("Error occurred when logging out!");
     }
-    req.session.destroy(() => {
-      res.clearCookie("connect.sid"); // Clear the session cookie
-      res.sendStatus(200); // Indicate success
+
+    // Destroy the session and clear the session cookie
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        return res.status(500).send("Error occurred when destroying session!");
+      }
+
+      // Clear the session cookie and send a single response
+      res.clearCookie("connect.sid", { path: "/" }); // Adjust path if necessary
+      return res.sendStatus(205); // Success response
     });
   });
 });

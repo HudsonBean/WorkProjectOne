@@ -6,7 +6,7 @@ const Logout = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      const response = await axios.get("/logout", {
+      const response = await axios.post("http://localhost:3000/logout", {
         withCredentials: true, // Include cookies for session-based authentication
       });
       if (response.status == 200) {
