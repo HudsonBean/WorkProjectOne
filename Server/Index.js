@@ -47,6 +47,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: { secure: false, httpOnly: true }, // Adjust as needed
   })
 );
 app.use(passport.initialize());
@@ -78,25 +79,27 @@ app.post("/login", (req, res, next) => {
 
 // Logout
 app.post("/logout", (req, res, next) => {
-  console.log("Hello World!");
+  console.log("Logout endpoint hit");
 
-  // Logout the user using Passport
   req.logout((err) => {
     if (err) {
       console.error("Error during logout:", err);
       return res.status(500).send("Error occurred when logging out!");
     }
 
-    // Destroy the session and clear the session cookie
     req.session.destroy((err) => {
       if (err) {
         console.error("Error destroying session:", err);
         return res.status(500).send("Error occurred when destroying session!");
       }
 
-      // Clear the session cookie and send a single response
-      res.clearCookie("connect.sid", { path: "/" }); // Adjust path if necessary
-      return res.sendStatus(205); // Success response
+      console.log("Session destroyed, clearing cookie");
+      res.clearCookie("connect.sid", {
+        path: "/", // Match the cookie's path
+        httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+        secure: false, // Set to true if using HTTPS
+      });
+      return res.sendStatus(200); // Success
     });
   });
 });

@@ -9,13 +9,17 @@ const Logout = () => {
       const response = await axios.post("http://localhost:3000/logout", {
         withCredentials: true, // Include cookies for session-based authentication
       });
-      if (response.status == 200) {
+      if (response.status === 200) {
         navigate("/"); // Redirect to login
       } else {
-        console.error("Logout failed");
+        console.error("Logout failed:", response.status, response.data);
       }
     } catch (error) {
-      console.error("Uh oh! An error occured during logout:", error);
+      console.error(
+        "Logout error:",
+        error.response?.status,
+        error.response?.data || error.message
+      );
     }
   };
   return <button onClick={handleLogout}>Log Out</button>;
