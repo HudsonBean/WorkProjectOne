@@ -10,18 +10,26 @@ const dotenv = require("dotenv").config();
 const colors = require("colors");
 // const passportLocal = require("passport-local");
 
-// Start mongodb
-mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+// Start Express Server
+const app = express();
+app.listen(process.env.PORT, () => {
+  console.log(
+    colors.blue.italic("Server is open on:\n") +
+      colors.blue.bgBlack.bold.underline(
+        `http://localhost:${process.env.PORT}/`
+      )
+  );
 });
+
+// Start mongodb
+mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on("error", (err) => console.error(err));
 db.once("open", () => {
   console.log(
     colors.yellow(
       "Database is open on:\n" +
-        colors.bold.bgBlack.yellow(process.env.DATABASE_URL)
+        colors.bold.bgBlack.yellow.underline(process.env.DATABASE_URL)
     )
   );
 });
