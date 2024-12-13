@@ -1,5 +1,6 @@
-/// Global Variables
-// Imports
+/**========================================================================
+ *                           IMPORTS
+ *========================================================================**/
 const express = require("express");
 const expressFlash = require("express-flash");
 const expressSession = require("express-session");
@@ -7,10 +8,17 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
+const helmet = require("helmet");
+const morgan = require("morgan");
+const compression = require("compression");
 const colors = require("colors");
+const passport = require("passport");
 // const passportLocal = require("passport-local");
 
-// Start Express Server
+/**======================
+ *    Start Server
+ *========================**/
+
 const app = express();
 app.listen(process.env.PORT, () => {
   console.log(
@@ -21,7 +29,9 @@ app.listen(process.env.PORT, () => {
   );
 });
 
-// Start mongodb
+/**======================
+ *    Start Database
+ *========================**/
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on("error", (err) => console.error(err));
@@ -33,3 +43,35 @@ db.once("open", () => {
     )
   );
 });
+
+/**============================================
+ *               APP MIDDLEWARE
+ *=============================================**/
+app.use(express.json()); // Json parsing for incoming payloads
+app.use(
+  express.urlencoded({
+    // Parsing URL-Encoded data typically sent from traditional HTML forms
+    extended: false,
+  })
+);
+app.use(
+  expressSession({
+    secret: process.env.SESSION_SECRET, // Session Data
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+); // Express Session Library for Managing Session
+app.use(expressFlash());
+app.use(helmet());
+app.use(morgan("dev"));
+app.use(compression());
+app.use(
+  cors({
+    origin: "http://localhost:5173/",
+    optionsSuccessStatus: 200,
+  })
+);
+// passport
+app.use(passport.session());
+app.use(passport.initialize());
