@@ -1,14 +1,23 @@
-// Global Variables
+/**============================================
+ *               IMPORTS
+ *=============================================**/
 const express = require("express");
 const router = express.Router();
 const User = require("../schemas/user");
 
-// Get user by id
+/**=======================
+ * *       GET USER BY ID
+ *========================**/
 router.get("/:id", getUser, async (req, res) => {
   res.status(200).send(res.user);
 });
 
-// Middlewares
+/**============================================
+ *               MIDDLEWARES
+ *=============================================**/
+/**=======================
+ * *       GET USER MIDDLEWARE
+====================**/
 async function getUser(req, res, next) {
   let user;
   try {

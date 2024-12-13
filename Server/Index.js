@@ -1,6 +1,6 @@
-/**========================================================================
- *                           IMPORTS
- *========================================================================**/
+/**============================================
+ *               IMPORTS
+ *=============================================**/
 const express = require("express");
 const expressFlash = require("express-flash");
 const expressSession = require("express-session");
@@ -14,6 +14,10 @@ const compression = require("compression");
 const colors = require("colors");
 const passport = require("passport");
 // const passportLocal = require("passport-local");
+
+/**============================================
+ *               START SERVER & BACKEND
+ *=============================================**/
 
 /**======================
  *    Start Server
@@ -68,10 +72,38 @@ app.use(morgan("dev"));
 app.use(compression());
 app.use(
   cors({
-    origin: "http://localhost:5173/",
+    origin: "http://localhost:5173",
     optionsSuccessStatus: 200,
+    credentials: true,
   })
 );
 // passport
 app.use(passport.session());
 app.use(passport.initialize());
+
+/**============================================
+ *               ROUTES
+ *=============================================**/
+app.use("/users", require("./routes/users"));
+
+/**============================================
+ *               ENDPOINTS
+ *=============================================**/
+
+//* Testing endpoint
+app.get("/dev", async (req, res) => {
+  res.status(202).send("Hello World!");
+});
+
+/**=======================
+ * *       REGISTER USER
+ *
+ *
+ *========================**/
+app.post("/register", async (req, res) => {
+  const { email, password } = req.body;
+});
+
+/**======================
+ *    PASSPORT ENDPOINTS
+ *========================**/

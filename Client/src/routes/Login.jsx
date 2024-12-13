@@ -1,6 +1,6 @@
 // Imports
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { redirect, useNavigate } from "react-router";
 import { useState } from "react";
 
 // Components
@@ -68,6 +68,21 @@ const Login = () => {
         <br />
         <button type="submit">Submit</button>
       </form>
+      <br />
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <a
+          href="/register"
+          style={{
+            marginRight: "6.5px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          Register
+        </a>
+        <p>Instead?</p>
+      </div>
     </div>
   );
 };
