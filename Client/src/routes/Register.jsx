@@ -36,6 +36,7 @@ const Register = () => {
         setLoading(false);
       })
       .catch((error) => {
+        console.log(error.response.data.message);
         if (error.response && error.response.status === 401) {
           setErrorMessage(error.response.data.message); // Error is from flash
         } else {
@@ -47,10 +48,33 @@ const Register = () => {
   return (
     <div>
       {loading && <Loading />}
+      <h1>{errrorMessage}</h1>
       <form onSubmit={onSubmit}>
+        {/* Name */}
+        <label
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+          htmlFor="firstName"
+        >
+          <h2>Name</h2>
+        </label>
+        <input
+          style={{ marginRight: "6.5px" }}
+          id="firstName"
+          type="text"
+          name="firstName"
+          placeholder="First Name"
+        ></input>
+        <input
+          id="lastName"
+          type="text"
+          name="lastName"
+          placeholder="Last Name"
+        ></input>
         {/* Email */}
         <div>
-          <h1>{errrorMessage}</h1>
           <label htmlFor="email">
             <h2>Email</h2>
           </label>

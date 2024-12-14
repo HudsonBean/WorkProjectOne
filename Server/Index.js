@@ -110,48 +110,13 @@ app.post("/dev_post", async (req, res) => {
  *
  *========================**/
 app.post("/register", async (req, res) => {
-  try {
-    // Pull data from the payload
-    const { firstName, lastName, email, password, phoneNumber, role } =
-      req.body;
-
-    console.log(req.body);
-    // Check for users with the same email in the database
-    const existingUser = await user.findOne({ email });
-    if (existingUser) {
-      req.flash("error", "Email is already registered!");
-      return res.status(400).redirect("/register"); // Redirect back to the registration form
-    }
-    // Create the user
-    const newUser = new user({
-      name: {
-        first: firstName,
-        last: lastName,
-      },
-      email,
-      password,
-      phoneNumber,
-      role,
-    });
-
-    await newUser.save();
-
-    req.logIn(newUser, (err) => {
-      if (err) {
-        console.error(err);
-        req.flash("error", "Error logging in after registration.");
-        return res.redirect("/login"); // Redirect to login if login fails
-      }
-
-      // Set a success flash message and redirect to the dashboard
-      req.flash("success", "Registration successful! Welcome!");
-      return res.redirect("/dashboard"); // Redirect to a logged-in area
-    });
-  } catch (err) {
-    console.error(err);
-    req.flash("error", "An error occurred during registration.");
-    res.redirect("/register"); // Redirect back to the registration form
-  }
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    phoneNumber = undefined,
+  } = req.body;
 });
 
 /**======================
