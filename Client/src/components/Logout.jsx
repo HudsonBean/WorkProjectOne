@@ -1,18 +1,28 @@
-// Imports
+/**============================================
+ *               IMPORTS
+ *=============================================**/
 import axios from "axios";
 import { useNavigate } from "react-router";
 
 const Logout = () => {
+  //* useNavigate to rediret
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/logout", {
-        withCredentials: true, // Include cookies for session-based authentication
-      });
-      if (response.status === 200) {
-        navigate("/"); // Redirect to login
+      const res = await axios.post(
+        "http://localhost:3000/logout",
+        {}, // No data in the body
+        { withCredentials: true } // Ensure cookies are included
+      );
+      if (res.status === 200) {
+        if (res.data.redirect == "/") {
+          window.location.reload();
+        } else {
+          navigate(res.data.redirect); // Go to where the server sends to redirect
+        }
       } else {
-        console.error("Logout failed:", response.status, response.data);
+        console.error("Logout failed:", res.status, res.data);
       }
     } catch (error) {
       console.error(
@@ -22,6 +32,7 @@ const Logout = () => {
       );
     }
   };
+
   return <button onClick={handleLogout}>Log Out</button>;
 };
 

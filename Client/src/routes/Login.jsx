@@ -1,20 +1,25 @@
-// Imports
+/**============================================
+ *               IMPORTS
+ *=============================================**/
 import axios from "axios";
-import { redirect, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
-// Components
+/**============================================
+ *               COMPONENTS
+ *=============================================**/
 import Loading from "../components/Loading";
 
 const Login = () => {
-  // Variables
+  //* Navigate for redirects; Use state for error message and loading
   const navigate = useNavigate();
   const [errrorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  //* Form submit
   const onSubmit = (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData);
 

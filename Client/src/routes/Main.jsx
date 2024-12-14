@@ -23,9 +23,14 @@ const Main = () => {
         setUser(response.data);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-        setLoading(false);
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          console.log("User is not logged in.");
+          setLoading(false);
+        } else {
+          console.error("Error fetching user data: " + err);
+          setLoading(false);
+        }
       });
   }, []);
 

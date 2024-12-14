@@ -70,10 +70,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   expressSession({
-    secret: process.env.SESSION_SECRET, // Session Data
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: true, maxAge: 60000 },
+    secret: process.env.SESSION_SECRET, // Session secret for signing cookies
+    resave: false, // Don't save session if it wasn't modified
+    saveUninitialized: false, // Don't save uninitialized sessions
+    cookie: {
+      secure: false, // Set to `true` only if using HTTPS
+      maxAge: 60000, // Optional: session expiration in milliseconds
+    },
   })
 );
 app.use(expressFlash());
@@ -117,15 +120,43 @@ app.post(
   passport.authenticate("local", {
     failureFlash: true,
   }),
-  async (req, res) => {
+  (req, res) => {
     if (req.user) {
-      console.log(req.user);
       res.json({ redirect: "/", message: "Success!" });
     } else {
       res.status(401).json({ redirect: "/login", message: "Failure!" });
     }
   }
 );
+/**=======================
+ * *       LOGOUT USER
+ *========================**/
+app.post("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error("Logout error:", err);
+      return res.status(500).json({
+        redirect: "/login",
+        message: "Error, when trying to logout user!",
+      });
+    }
+
+    // Destroy the session
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Session destruction error:", err);
+        return res.status(500).json({
+          redirect: "/login",
+          message: "Error destroying session!",
+        });
+      }
+
+      // Clear the session cookie
+      res.clearCookie("connect.sid", { path: "/" });
+      return res.status(200).json({ redirect: "/" });
+    });
+  });
+});
 /**=======================
  * *       REGISTER USER
  *========================**/
@@ -160,10 +191,8 @@ app.post("/register", async (req, res) => {
  * *       CURRENT USER
  *========================**/
 app.get("/api/current-user", async (req, res) => {
-  console.log(req.isAuthenticated());
   if (req.isAuthenticated()) {
     // Respond with user details if authenticated
-    console.log(req.user);
     res.status(200).json({ user: req.user });
   } else {
     // Respond with 401 if not authenticated
