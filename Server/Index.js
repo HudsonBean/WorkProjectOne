@@ -14,6 +14,10 @@ const compression = require("compression");
 const colors = require("colors");
 const passport = require("passport");
 // const passportLocal = require("passport-local");
+/**======================
+ *    SCHEMAS
+ *========================**/
+const user = require("./schemas/user");
 
 /**============================================
  *               START SERVER & BACKEND
@@ -55,17 +59,18 @@ app.use(express.json()); // Json parsing for incoming payloads
 app.use(
   express.urlencoded({
     // Parsing URL-Encoded data typically sent from traditional HTML forms
-    extended: false,
+    extended: true,
   })
 );
 app.use(
+  // Express Session Library for Managing Session
   expressSession({
     secret: process.env.SESSION_SECRET, // Session Data
     resave: false,
     saveUninitialized: true,
     cookie: { secure: true },
   })
-); // Express Session Library for Managing Session
+);
 app.use(expressFlash());
 app.use(helmet());
 app.use(morgan("dev"));
@@ -91,8 +96,12 @@ app.use("/users", require("./routes/users"));
  *=============================================**/
 
 //* Testing endpoint
-app.get("/dev", async (req, res) => {
+app.get("/dev_get", async (req, res) => {
   res.status(202).send("Hello World!");
+});
+app.post("/dev_post", async (req, res) => {
+  console.log(req.body);
+  res.send("Hello!");
 });
 
 /**=======================
@@ -101,7 +110,48 @@ app.get("/dev", async (req, res) => {
  *
  *========================**/
 app.post("/register", async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    // Pull data from the payload
+    const { firstName, lastName, email, password, phoneNumber, role } =
+      req.body;
+
+    console.log(req.body);
+    // Check for users with the same email in the database
+    const existingUser = await user.findOne({ email });
+    if (existingUser) {
+      req.flash("error", "Email is already registered!");
+      return res.status(400).redirect("/register"); // Redirect back to the registration form
+    }
+    // Create the user
+    const newUser = new user({
+      name: {
+        first: firstName,
+        last: lastName,
+      },
+      email,
+      password,
+      phoneNumber,
+      role,
+    });
+
+    await newUser.save();
+
+    req.logIn(newUser, (err) => {
+      if (err) {
+        console.error(err);
+        req.flash("error", "Error logging in after registration.");
+        return res.redirect("/login"); // Redirect to login if login fails
+      }
+
+      // Set a success flash message and redirect to the dashboard
+      req.flash("success", "Registration successful! Welcome!");
+      return res.redirect("/dashboard"); // Redirect to a logged-in area
+    });
+  } catch (err) {
+    console.error(err);
+    req.flash("error", "An error occurred during registration.");
+    res.redirect("/register"); // Redirect back to the registration form
+  }
 });
 
 /**======================

@@ -1,8 +1,12 @@
-// MongoDB
+/**============================================
+ *               IMPORTS
+ *=============================================**/
 const mongoose = require("mongoose");
 
-// Schema
-const usersSchema = new mongoose.Schema({
+/**=======================
+ * *       User Schema
+ *========================**/
+const userSchema = new mongoose.Schema({
   name: {
     first: {
       type: String,
@@ -49,9 +53,17 @@ const usersSchema = new mongoose.Schema({
     },
   },
 
+  /**=======================
+   * todo      Create Payment Info Stuff
+   * todo      Make Sure to Update the Register Function
+   * todo      Add 2FA And Implement It In The Main as well as 2FA Prompt Count
+   *========================**/
+
   // Security
   loginAttempts: { type: Number, default: 0 }, // Keep track of login attempts
   lockUntil: { type: Date }, // Lock the login until implement later
+  twoFactorAuth: { type: Boolean },
+  twoFactorAuthPrompt: { type: Number },
 });
 
-module.exports = mongoose.model("User", usersSchema);
+module.exports = mongoose.model("User", userSchema);

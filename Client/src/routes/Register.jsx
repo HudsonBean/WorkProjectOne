@@ -37,7 +37,7 @@ const Register = () => {
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
-          setErrorMessage(error.response.data.message); // Error is not from flash
+          setErrorMessage(error.response.data.message); // Error is from flash
         } else {
           setErrorMessage("An unexpected error occurred. Please try again.");
         }

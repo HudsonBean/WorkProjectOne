@@ -1,3 +1,20 @@
 # DEV
 
 GET http://localhost:3000/dev
+
+
+###
+
+# REGISTER
+
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "dev@a",
+  "password": "a",
+  "phoneNumber": "3164940195",
+  "role": "admin"
+}
