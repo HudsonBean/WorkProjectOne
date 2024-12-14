@@ -19,24 +19,28 @@ const Register = () => {
   const [errrorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  //* Form submit
   const onSubmit = (e) => {
-    setLoading(true);
+    // Prevent reload
     e.preventDefault();
+    setLoading(true);
+    // Get form data
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData);
+    // Send request
     axios
       .post("http://localhost:3000/register", payload, {
         withCredentials: true,
       })
-      .then((response) => {
-        console.log(response.data.message);
-        if (response.data.redirect) {
-          navigate(response.data.redirect);
+      .then((res) => {
+        // If there is a redirect go to it
+        if (res.data.redirect) {
+          navigate(res.data.redirect);
         }
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error.response.data.message);
+        // Display any error
         if (error.response && error.response.status === 401) {
           setErrorMessage(error.response.data.message); // Error is from flash
         } else {
@@ -56,21 +60,20 @@ const Register = () => {
             display: "flex",
             alignItems: "center",
           }}
-          htmlFor="firstName"
         >
           <h2>Name</h2>
         </label>
         <input
           style={{ marginRight: "6.5px" }}
-          id="firstName"
+          id="first"
           type="text"
-          name="firstName"
+          name="first"
           placeholder="First Name"
         ></input>
         <input
-          id="lastName"
+          id="last"
           type="text"
-          name="lastName"
+          name="last"
           placeholder="Last Name"
         ></input>
         {/* Email */}

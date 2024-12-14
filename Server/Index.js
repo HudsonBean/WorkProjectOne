@@ -12,6 +12,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const compression = require("compression");
 const colors = require("colors");
+const bodyParser = require("body-parser");
 const passport = require("passport");
 // const passportLocal = require("passport-local");
 /**======================
@@ -55,20 +56,15 @@ db.once("open", () => {
 /**============================================
  *               APP MIDDLEWARE
  *=============================================**/
-app.use(express.json()); // Json parsing for incoming payloads
-app.use(
-  express.urlencoded({
-    // Parsing URL-Encoded data typically sent from traditional HTML forms
-    extended: true,
-  })
-);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   // Express Session Library for Managing Session
   expressSession({
     secret: process.env.SESSION_SECRET, // Session Data
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: { secure: true, maxAge: 60000 },
   })
 );
 app.use(expressFlash());
@@ -95,7 +91,7 @@ app.use("/users", require("./routes/users"));
  *               ENDPOINTS
  *=============================================**/
 
-//* Testing endpoint
+//* Testing endpoints
 app.get("/dev_get", async (req, res) => {
   res.status(202).send("Hello World!");
 });
@@ -106,17 +102,29 @@ app.post("/dev_post", async (req, res) => {
 
 /**=======================
  * *       REGISTER USER
- *
- *
  *========================**/
 app.post("/register", async (req, res) => {
-  const {
-    firstName,
-    lastName,
+  let { first, last, email, password, phoneNumber = undefined } = req.body;
+
+  // Check if user already exists in the database
+  if (await user.findOne({ email })) {
+    return res.status(401).json({ message: "That email is already in use!" });
+  }
+
+  // Save the user
+  const newUser = new user({
+    name: {
+      first,
+      last,
+    },
     email,
-    password,
-    phoneNumber = undefined,
-  } = req.body;
+    password: await bcrypt.hash(password, 10),
+    phoneNumber,
+  });
+  const savedUser = await newUser.save();
+
+  // Sucess
+  return res.status(201).json({ redirect: "/login" }); //todo  Auto log the user in
 });
 
 /**======================
