@@ -14,11 +14,21 @@ const compression = require("compression");
 const colors = require("colors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-// const passportLocal = require("passport-local");
-/**======================
- *    SCHEMAS
- *========================**/
+const initializeLocalStrategy = require("./passport-config");
+/**============================================
+ *               SCHEMAS
+ *=============================================**/
 const user = require("./schemas/user");
+
+/**============================================
+ *               FUNCTIONS
+ *=============================================**/
+//* Passport local initialization strategy methods
+initializeLocalStrategy(
+  passport,
+  async (email) => await user.find({ email: email }),
+  async (id) => await user.find({ _id: id })
+);
 
 /**============================================
  *               START SERVER & BACKEND
@@ -101,6 +111,22 @@ app.post("/dev_post", async (req, res) => {
 });
 
 /**=======================
+ * *       LOGIN USER
+ *========================**/
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    failureFlash: true,
+  }),
+  async (req, res) => {
+    if (req.user) {
+      res.json({ redirect: "/", message: "Success!" });
+    } else {
+      res.status(401).json({ redirect: "/login", message: "Failure!" });
+    }
+  }
+);
+/**=======================
  * *       REGISTER USER
  *========================**/
 app.post("/register", async (req, res) => {
@@ -127,6 +153,10 @@ app.post("/register", async (req, res) => {
   return res.status(201).json({ redirect: "/login" }); //todo  Auto log the user in
 });
 
-/**======================
- *    PASSPORT ENDPOINTS
+/**============================================
+ *               API
+ *=============================================**/
+/**=======================
+ * *       CURRENT USER
  *========================**/
+app.get("/api/current-user", async (req, res) => {});

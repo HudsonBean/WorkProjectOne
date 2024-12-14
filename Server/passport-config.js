@@ -1,10 +1,12 @@
-// Global Variables
-// Passport strategy
+/**============================================
+ *               IMPORTS
+ *=============================================**/
 const LocalStrategy = require("passport-local").Strategy;
-// Bcrypt
 const bcrypt = require("bcrypt");
 
-// Passport initialize strategy
+/**======================
+ *    Initialization strategy
+ *========================**/
 function initializeLocalStrategy(passport, getUserByEmail, getUserById) {
   passport.use(
     new LocalStrategy({ usernameField: "email" }, async function verify(
