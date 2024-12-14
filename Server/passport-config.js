@@ -38,6 +38,8 @@ function initializeLocalStrategy(passport, getUserByEmail, getUserById) {
   });
 
   passport.deserializeUser(function (id, done) {
+    console.log("a");
+    console.log(id + "deserialize");
     // Deserialize user to get the object
     done(null, getUserById(id));
   });

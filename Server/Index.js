@@ -69,11 +69,10 @@ db.once("open", () => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
-  // Express Session Library for Managing Session
   expressSession({
     secret: process.env.SESSION_SECRET, // Session Data
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: { secure: true, maxAge: 60000 },
   })
 );
@@ -89,8 +88,8 @@ app.use(
   })
 );
 // passport
-app.use(passport.session());
 app.use(passport.initialize());
+app.use(passport.session());
 
 /**============================================
  *               ROUTES
@@ -120,6 +119,7 @@ app.post(
   }),
   async (req, res) => {
     if (req.user) {
+      console.log(req.user);
       res.json({ redirect: "/", message: "Success!" });
     } else {
       res.status(401).json({ redirect: "/login", message: "Failure!" });
@@ -159,4 +159,14 @@ app.post("/register", async (req, res) => {
 /**=======================
  * *       CURRENT USER
  *========================**/
-app.get("/api/current-user", async (req, res) => {});
+app.get("/api/current-user", async (req, res) => {
+  console.log(req.isAuthenticated());
+  if (req.isAuthenticated()) {
+    // Respond with user details if authenticated
+    console.log(req.user);
+    res.status(200).json({ user: req.user });
+  } else {
+    // Respond with 401 if not authenticated
+    res.status(401).json({ message: "Not authenticated" });
+  }
+});
