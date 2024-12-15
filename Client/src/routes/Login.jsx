@@ -11,30 +11,33 @@ import { useState } from "react";
 import Loading from "../components/Loading";
 
 const Login = () => {
-  //* Navigate for redirects; Use state for error message and loading
+  // Navigate for redirects; Use state for error message and loading
   const navigate = useNavigate();
   const [errrorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  //* Form submit
+  // Form submit
   const onSubmit = (e) => {
+    // Prevent refresh and start loading component
     e.preventDefault();
     setLoading(true);
+    // Get form data
     const formData = new FormData(e.target);
     const payload = Object.fromEntries(formData);
-
     axios
       .post("http://localhost:3000/login", payload, { withCredentials: true })
       .then((response) => {
-        console.log(response.data.message);
+        // Set error message
+        setErrorMessage(response.data.message);
         if (response.data.redirect) {
+          // Redirect if a pathname was supplied by server
           navigate(response.data.redirect);
         }
         setLoading(false);
       })
-      .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          setErrorMessage(error.response.data.message);
+      .catch((err) => {
+        if (err.response && err.response.status === 401) {
+          setErrorMessage(err.response.data.message);
         } else {
           setErrorMessage("An unexpected error occurred. Please try again.");
         }

@@ -115,28 +115,38 @@ app.post("/dev_post", async (req, res) => {
 /**=======================
  * *       LOGIN USER
  *========================**/
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    failureFlash: true,
-  }),
-  (req, res) => {
-    if (req.isAuthenticated()) {
-      res
-        .status(200)
-        .json({ user: req.user, redirect: "/", message: "Success!" });
-    } else {
-      res.status(401).json({ redirect: "/login", message: "Failure!" });
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
     }
-  }
-);
+    if (!user) {
+      // If authentication fails, include the flash message in the response
+      const messages = req.flash("error"); // Retrieve flash messages
+      return res.status(401).json({
+        redirect: "/login",
+        message: messages[0] || info.message || "Authentication failed!",
+      });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      // Successful login
+      return res.status(200).json({
+        redirect: "/",
+        message: "Success!",
+      });
+    });
+  })(req, res, next);
+});
 /**=======================
  * *       LOGOUT USER
  *========================**/
 app.post("/logout", (req, res) => {
+  // Call paspport logout method
   req.logout((err) => {
     if (err) {
-      console.error("Logout error:", err);
       return res.status(500).json({
         redirect: "/login",
         message: "Error, when trying to logout user!",
@@ -146,7 +156,6 @@ app.post("/logout", (req, res) => {
     // Destroy the session
     req.session.destroy((err) => {
       if (err) {
-        console.error("Session destruction error:", err);
         return res.status(500).json({
           redirect: "/login",
           message: "Error destroying session!",
@@ -163,11 +172,11 @@ app.post("/logout", (req, res) => {
  * *       REGISTER USER
  *========================**/
 app.post("/register", async (req, res) => {
+  // Grab data from request
   let { first, last, email, password, phoneNumber = undefined } = req.body;
 
   // Check if user already exists in the database
   if (await user.findOne({ email })) {
-    console.log("haufhahia");
     return res.status(401).json({ message: "That email is already in use!" });
   }
 
@@ -181,7 +190,7 @@ app.post("/register", async (req, res) => {
     password: await bcrypt.hash(password, 10),
     phoneNumber,
   });
-  const savedUser = await newUser.save();
+  await newUser.save();
 
   // Sucess
   return res.status(201).json({ redirect: "/login" }); //todo  Auto log the user in
