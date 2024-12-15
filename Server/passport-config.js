@@ -9,6 +9,7 @@ const bcrypt = require("bcrypt");
  *========================**/
 function initializeLocalStrategy(passport, getUserByEmail, getUserById) {
   passport.use(
+    // Creates the new local strategy
     new LocalStrategy({ usernameField: "email" }, async function verify(
       email,
       password,
@@ -37,11 +38,13 @@ function initializeLocalStrategy(passport, getUserByEmail, getUserById) {
     done(null, user);
   });
 
-  passport.deserializeUser(function (id, done) {
-    console.log("a");
-    console.log(id + "deserialize");
-    // Deserialize user to get the object
-    done(null, getUserById(id));
+  passport.deserializeUser(async function (id, done) {
+    try {
+      const user = await getUserById(id); // Resolve the Promise
+      done(null, user[0]); // Pass the resolved user object to req.user
+    } catch (err) {
+      done(err, null); // Pass the error to Passport
+    }
   });
 }
 

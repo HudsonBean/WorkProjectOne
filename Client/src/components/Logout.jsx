@@ -4,10 +4,14 @@
 import axios from "axios";
 import { useNavigate } from "react-router";
 
+/**============================================
+ *               COMPONENT
+ *=============================================**/
 const Logout = () => {
   //* useNavigate to rediret
   const navigate = useNavigate();
 
+  //* Handles server request and redirect
   const handleLogout = async () => {
     try {
       const res = await axios.post(
@@ -16,8 +20,8 @@ const Logout = () => {
         { withCredentials: true } // Ensure cookies are included
       );
       if (res.status === 200) {
-        if (res.data.redirect == "/") {
-          window.location.reload();
+        if (res.data.redirect == window.location.pathname) {
+          window.location.reload(); // Reload page if the
         } else {
           navigate(res.data.redirect); // Go to where the server sends to redirect
         }

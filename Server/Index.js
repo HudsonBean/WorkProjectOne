@@ -121,8 +121,10 @@ app.post(
     failureFlash: true,
   }),
   (req, res) => {
-    if (req.user) {
-      res.json({ redirect: "/", message: "Success!" });
+    if (req.isAuthenticated()) {
+      res
+        .status(200)
+        .json({ user: req.user, redirect: "/", message: "Success!" });
     } else {
       res.status(401).json({ redirect: "/login", message: "Failure!" });
     }
@@ -165,6 +167,7 @@ app.post("/register", async (req, res) => {
 
   // Check if user already exists in the database
   if (await user.findOne({ email })) {
+    console.log("haufhahia");
     return res.status(401).json({ message: "That email is already in use!" });
   }
 
