@@ -2,9 +2,11 @@
  *                           IMPORTS
  *========================================================================**/
 import express from "express";
-const connectDB = require("./config/db");
-const loadMiddleware = require("./middleware");
-const loadRoutes = require("./routes");
+import colorsTheme from "./utils/colors";
+//todo  Convert to imports
+// const connectDB = require("./config/db");
+// const loadMiddleware = require("./middleware");
+// const loadRoutes = require("./routes");
 
 const app = express();
 
@@ -12,15 +14,17 @@ const init = async () => {
   try {
     // Connect to the database
     await connectDB();
-    console.log("Database connected successfully!");
+    console.log("Database connected successfully!".success);
 
     // Load middlewares
-    loadMiddleware(app);
+    injectMiddleware(app);
 
     // Load routes
-    loadRoutes(app);
+    injectRoutes(app);
 
-    console.log("Middlewares and routes loaded!");
+    console.log(
+      colors.green.underline.bold("Middlewares and routes loaded!".success)
+    );
   } catch (err) {
     console.error("Error initializing app:", err);
     process.exit(1); // Exit the process if initialization fails
