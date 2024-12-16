@@ -17,7 +17,7 @@ import colorsTheme from "../config/colors.js";
  * Injects middlewares into the app instance.
  * @param {Object} app
  */
-const injectMiddleware = async (app) => {
+const injectMiddleware = (app) => {
   // Middlewares
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));

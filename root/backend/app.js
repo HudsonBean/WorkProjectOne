@@ -5,6 +5,7 @@ import express from "express";
 import colorsTheme from "./config/colors.js";
 import connectDB from "./config/connect.js";
 import injectMiddleware from "./middlewares/index.js";
+import injectRoute from "./routes/index.js";
 
 /**======================
  *    INIT
@@ -14,16 +15,22 @@ import injectMiddleware from "./middlewares/index.js";
  * The init function injects the app with the middleware routes, and initializes the database connection.
  */
 const app = express();
-const init = () => {
-  // initialize the database connection.
-  connectDB();
+const init = async () => {
+  try {
+    // initialize the database connection.
+    await connectDB();
 
-  // Inject middlewares
-  injectMiddleware(app);
+    // Inject middlewares
+    await injectMiddleware(app);
 
-  // Inject routes
+    // Inject routes
+    await injectRoute(app);
 
-  return app;
+    return app;
+  } catch (error) {
+    console.error(`Error: ${error.message}`.failure);
+    process.exit(1);
+  }
 };
 
 export default init;
