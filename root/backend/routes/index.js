@@ -2,8 +2,9 @@
  *                           IMPORTS
  *========================================================================**/
 import express from "express";
+import apiRoute from "./apiRoute.js";
+
 const router = express.Router();
-import apiDevPost from "./apiDevPost.js";
 
 /**============================================
  *               INJECT ROUTES
@@ -13,19 +14,15 @@ import apiDevPost from "./apiDevPost.js";
  * @param {Object} app
  */
 const injectRoute = (app) => {
-  // Dev routes
-  router.get("/api/dev-get", (req, res) => {
-    res.status(200).json({ message: "Hello World!" });
-  });
-
-  router.post("/api/dev-post", apiDevPost, (req, res) => {
-    res.status(200).json({ message: "Post route hit!" });
-  });
+  /**======================
+   *    DEFAULT ENDPOINTS
+   *========================**/
 
   /**======================
    *    MOUNT ROUTES
    *========================**/
   app.use("/", router);
+  app.use("/api", apiRoute());
 };
 
 export default injectRoute;
