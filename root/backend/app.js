@@ -3,9 +3,11 @@
  *========================================================================**/
 import express from "express";
 import colorsTheme from "./config/colors.js";
-import connectDB from "./config/connect.js";
+import connectDB from "./config/database.js";
 import injectMiddleware from "./middlewares/index.js";
 import injectRoute from "./routes/index.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 /**======================
  *    INIT
@@ -18,7 +20,7 @@ const app = express();
 const init = async () => {
   try {
     // initialize the database connection.
-    await connectDB();
+    await connectDB(process.env.DATABASE_URI);
 
     // Inject middlewares
     await injectMiddleware(app);
@@ -33,4 +35,4 @@ const init = async () => {
   }
 };
 
-export default init;
+export { app, init };

@@ -3,7 +3,7 @@
  *========================================================================**/
 import express from "express";
 const router = express.Router();
-import apiDevPost from "./apiDevPost";
+import apiDevPost from "./apiDevPost.js";
 
 /**============================================
  *               INJECT ROUTES
@@ -15,9 +15,17 @@ import apiDevPost from "./apiDevPost";
 const injectRoute = (app) => {
   // Dev routes
   router.get("/api/dev-get", (req, res) => {
-    res.json({ message: "Hello World!" });
+    res.status(200).json({ message: "Hello World!" });
   });
-  router.post("/api/dev-post", apiDevPost, (req, res) => {});
+
+  router.post("/api/dev-post", apiDevPost, (req, res) => {
+    res.status(200).json({ message: "Post route hit!" });
+  });
+
+  /**======================
+   *    MOUNT ROUTES
+   *========================**/
+  app.use("/", router);
 };
 
 export default injectRoute;

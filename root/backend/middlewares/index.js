@@ -23,8 +23,6 @@ const injectMiddleware = (app) => {
   app.use(express.urlencoded({ extended: true }));
   app.use(helmet());
   app.use(cors());
-  app.use(passport.initialize());
-  app.use(passport.session());
   app.use(
     session({
       secret: process.env.SESSION_SECRET,
@@ -37,6 +35,8 @@ const injectMiddleware = (app) => {
       },
     })
   );
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(compression());
   app.use(
     rateLimit({

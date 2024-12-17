@@ -1,2 +1,12 @@
 # DEV
+# DEV-GET
 GET http://localhost:3000/api/dev-get
+
+###
+#DEV-POST
+POST http://localhost:3000/api/dev-post
+Content-Type: application/json
+
+{
+    "data": "Hello World!x2"
+}
