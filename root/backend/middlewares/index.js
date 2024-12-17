@@ -9,6 +9,7 @@ import session from "express-session";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
 import colorsTheme from "../config/colors.js";
+import configurePassport from "../config/passport-config.js";
 
 /**======================
  *    INJECT MIDDLEWARES
@@ -37,6 +38,7 @@ const injectMiddleware = (app) => {
   );
   app.use(passport.initialize());
   app.use(passport.session());
+  configurePassport(); // Configure passport for authentication
   app.use(compression());
   app.use(
     rateLimit({
