@@ -1,7 +1,8 @@
 /**========================================================================
  *                           IMPORTS
  *========================================================================**/
-
+import "./sass/globals.css";
+import { default as Navbar } from "./components/Navbar.js";
 /**======================
  *    METADATA
  *========================**/
@@ -16,8 +17,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <div></div>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
