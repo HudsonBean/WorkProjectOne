@@ -8,6 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 const poppins = Poppins({
   weight: "500",
@@ -20,7 +22,7 @@ export default function Navbar() {
 
   return (
     <div className={`navbar ${poppins.className}`}>
-      <div className="navbar-links-primary">
+      <li className="navbar-links-primary">
         <Link className="navbar-logo" href="/">
           <Image src={logo} alt="Logo" width={65} height={65} />
         </Link>
@@ -33,9 +35,14 @@ export default function Navbar() {
         >
           Contact
         </Link>
+      </li>
+      <div className="navbar-links-secondary">
+        <Link href="">
+          Get your website <FontAwesomeIcon className="fa" icon={faGlobe} />
+        </Link>
+        <Link href="">Login</Link>
+        <Link href="">Signup</Link>
       </div>
-      <div className="navbar-links-secondary"></div>
-      <li className="navbar-links"></li>
     </div>
   );
 }
