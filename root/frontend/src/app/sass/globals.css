@@ -66,6 +66,7 @@ li {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  text-transform: uppercase;
 }
 .navbar .navbar-links-primary .navbar-logo {
   gap: 3rem;

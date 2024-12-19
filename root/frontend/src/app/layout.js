@@ -4,7 +4,11 @@
 import "./sass/globals.css";
 import { default as Navbar } from "./components/Navbar.js";
 import { Poppins } from "next/font/google";
-const poppins = Poppins({ weight: "200" });
+const poppins = Poppins({
+  weight: "200",
+  style: "normal",
+  display: "swap",
+});
 /**======================
  *    METADATA
  *========================**/
