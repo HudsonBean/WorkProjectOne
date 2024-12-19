@@ -3,6 +3,8 @@
  *========================================================================**/
 import "./sass/globals.css";
 import { default as Navbar } from "./components/Navbar.js";
+import { Poppins } from "next/font/google";
+const poppins = Poppins({ weight: "200" });
 /**======================
  *    METADATA
  *========================**/
@@ -17,7 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className={poppins.className}>
         <Navbar />
         {children}
       </body>

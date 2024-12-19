@@ -55,8 +55,18 @@ li {
   height: 4.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
   margin-bottom: 1rem;
-  padding-inline: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.navbar .navbar-links-primary,
+.navbar .navbar-links-secondary {
+  margin: 0 1.5rem 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.navbar .navbar-links-primary .navbar-logo {
+  gap: 3rem;
 }/*# sourceMappingURL=globals.css.map */

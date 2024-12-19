@@ -3,12 +3,27 @@
  *========================================================================**/
 
 .navbar {
+  $link-gap: 2rem;
   width: 100%;
   height: 4.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
   margin-bottom: 1rem;
-  padding-inline: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .navbar-links-primary,
+  .navbar-links-secondary {
+    margin: 0 1.5rem 0 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $link-gap;
+  }
+  .navbar-links-primary {
+    .navbar-logo {
+      gap: $link-gap + 1rem;
+    }
+  }
+  .navbar-links-secondary {
+  }
 }
