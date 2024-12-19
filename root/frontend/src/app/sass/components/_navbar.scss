@@ -19,20 +19,32 @@
     text-transform: uppercase;
   }
   .navbar-links-primary {
+    // Links that are not the logo
+    .navbar-logo {
+      margin-right: 1.5rem;
+    }
     a:not(.navbar-logo) {
       width: 7.5rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: color 0.5s;
-      &:hover {
-        color: theme.$primaryCTA;
+      position: relative;
+      transition: all 0.25s ease;
+      font-size: large;
+      font-weight: bold;
+    }
+    .active {
+      color: theme.$primaryCTA;
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: -25;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background-color: theme.$primaryCTA;
+        transition: all 0.25s ease;
       }
     }
-    .navbar-logo {
-      // gap: $link-gap + 1rem;
-    }
-  }
-  .navbar-links-secondary {
   }
 }

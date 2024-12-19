@@ -67,13 +67,29 @@ li {
   align-items: center;
   text-transform: uppercase;
 }
+.navbar .navbar-links-primary .navbar-logo {
+  margin-right: 1.5rem;
+}
 .navbar .navbar-links-primary a:not(.navbar-logo) {
   width: 7.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: color 0.5s;
+  position: relative;
+  transition: all 0.25s ease;
+  font-size: large;
+  font-weight: bold;
 }
-.navbar .navbar-links-primary a:not(.navbar-logo):hover {
+.navbar .navbar-links-primary .active {
   color: #0081a7;
+}
+.navbar .navbar-links-primary .active::before {
+  content: "";
+  position: absolute;
+  bottom: -25;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: #0081a7;
+  transition: all 0.25s ease;
 }/*# sourceMappingURL=globals.css.map */
