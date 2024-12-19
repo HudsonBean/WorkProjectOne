@@ -65,9 +65,15 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
   text-transform: uppercase;
 }
-.navbar .navbar-links-primary .navbar-logo {
-  gap: 3rem;
+.navbar .navbar-links-primary a:not(.navbar-logo) {
+  width: 7.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.5s;
+}
+.navbar .navbar-links-primary a:not(.navbar-logo):hover {
+  color: #0081a7;
 }/*# sourceMappingURL=globals.css.map */
