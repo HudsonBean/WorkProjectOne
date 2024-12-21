@@ -53,7 +53,7 @@
   .navbar-links-secondary {
     gap: 1rem;
     a:nth-child(1) {
-      margin-right: 5rem;
+      margin-right: 3.5rem;
     }
     a:nth-child(2),
     a:nth-child(3) {
@@ -68,13 +68,11 @@
       color: theme.$secondaryBackground;
       &:hover {
         background-color: #deded1;
-        border: 2px solid #494949;
       }
     }
     a:nth-child(3) {
       &:hover {
-        border: 2px solid #c9c9be;
-        background-color: #494949;
+        background-color: #3e3d3d;
       }
     }
   }

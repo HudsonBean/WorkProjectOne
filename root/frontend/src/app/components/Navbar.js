@@ -35,6 +35,12 @@ export default function Navbar() {
         >
           Contact
         </Link>
+        <Link
+          className={pathname === "/hosting" ? "active" : ""}
+          href="/hosting"
+        >
+          Hosting
+        </Link>
       </li>
       <div className="navbar-links-secondary">
         <Link href="">
