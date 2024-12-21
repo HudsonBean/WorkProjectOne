@@ -22,33 +22,47 @@ export default function Navbar() {
 
   return (
     <div className={`navbar ${poppins.className}`}>
-      <li className="navbar-links-primary">
-        <Link className="navbar-logo" href="/">
-          <Image src={logo} alt="Logo" width={65} height={65} />
-        </Link>
-        <Link className={pathname === "/about" ? "active" : ""} href="/about">
-          About
-        </Link>
-        <Link
-          className={pathname === "/contact" ? "active" : ""}
-          href="/contact"
-        >
-          Contact
-        </Link>
-        <Link
-          className={pathname === "/hosting" ? "active" : ""}
-          href="/hosting"
-        >
-          Hosting
-        </Link>
-      </li>
-      <div className="navbar-links-secondary">
-        <Link href="">
-          Get your website <FontAwesomeIcon className="fa" icon={faGlobe} />
-        </Link>
-        <Link href="">Login</Link>
-        <Link href="">Signup</Link>
-      </div>
+      <ul className="navbar-links-primary">
+        <li>
+          <Link className="navbar-logo" href="/">
+            <Image src={logo} alt="Logo" width={65} height={65} />
+          </Link>
+        </li>
+        <li>
+          <Link className={pathname === "/about" ? "active" : ""} href="/about">
+            About
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={pathname === "/contact" ? "active" : ""}
+            href="/contact"
+          >
+            Contact
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={pathname === "/hosting" ? "active" : ""}
+            href="/hosting"
+          >
+            Hosting
+          </Link>
+        </li>
+      </ul>
+      <ul className="navbar-links-secondary">
+        <li>
+          <Link href="/">
+            Get your website <FontAwesomeIcon className="fa" icon={faGlobe} />
+          </Link>
+        </li>
+        <li>
+          <Link href="/">Login</Link>
+        </li>
+        <li>
+          <Link href="/">Signup</Link>
+        </li>
+      </ul>
     </div>
   );
 }
