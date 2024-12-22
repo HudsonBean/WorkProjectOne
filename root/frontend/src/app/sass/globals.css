@@ -53,7 +53,6 @@ li {
 .navbar {
   width: 100%;
   height: 4.5rem;
-  background-color: #f8f8eb;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
   margin-bottom: 1rem;
   display: flex;
@@ -101,24 +100,24 @@ li {
 .navbar .navbar-links-secondary {
   gap: 1rem;
 }
-.navbar .navbar-links-secondary a:nth-child(1) {
+.navbar .navbar-links-secondary li:nth-child(1) a {
   margin-right: 3.5rem;
 }
-.navbar .navbar-links-secondary a:nth-child(2),
-.navbar .navbar-links-secondary a:nth-child(3) {
+.navbar .navbar-links-secondary li:nth-child(2) a,
+.navbar .navbar-links-secondary li:nth-child(3) a {
   border: 2px solid #2c2c2c;
-  color: #f8f8eb;
   background-color: #2c2c2c;
   padding: 10px 20px 10px 20px;
   border-radius: 2.5rem;
+  color: #f8f8eb;
 }
-.navbar .navbar-links-secondary a:nth-child(2) {
+.navbar .navbar-links-secondary li:nth-child(2) a {
   background-color: #f8f8eb;
   color: #2c2c2c;
 }
-.navbar .navbar-links-secondary a:nth-child(2):hover {
+.navbar .navbar-links-secondary li:nth-child(2) a:hover {
   background-color: #deded1;
 }
-.navbar .navbar-links-secondary a:nth-child(3):hover {
-  background-color: #3e3d3d;
+.navbar .navbar-links-secondary li:nth-child(3) a:hover {
+  background-color: #474747;
 }/*# sourceMappingURL=globals.css.map */
