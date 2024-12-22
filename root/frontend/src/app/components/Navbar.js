@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Poppins } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faGlobe, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const poppins = Poppins({
   weight: "500",
@@ -67,6 +67,11 @@ export default function Navbar() {
             <Link href="/register">Signup</Link>
           </li>
         </ul>
+      </div>
+      <div className="navbar-hamburger">
+        <button className="navbar-hamburger-button">
+          <FontAwesomeIcon size="3x" icon={faBars} />
+        </button>
       </div>
     </div>
   );

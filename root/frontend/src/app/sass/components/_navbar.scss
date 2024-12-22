@@ -7,11 +7,15 @@
   height: 4.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
   margin-bottom: 1rem;
-  .navbar-normal {
+  .navbar-normal,
+  .navbar-hamburger {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .navbar-hamburger {
+    display: none;
   }
   .navbar-links-primary,
   .navbar-links-secondary {
@@ -92,6 +96,19 @@
   .navbar {
     .navbar-normal {
       display: none;
+    }
+    .navbar-hamburger {
+      height: 4.5rem;
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      .navbar-hamburger-button {
+        margin-right: 2rem;
+        background: none;
+        color: theme.$secondaryBackground;
+        border: none;
+        cursor: pointer;
+      }
     }
   }
 }
