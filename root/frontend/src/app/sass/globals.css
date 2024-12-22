@@ -138,6 +138,7 @@ li {
     display: flex;
     justify-content: right;
     align-items: center;
+    position: relative;
   }
   .navbar .navbar-hamburger .navbar-hamburger-button {
     margin-right: 2rem;
@@ -145,5 +146,19 @@ li {
     color: #2c2c2c;
     border: none;
     cursor: pointer;
+  }
+  .navbar .navbar-hamburger .navbar-hamburger-button:hover {
+    color: #0081a7;
+  }
+  .navbar .navbar-hamburger .navbar-hamburger-body {
+    width: 100%;
+    max-height: 0rem;
+    position: absolute;
+    background-color: red;
+    top: 60px;
+    transition: all 0.5s ease;
+  }
+  .navbar .navbar-hamburger #show {
+    max-height: 20rem;
   }
 }/*# sourceMappingURL=globals.css.map */
