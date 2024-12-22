@@ -1,0 +1,39 @@
+/**========================================================================
+ *                           IMPORTS
+ *========================================================================**/
+@use "../themes/temp" as theme;
+.navbar {
+  width: 100%;
+  height: 4.5rem;
+  background-color: theme.$primaryBackground;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
+  color: theme.$secondaryBackground;
+  font-size: larger;
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 2rem 0 2rem;
+    .navbar-left_links,
+    .navbar-right_links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      a {
+        &:hover {
+          color: theme.$primaryCTA;
+        }
+      }
+    }
+    .navbar-left_links {
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+  }
+}
+
+.hide {
+  display: none;
+}
