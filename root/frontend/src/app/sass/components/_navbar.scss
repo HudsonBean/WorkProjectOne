@@ -7,9 +7,12 @@
   height: 4.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
   margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .navbar-normal {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .navbar-links-primary,
   .navbar-links-secondary {
     margin: 0 2rem 0 1.5rem;
@@ -86,4 +89,9 @@
   }
 }
 @media (max-width: 1011px) {
+  .navbar {
+    .navbar-normal {
+      display: none;
+    }
+  }
 }

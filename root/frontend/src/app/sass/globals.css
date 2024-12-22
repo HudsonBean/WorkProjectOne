@@ -55,6 +55,9 @@ li {
   height: 4.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
   margin-bottom: 1rem;
+}
+.navbar .navbar-normal {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -120,4 +123,10 @@ li {
 }
 .navbar .navbar-links-secondary li:nth-child(3) a:hover {
   background-color: #474747;
+}
+
+@media (max-width: 1011px) {
+  .navbar .navbar-normal {
+    display: none;
+  }
 }/*# sourceMappingURL=globals.css.map */
