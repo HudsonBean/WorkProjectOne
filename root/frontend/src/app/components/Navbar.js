@@ -19,7 +19,7 @@ export default function Navbar() {
   const pathname = usePathname();
   return (
     <nav className={`navbar ${poppins.className}`}>
-      <ul>
+      <ul className="navbar-default">
         <div className="navbar-left_links">
           <li>
             <Link href="/">
@@ -64,11 +64,10 @@ export default function Navbar() {
             <Link href="/register">Register</Link>
           </li>
         </div>
-        {/* Hamburger menu button */}
-        <button className="navbar-hamburger-menu-button hide">
-          <FontAwesomeIcon size="3x" icon={faBars} />
-        </button>
       </ul>
+      <button className="navbar-hamburger-menu-button">
+        <FontAwesomeIcon size="2x" icon={faBars} />
+      </button>
     </nav>
   );
 }
