@@ -32,16 +32,26 @@
       text-transform: uppercase;
       font-weight: 500;
       position: relative;
+
+      &:hover {
+        a {
+          display: inline-block;
+          transition: transform 0.25s ease-in-out;
+          &:hover {
+            transform: translateY(-2px);
+          }
+        }
+      }
       li:nth-child(1) {
         margin-right: 2rem;
         &::after {
           content: "";
           position: absolute;
           left: 5.5rem;
-          width: 2px;
+          width: 1px;
           height: 3rem;
           background-color: theme.$secondaryBackground;
-          transform: translateY(30%);
+          transform: translateY(25%);
         }
       }
     }
