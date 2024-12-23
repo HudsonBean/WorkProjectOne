@@ -21,6 +21,7 @@
       align-items: center;
       justify-content: center;
       gap: 2rem;
+      font-weight: 300;
       a {
         &:hover {
           color: theme.$primaryCTA;
@@ -33,6 +34,15 @@
       position: relative;
       li:nth-child(1) {
         margin-right: 2rem;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 5.5rem;
+          width: 2px;
+          height: 3rem;
+          background-color: theme.$secondaryBackground;
+          transform: translateY(30%);
+        }
       }
     }
   }

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { Poppins } from "next/font/google";
 const poppins = Poppins({
-  weight: ["200", "500"],
+  weight: ["300", "500"],
   style: "normal",
   display: "swap",
 });
