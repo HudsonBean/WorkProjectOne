@@ -78,9 +78,27 @@ li {
 }
 .navbar ul .navbar-left_links {
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 500;
+  position: relative;
+}
+.navbar ul .navbar-left_links li:nth-child(1) {
+  margin-right: 2rem;
 }
 
 .hide {
   display: none;
+}
+
+.selected {
+  position: relative;
+}
+.selected::after {
+  content: "";
+  position: absolute;
+  left: 50%; /* Start at the center */
+  bottom: -25px; /* Position it below the containing box */
+  width: 120%; /* Make it 20% larger than the box */
+  height: 0.35rem;
+  background-color: #0081a7;
+  transform: translateX(-50%); /* Center it */
 }/*# sourceMappingURL=globals.css.map */

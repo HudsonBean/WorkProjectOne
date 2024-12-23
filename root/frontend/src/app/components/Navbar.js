@@ -1,3 +1,4 @@
+"use client";
 /**========================================================================
  *                           IMPORTS
  *========================================================================**/
@@ -6,10 +7,18 @@ import logo from "../assets/logo.png";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { Poppins } from "next/font/google";
+const poppins = Poppins({
+  weight: ["200", "500"],
+  style: "normal",
+  display: "swap",
+});
+import { usePathname } from "next/navigation";
 
-export default function navbar() {
+export default function Navbar() {
+  const pathname = usePathname();
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${poppins.className}`}>
       <ul>
         <div className="navbar-left_links">
           <li>
@@ -18,13 +27,28 @@ export default function navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/about">About</Link>
+            <Link
+              href="/about"
+              className={pathname === "/about" ? "selected" : ""}
+            >
+              About
+            </Link>
           </li>
           <li>
-            <Link href="/contact">Contact</Link>
+            <Link
+              href="/contact"
+              className={pathname === "/contact" ? "selected" : ""}
+            >
+              Contact
+            </Link>
           </li>
           <li>
-            <Link href="/hosting">Hosting</Link>
+            <Link
+              href="/hosting"
+              className={pathname === "/hosting" ? "selected" : ""}
+            >
+              Hosting
+            </Link>
           </li>
         </div>
         <div className="navbar-right_links">
