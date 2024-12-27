@@ -57,13 +57,13 @@ li {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
   color: #1e1e1e;
   font-size: larger;
+  padding: 0 2rem 0 2rem;
 }
 .navbar ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 2rem 0 2rem;
 }
 .navbar ul .navbar-left_links,
 .navbar ul .navbar-right_links {
@@ -157,17 +157,41 @@ li {
   .navbar-default {
     display: none !important;
   }
+  .navbar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
   .navbar-hamburger-menu-button {
-    display: block;
-    background: none;
-    color: inherit;
     border: none;
-    padding: 0;
-    font: inherit;
+    background-color: #f8f8eb;
+    width: 2.25rem; /* Internal size of the button */
+    height: 2.25rem; /* Internal size of the button */
+    padding: 0.5rem; /* Add padding to make the button larger */
+    box-sizing: content-box; /* Ensure padding does not affect internal size */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    border-radius: 50%;
+    gap: 10px;
     cursor: pointer;
-    outline: inherit;
+    transition: all 0.25s ease-in-out;
+  }
+  .navbar-hamburger-menu-button::before, .navbar-hamburger-menu-button::after {
+    content: "";
+    width: 100%; /* Pseudo-elements match the internal button width */
+    height: 3px;
+    background-color: #2c2c2c;
+  }
+  .navbar-hamburger-menu-button::after {
+    width: 70%; /* Adjust for the pseudo-element width */
   }
   .navbar-hamburger-menu-button:hover {
-    color: #0081a7;
+    background-color: #f8f8eb;
+    box-shadow: 12px 12px 12px rgba(44, 44, 44, 0.05) inset, -10px -10px 10px #f8f8eb inset;
+  }
+  .navbar-hamburger-menu-button:hover::before, .navbar-hamburger-menu-button:hover::after {
+    background-color: #0081a7;
   }
 }/*# sourceMappingURL=globals.css.map */

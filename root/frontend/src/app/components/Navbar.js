@@ -6,7 +6,7 @@ import Image from "next/image";
 import logo from "../assets/logo.png";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { Poppins } from "next/font/google";
 const poppins = Poppins({
   weight: ["300", "500"],
@@ -65,9 +65,7 @@ export default function Navbar() {
           </li>
         </div>
       </ul>
-      <button className="navbar-hamburger-menu-button">
-        <FontAwesomeIcon size="2x" icon={faBars} />
-      </button>
+      <button className="navbar-hamburger-menu-button"></button>
     </nav>
   );
 }

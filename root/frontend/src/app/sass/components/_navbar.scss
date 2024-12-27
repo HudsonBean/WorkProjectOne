@@ -9,12 +9,12 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
   color: theme.$primaryText;
   font-size: larger;
+  padding: 0 2rem 0 2rem;
   ul {
     list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 2rem 0 2rem;
     .navbar-left_links,
     .navbar-right_links {
       display: flex;
@@ -122,17 +122,46 @@
   .navbar-default {
     display: none !important;
   }
+  .navbar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
   .navbar-hamburger-menu-button {
-    display: block;
-    background: none;
-    color: inherit;
     border: none;
-    padding: 0;
-    font: inherit;
+    background-color: theme.$primaryBackground;
+    width: 2.25rem; /* Internal size of the button */
+    height: 2.25rem; /* Internal size of the button */
+    padding: 0.5rem; /* Add padding to make the button larger */
+    box-sizing: content-box; /* Ensure padding does not affect internal size */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    border-radius: 50%;
+    gap: 10px;
     cursor: pointer;
-    outline: inherit;
+    transition: all 0.25s ease-in-out;
+    &::before,
+    &::after {
+      content: "";
+      width: 100%; /* Pseudo-elements match the internal button width */
+      height: 3px;
+      background-color: theme.$secondaryBackground;
+    }
+
+    &::after {
+      width: 70%; /* Adjust for the pseudo-element width */
+    }
+
     &:hover {
-      color: theme.$primaryCTA;
+      background-color: theme.$primaryBackground;
+      box-shadow: 12px 12px 12px rgb(theme.$secondaryBackground, 0.05) inset,
+        -10px -10px 10px theme.$primaryBackground inset;
+      &::before,
+      &::after {
+        background-color: theme.$primaryCTA;
+      }
     }
   }
 }
