@@ -141,7 +141,8 @@
     border-radius: 50%;
     gap: 10px;
     cursor: pointer;
-    transition: all 0.25s ease-in-out;
+    border: 1px solid theme.$primaryBackground;
+    transition: all 0.25s ease-out;
     &::before,
     &::after {
       content: "";
@@ -158,6 +159,7 @@
       background-color: theme.$primaryBackground;
       box-shadow: 12px 12px 12px rgb(theme.$secondaryBackground, 0.05) inset,
         -10px -10px 10px theme.$primaryBackground inset;
+      border: 1px solid theme.$primaryCTA;
       &::before,
       &::after {
         background-color: theme.$primaryCTA;

@@ -176,7 +176,8 @@ li {
     border-radius: 50%;
     gap: 10px;
     cursor: pointer;
-    transition: all 0.25s ease-in-out;
+    border: 1px solid #f8f8eb;
+    transition: all 0.25s ease-out;
   }
   .navbar-hamburger-menu-button::before, .navbar-hamburger-menu-button::after {
     content: "";
@@ -190,6 +191,7 @@ li {
   .navbar-hamburger-menu-button:hover {
     background-color: #f8f8eb;
     box-shadow: 12px 12px 12px rgba(44, 44, 44, 0.05) inset, -10px -10px 10px #f8f8eb inset;
+    border: 1px solid #0081a7;
   }
   .navbar-hamburger-menu-button:hover::before, .navbar-hamburger-menu-button:hover::after {
     background-color: #0081a7;
