@@ -1,3 +1,3 @@
 export default function Hosting() {
-  return <div>Hosting</div>;
+  return <div style={{ paddingTop: "4.5rem" }}>Hosting</div>;
 }
