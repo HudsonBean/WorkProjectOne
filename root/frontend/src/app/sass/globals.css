@@ -50,6 +50,9 @@ li {
  *                           IMPORTS
  *========================================================================**/
 .navbar {
+  background-color: blue;
+}
+.navbar .navbar-default {
   position: fixed;
   width: 100%;
   height: 4.5rem;
@@ -59,33 +62,34 @@ li {
   font-size: larger;
   padding: 0 2rem 0 2rem;
 }
-.navbar ul {
+.navbar .navbar-default ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.navbar ul .navbar-left_links,
-.navbar ul .navbar-right_links {
+.navbar .navbar-default ul .navbar-left_links,
+.navbar .navbar-default ul .navbar-right_links {
+  background-color: red;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 300;
 }
-.navbar ul .navbar-left_links a:hover,
-.navbar ul .navbar-right_links a:hover {
+.navbar .navbar-default ul .navbar-left_links a:hover,
+.navbar .navbar-default ul .navbar-right_links a:hover {
   color: #0081a7;
 }
-.navbar ul .navbar-left_links {
+.navbar .navbar-default ul .navbar-left_links {
   text-transform: uppercase;
   font-weight: 500;
   position: relative;
   gap: 2rem;
 }
-.navbar ul .navbar-left_links li:nth-child(1) {
+.navbar .navbar-default ul .navbar-left_links li:nth-child(1) {
   margin-right: 2rem;
 }
-.navbar ul .navbar-left_links li:nth-child(1)::after {
+.navbar .navbar-default ul .navbar-left_links li:nth-child(1)::after {
   content: "";
   position: absolute;
   left: 5.5rem;
@@ -94,16 +98,16 @@ li {
   background-color: #2c2c2c;
   transform: translateY(25%);
 }
-.navbar ul .navbar-right_links {
+.navbar .navbar-default ul .navbar-right_links {
   gap: 1.25rem;
 }
-.navbar ul .navbar-right_links li:nth-child(1) {
+.navbar .navbar-default ul .navbar-right_links li:nth-child(1) {
   margin-right: 4rem;
 }
-.navbar ul .navbar-right_links li:nth-child(1) a {
+.navbar .navbar-default ul .navbar-right_links li:nth-child(1) a {
   position: relative;
 }
-.navbar ul .navbar-right_links li:nth-child(1) a::before {
+.navbar .navbar-default ul .navbar-right_links li:nth-child(1) a::before {
   content: "";
   position: absolute;
   right: 0;
@@ -112,26 +116,26 @@ li {
   height: 2px;
   transition: all 0.25s ease-in-out;
 }
-.navbar ul .navbar-right_links li:nth-child(1) a:hover::before {
+.navbar .navbar-default ul .navbar-right_links li:nth-child(1) a:hover::before {
   left: 0;
   width: 100%;
   background-color: #0081a7;
 }
-.navbar ul .navbar-right_links li:nth-child(2) a,
-.navbar ul .navbar-right_links li:nth-child(3) a {
+.navbar .navbar-default ul .navbar-right_links li:nth-child(2) a,
+.navbar .navbar-default ul .navbar-right_links li:nth-child(3) a {
   padding: 0.5rem 1rem 0.5rem 1rem;
   border-radius: 40px;
   border: 1px solid #2c2c2c;
 }
-.navbar ul .navbar-right_links li:nth-child(2) a:hover {
+.navbar .navbar-default ul .navbar-right_links li:nth-child(2) a:hover {
   background-color: #e0e0d3;
   color: #1e1e1e;
 }
-.navbar ul .navbar-right_links li:nth-child(3) a {
+.navbar .navbar-default ul .navbar-right_links li:nth-child(3) a {
   color: #f8f8eb;
   background-color: #2c2c2c;
 }
-.navbar ul .navbar-right_links li:nth-child(3) a:hover {
+.navbar .navbar-default ul .navbar-right_links li:nth-child(3) a:hover {
   background-color: #585858;
 }
 
