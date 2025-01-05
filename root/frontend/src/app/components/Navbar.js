@@ -62,6 +62,16 @@ export default function Navbar() {
               </span>
             </Link>
           </li>
+          <li className="navbar__nav__right__item">
+            <Link href="/login">
+              <span>Login</span>
+            </Link>
+          </li>
+          <li className="navbar__nav__right__item">
+            <Link href="/register">
+              <span>Register</span>
+            </Link>
+          </li>
         </ul>
         <button className="navbar__hamburger__button"></button>
       </nav>

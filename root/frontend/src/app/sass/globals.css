@@ -65,6 +65,11 @@ li {
   bottom: -1.5rem;
 }
 
+.navbar__hamburger__button,
+.navbar__hamburger__menu {
+  display: none;
+}
+
 .navbar {
   width: 100%;
   color: #1e1e1e;
@@ -105,6 +110,48 @@ li {
   top: 50%;
   transform: translateY(-50%);
 }
+.navbar .navbar__nav .navbar__nav__right {
+  gap: 1.25rem;
+}
+.navbar .navbar__nav .navbar__nav__right .navbar__nav__right__item:nth-child(1) {
+  position: relative;
+  margin-right: 2rem;
+}
+.navbar .navbar__nav .navbar__nav__right .navbar__nav__right__item:nth-child(1)::after {
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 2px;
+  background-color: #0081a7;
+  right: 0;
+  bottom: -0.25rem;
+  transition: all 0.3s ease-in-out;
+}
+.navbar .navbar__nav .navbar__nav__right .navbar__nav__right__item:nth-child(1):hover::after {
+  left: 0;
+  width: 100%;
+}
+.navbar .navbar__nav .navbar__nav__right .navbar__nav__right__item:nth-child(2) a, .navbar .navbar__nav .navbar__nav__right .navbar__nav__right__item:nth-child(3) a {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: #0081a7;
+  color: #f8f8eb;
+  transition: all 0.15s ease-in-out;
+  border: 1px solid #0081a7;
+}
+.navbar .navbar__nav .navbar__nav__right .navbar__nav__right__item:nth-child(2) a:hover, .navbar .navbar__nav .navbar__nav__right .navbar__nav__right__item:nth-child(3) a:hover {
+  background-color: rgba(0, 129, 167, 0.9);
+}
 .navbar .navbar__nav li:hover {
   color: #0081a7;
+}
+
+@media (max-width: 1000px) {
+  .navbar__nav {
+    display: none !important;
+  }
+  .navbar__hamburger__button,
+  .navbar__hamburger__menu {
+    display: block;
+  }
 }/*# sourceMappingURL=globals.css.map */
