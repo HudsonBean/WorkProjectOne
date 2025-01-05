@@ -3,5 +3,5 @@
  *========================================================================**/
 
 export default function index() {
-  return <div style={{ paddingTop: "4.5rem" }}>Index</div>;
+  return <div>Index</div>;
 }
