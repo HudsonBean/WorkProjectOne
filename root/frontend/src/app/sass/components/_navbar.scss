@@ -76,7 +76,7 @@
   position: fixed;
   top: 5rem;
   right: -100%;
-  width: 80%;
+  width: 85%;
   height: calc(100vh - 5rem);
   background-color: theme.$primaryBackground;
   transition: right 0.3s ease-in-out;
@@ -130,6 +130,7 @@
   position: relative;
 
   .navbar__nav {
+    position: fixed;
     width: inherit;
     height: 5rem;
     background-color: theme.$primaryBackground;
@@ -138,7 +139,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
     z-index: 102;
 
     .navbar__nav__left,
@@ -177,7 +177,7 @@
         &:nth-child(1) {
           position: relative;
           margin-right: 2.25rem;
-          transition: all 0.4s ease-in-out;
+          transition: all 0.25s ease-in-out;
           &::after {
             position: absolute;
             content: "";
@@ -186,7 +186,7 @@
             background-color: theme.$primaryCTA;
             right: 0;
             bottom: -0.25rem;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.15s ease-in-out;
           }
           &:hover {
             &::after {
