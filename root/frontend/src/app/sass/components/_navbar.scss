@@ -168,11 +168,11 @@
     }
 
     .navbar__nav__right {
-      gap: 1.25rem;
+      gap: 1rem;
       .navbar__nav__right__item {
         &:nth-child(1) {
           position: relative;
-          margin-right: 2rem;
+          margin-right: 2.25rem;
           &::after {
             position: absolute;
             content: "";
@@ -194,13 +194,24 @@
         &:nth-child(3) {
           a {
             padding: 0.5rem 1rem;
-            border-radius: 0.25rem;
+            border-radius: 1.25rem;
             background-color: theme.$primaryCTA;
             color: theme.$primaryBackground;
             transition: all 0.15s ease-in-out;
             border: 1px solid theme.$primaryCTA;
             &:hover {
-              background-color: rgba(theme.$primaryCTA, 0.9);
+              background-color: rgba(theme.$primaryCTA, 0.85);
+            }
+          }
+        }
+        &:nth-child(2) {
+          a {
+            background-color: theme.$primaryBackground;
+            border-color: theme.$secondaryBackground;
+            color: theme.$secondaryBackground;
+
+            &:hover {
+              background-color: rgba(theme.$secondaryBackground, 0.15);
             }
           }
         }
