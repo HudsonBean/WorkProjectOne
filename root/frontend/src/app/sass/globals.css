@@ -176,7 +176,7 @@ li {
 }
 .navbar .navbar__nav .navbar__nav__left {
   gap: 1.25rem;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1.2rem;
   text-transform: uppercase;
 }
@@ -243,9 +243,18 @@ li {
   .navbar .navbar__nav {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding: 0 2.5rem 0 0;
   }
-  .navbar .navbar__nav > .navbar__nav__left,
+  .navbar .navbar__nav .navbar__nav__left .navbar__nav__left__item {
+    display: none;
+  }
+  .navbar .navbar__nav .navbar__nav__left .navbar__nav__left__item:has(img) {
+    display: block;
+  }
+  .navbar .navbar__nav .navbar__nav__left .navbar__nav__left__item:has(img)::after {
+    display: none;
+  }
   .navbar .navbar__nav > .navbar__nav__right {
     display: none;
   }
