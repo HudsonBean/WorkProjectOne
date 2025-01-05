@@ -62,7 +62,7 @@ li {
   height: 2.5px;
   background-color: #0081a7;
   left: -15%;
-  bottom: -1.5rem;
+  bottom: -2rem;
 }
 
 .navbar__hamburger__button,
@@ -171,10 +171,10 @@ li {
 }
 .navbar .navbar__nav {
   width: inherit;
-  height: 4.5rem;
+  height: 5.5rem;
   background-color: #f8f8eb;
-  padding: 0 1.5rem;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 0 2.5rem 0 1.5rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -199,7 +199,7 @@ li {
   position: absolute;
   content: "";
   width: 2px;
-  height: 75%;
+  height: 85%;
   background-color: #1e1e1e;
   right: -1.25rem;
   top: 50%;
@@ -262,5 +262,27 @@ li {
   .navbar__hamburger__button,
   .navbar__hamburger__menu {
     display: block;
+  }
+}
+@media (min-width: 960px) {
+  .navbar__hamburger__backdrop {
+    opacity: 0 !important;
+    pointer-events: none;
+  }
+  .navbar__hamburger__menu {
+    right: -100% !important;
+  }
+  .navbar__hamburger__backdrop--active,
+  .navbar__hamburger__menu--active {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .navbar__hamburger__button--active::before, .navbar__hamburger__button--active::after {
+    transform: none;
+    width: initial;
+    background-color: #1e1e1e;
+  }
+  .navbar__hamburger__button--active::after {
+    width: 60%;
   }
 }/*# sourceMappingURL=globals.css.map */
