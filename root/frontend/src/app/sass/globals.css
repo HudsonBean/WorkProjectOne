@@ -99,7 +99,7 @@ li {
 
 .navbar__hamburger__backdrop {
   position: fixed;
-  top: 5.5rem;
+  top: 5rem;
   left: 0;
   right: 0;
   bottom: 0;
@@ -119,10 +119,10 @@ li {
 
 .navbar__hamburger__menu {
   position: fixed;
-  top: 5.5rem;
+  top: 5rem;
   right: -100%;
-  width: 85%;
-  height: calc(100vh - 5.5rem);
+  width: 80%;
+  height: calc(100vh - 5rem);
   background-color: #f8f8eb;
   transition: right 0.3s ease-in-out;
   z-index: 99;
@@ -158,7 +158,7 @@ li {
 }
 .navbar .navbar__nav {
   width: inherit;
-  height: 5.5rem;
+  height: 5rem;
   background-color: #f8f8eb;
   padding: 0 2.5rem 0 1.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1215686275), 0 0 2px rgba(0, 0, 0, 0.2392156863);
