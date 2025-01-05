@@ -26,6 +26,9 @@ export default function Navbar() {
     document
       .querySelector(".navbar__hamburger__button")
       .classList.toggle("navbar__hamburger__button--active");
+    document
+      .querySelector(".navbar__hamburger__backdrop")
+      .classList.toggle("navbar__hamburger__backdrop--active");
   };
 
   return (
@@ -94,6 +97,7 @@ export default function Navbar() {
       <div className="navbar__hamburger__menu">
         <ul className="navbar__hamburger__menu__list"></ul>
       </div>
+      <div className="navbar__hamburger__backdrop"></div>
     </div>
   );
 }
