@@ -17,9 +17,21 @@ const poppins = Poppins({
 
 export default function Navbar() {
   const pathname = usePathname();
+
+  const handleClick = () => {
+    // Activates & deactivates the hamburger menu
+    document
+      .querySelector(".navbar__hamburger__menu")
+      .classList.toggle("navbar__hamburger__menu--active");
+    document
+      .querySelector(".navbar__hamburger__button")
+      .classList.toggle("navbar__hamburger__button--active");
+  };
+
   return (
     <div className={`navbar ${poppins.className}`}>
       <nav className="navbar__nav">
+        {/* Left side of the navbar */}
         <ul className="navbar__nav__left">
           <li className="navbar__nav__left__item">
             <Link href="/">
@@ -28,7 +40,7 @@ export default function Navbar() {
           </li>
           <li
             className={`navbar__nav__left__item ${
-              pathname == "/pricing" ? "selected" : ""
+              pathname == "/pricing" ? "navbar__nav__left__item--selected" : ""
             }`}
           >
             <Link href="/pricing">
@@ -37,7 +49,7 @@ export default function Navbar() {
           </li>
           <li
             className={`navbar__nav__left__item ${
-              pathname == "/about" ? "selected" : ""
+              pathname == "/about" ? "navbar__nav__left__item--selected" : ""
             }`}
           >
             <Link href="/about">
@@ -46,7 +58,7 @@ export default function Navbar() {
           </li>
           <li
             className={`navbar__nav__left__item ${
-              pathname == "/contact" ? "selected" : ""
+              pathname == "/contact" ? "navbar__nav__left__item--selected" : ""
             }`}
           >
             <Link href="/contact">
@@ -54,6 +66,7 @@ export default function Navbar() {
             </Link>
           </li>
         </ul>
+        {/* Right side of the navbar */}
         <ul className="navbar__nav__right">
           <li className="navbar__nav__right__item">
             <Link href="/">
@@ -73,9 +86,14 @@ export default function Navbar() {
             </Link>
           </li>
         </ul>
-        <button className="navbar__hamburger__button"></button>
+        <button
+          onClick={handleClick}
+          className="navbar__hamburger__button"
+        ></button>
       </nav>
-      <div className="navbar__hamburger__menu"></div>
+      <div className="navbar__hamburger__menu">
+        <ul className="navbar__hamburger__menu__list"></ul>
+      </div>
     </div>
   );
 }

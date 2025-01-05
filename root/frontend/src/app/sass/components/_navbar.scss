@@ -6,7 +6,7 @@
 /**======================
  *    UTILITIES
  *========================**/
-.selected {
+.navbar__nav__left__item--selected {
   position: relative;
   &::after {
     position: absolute;
@@ -22,7 +22,86 @@
 .navbar__hamburger__menu {
   display: none;
 }
+.navbar__hamburger__button {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 101;
 
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: theme.$primaryText;
+    right: 0;
+    transition: all 0.3s ease-in-out;
+    transform-origin: center;
+  }
+
+  &::before {
+    top: 40%;
+  }
+
+  &::after {
+    top: 60%;
+    width: 60%;
+  }
+}
+
+.navbar__hamburger__menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  background-color: theme.$secondaryBackground;
+  transition: right 0.3s ease-in-out;
+  z-index: 100;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 4.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background-color: theme.$primaryBackground;
+    transition: width 0.3s ease-in-out 0s;
+  }
+}
+
+.navbar__hamburger__menu--active {
+  right: 0;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+
+  &::before {
+    width: 90%;
+    transition: width 0.3s ease-in-out 0.4s;
+  }
+}
+.navbar__hamburger__button--active {
+  &::before {
+    background-color: theme.$primaryBackground;
+    transform: translateY(0.25rem) rotate(45deg);
+    width: 80%;
+  }
+
+  &::after {
+    background-color: theme.$primaryBackground;
+    transform: translateY(-0.25rem) rotate(-45deg);
+    width: 80%;
+  }
+}
+
+/**======================
+ *    MAIN LOGGED OUT NAVBAR
+ *========================**/
 .navbar {
   width: 100%;
   color: theme.$primaryText;
@@ -115,9 +194,19 @@
 }
 
 @media (max-width: 1000px) {
-  .navbar__nav {
-    display: none !important;
+  .navbar {
+    .navbar__nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      > .navbar__nav__left,
+      > .navbar__nav__right {
+        display: none;
+      }
+    }
   }
+
   .navbar__hamburger__button,
   .navbar__hamburger__menu {
     display: block;
