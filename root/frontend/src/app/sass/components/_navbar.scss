@@ -3,6 +3,22 @@
  *========================================================================**/
 @use "../themes/temp" as theme;
 
+/**======================
+ *    UTILITIES
+ *========================**/
+.selected {
+  position: relative;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 125%;
+    height: 2.5px;
+    background-color: theme.$primaryCTA;
+    left: -15%;
+    bottom: -1.5rem;
+  }
+}
+
 .navbar {
   width: 100%;
   color: theme.$primaryText;
@@ -12,27 +28,44 @@
     background-color: theme.$primaryBackground;
     padding: 0 1.5rem;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-    .navbar__nav__left {
-      width: 10rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .navbar__nav__left,
+    .navbar__nav__right {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 1rem;
+      font-weight: 300;
+    }
+
+    .navbar__nav__left {
+      gap: 1.25rem;
       font-weight: 500;
       font-size: 1.2rem;
       text-transform: uppercase;
-
       .navbar__nav__left__item {
-        // LOGO
         &:has(img) {
+          position: relative;
           margin-right: 2rem;
-        }
-        &:hover {
-          color: theme.$primaryColor;
+          &::after {
+            position: absolute;
+            content: "";
+            width: 2px;
+            height: 75%;
+            background-color: theme.$primaryText;
+            right: -1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+          }
         }
       }
     }
-    .navbar__nav__right {
+
+    // GENERALS
+    li {
+      &:hover {
+        color: theme.$primaryCTA;
+      }
     }
   }
 }

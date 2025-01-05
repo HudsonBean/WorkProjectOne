@@ -49,8 +49,25 @@ li {
 /**========================================================================
  *                           IMPORTS
  *========================================================================**/
+/**======================
+ *    UTILITIES
+ *========================**/
+.selected {
+  position: relative;
+}
+.selected::after {
+  position: absolute;
+  content: "";
+  width: 125%;
+  height: 2.5px;
+  background-color: #0081a7;
+  left: -15%;
+  bottom: -1.5rem;
+}
+
 .navbar {
   width: 100%;
+  color: #1e1e1e;
 }
 .navbar .navbar__nav {
   width: inherit;
@@ -58,17 +75,36 @@ li {
   background-color: #f8f8eb;
   padding: 0 1.5rem;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-}
-.navbar .navbar__nav .navbar__nav__left {
-  width: 10rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+}
+.navbar .navbar__nav .navbar__nav__left,
+.navbar .navbar__nav .navbar__nav__right {
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+}
+.navbar .navbar__nav .navbar__nav__left {
+  gap: 1.25rem;
   font-weight: 500;
   font-size: 1.2rem;
   text-transform: uppercase;
 }
 .navbar .navbar__nav .navbar__nav__left .navbar__nav__left__item:has(img) {
+  position: relative;
   margin-right: 2rem;
+}
+.navbar .navbar__nav .navbar__nav__left .navbar__nav__left__item:has(img)::after {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 75%;
+  background-color: #1e1e1e;
+  right: -1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.navbar .navbar__nav li:hover {
+  color: #0081a7;
 }/*# sourceMappingURL=globals.css.map */
