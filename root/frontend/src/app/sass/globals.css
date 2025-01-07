@@ -239,6 +239,93 @@ li {
   color: #0081a7;
 }
 
+@keyframes menuItemFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.navbar__hamburger__menu .navbar__hamburger__menu__list {
+  width: 100%;
+  padding: 5rem 0 1.5rem 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+.navbar__hamburger__menu .navbar__hamburger__menu__list .navbar__hamburger__menu__list__item {
+  font-size: 2.25rem;
+  font-weight: 100;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(50px);
+}
+.navbar__hamburger__menu .navbar__hamburger__menu__list::after {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 1px;
+  background-color: #2c2c2c;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+}
+.navbar__hamburger__menu .navbar__hamburger__menu__list__bottom {
+  padding: 2rem 0 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+.navbar__hamburger__menu .navbar__hamburger__menu__list__bottom .navbar__hamburger__menu__list__bottom__item:nth-child(1) a, .navbar__hamburger__menu .navbar__hamburger__menu__list__bottom .navbar__hamburger__menu__list__bottom__item:nth-child(2) a {
+  padding: 0.5rem 1rem;
+  border-radius: 1.25rem;
+  background-color: #0081a7;
+  color: #f8f8eb;
+  transition: all 0.15s ease-in-out;
+  border: 1px solid #0081a7;
+}
+.navbar__hamburger__menu .navbar__hamburger__menu__list__bottom .navbar__hamburger__menu__list__bottom__item:nth-child(1) a:hover, .navbar__hamburger__menu .navbar__hamburger__menu__list__bottom .navbar__hamburger__menu__list__bottom__item:nth-child(2) a:hover {
+  background-color: rgba(0, 129, 167, 0.85);
+}
+.navbar__hamburger__menu .navbar__hamburger__menu__list__bottom .navbar__hamburger__menu__list__bottom__item:nth-child(2) a {
+  background-color: #f8f8eb;
+  border-color: #2c2c2c;
+  color: #2c2c2c;
+}
+.navbar__hamburger__menu .navbar__hamburger__menu__list__bottom .navbar__hamburger__menu__list__bottom__item:nth-child(2) a:hover {
+  background-color: rgba(44, 44, 44, 0.15);
+}
+
+.navbar__hamburger__menu--active .navbar__hamburger__menu__list .navbar__hamburger__menu__list__item:nth-child(1) {
+  animation: menuItemFade 0.3s ease-in-out 0.1s forwards;
+}
+.navbar__hamburger__menu--active .navbar__hamburger__menu__list .navbar__hamburger__menu__list__item:nth-child(2) {
+  animation: menuItemFade 0.3s ease-in-out 0.2s forwards;
+}
+.navbar__hamburger__menu--active .navbar__hamburger__menu__list .navbar__hamburger__menu__list__item:nth-child(3) {
+  animation: menuItemFade 0.3s ease-in-out 0.3s forwards;
+}
+.navbar__hamburger__menu--active .navbar__hamburger__menu__list .navbar__hamburger__menu__list__item:hover {
+  color: #0081a7;
+  position: relative;
+}
+.navbar__hamburger__menu--active .navbar__hamburger__menu__list .navbar__hamburger__menu__list__item:hover::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #0081a7;
+  left: 0;
+  bottom: -0.25rem;
+}
+
 @media (max-width: 950px) {
   .navbar .navbar__nav {
     display: flex;

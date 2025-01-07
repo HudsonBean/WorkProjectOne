@@ -1,6 +1,7 @@
 "use client";
 /**========================================================================
  *                           IMPORTS
+ *                           | HBD 1/5/2025
  *========================================================================**/
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +20,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const handleClick = () => {
-    // Activates & deactivates the hamburger menu
+    // Activates & deactivates the hamburger menu | HBD 01/5/2025
     document
       .querySelector(".navbar__hamburger__menu")
       .classList.toggle("navbar__hamburger__menu--active");
@@ -34,7 +35,7 @@ export default function Navbar() {
   return (
     <div className={`navbar ${poppins.className}`}>
       <nav className="navbar__nav">
-        {/* Left side of the navbar */}
+        {/* Left side of the navbar | HBD 01/5/2025 */}
         <ul className="navbar__nav__left">
           <li className="navbar__nav__left__item">
             <Link href="/">
@@ -69,7 +70,7 @@ export default function Navbar() {
             </Link>
           </li>
         </ul>
-        {/* Right side of the navbar */}
+        {/* Right side of the navbar | HBD 01/5/2025 */}
         <ul className="navbar__nav__right">
           <li className="navbar__nav__right__item">
             <Link href="/">
@@ -94,9 +95,37 @@ export default function Navbar() {
           className="navbar__hamburger__button"
         ></button>
       </nav>
-      <div className="navbar__hamburger__menu">
-        <ul className="navbar__hamburger__menu__list"></ul>
-      </div>
+      <nav className="navbar__hamburger__menu">
+        <ul className="navbar__hamburger__menu__list">
+          <li className="navbar__hamburger__menu__list__item">
+            <Link href="/pricing">
+              <span>Plans</span>
+            </Link>
+          </li>
+          <li className="navbar__hamburger__menu__list__item">
+            <Link href="/about">
+              <span>About</span>
+            </Link>
+          </li>
+          <li className="navbar__hamburger__menu__list__item">
+            <Link href="/contact">
+              <span>Contact</span>
+            </Link>
+          </li>
+        </ul>
+        <ul className="navbar__hamburger__menu__list__bottom">
+          <li className="navbar__hamburger__menu__list__bottom__item">
+            <Link href="/login">
+              <span>Login</span>
+            </Link>
+          </li>
+          <li className="navbar__hamburger__menu__list__bottom__item">
+            <Link href="/register">
+              <span>Register</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
       <div className="navbar__hamburger__backdrop"></div>
     </div>
   );
