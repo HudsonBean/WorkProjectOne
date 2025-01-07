@@ -114,16 +114,26 @@ export default function Navbar() {
           </li>
         </ul>
         <ul className="navbar__hamburger__menu__list__bottom">
-          <li className="navbar__hamburger__menu__list__bottom__item">
-            <Link href="/login">
-              <span>Login</span>
-            </Link>
-          </li>
-          <li className="navbar__hamburger__menu__list__bottom__item">
-            <Link href="/register">
-              <span>Register</span>
-            </Link>
-          </li>
+          <div className="navbar__hamburger__menu__list__bottom__row-container">
+            <li className="navbar__hamburger__menu__list__bottom__row-container__item">
+              <Link href="/login">
+                <span>Login</span>
+              </Link>
+            </li>
+            <li className="navbar__hamburger__menu__list__bottom__row-container__item">
+              <Link href="/register">
+                <span>Register</span>
+              </Link>
+            </li>
+          </div>
+          <Link
+            className="navbar__hamburger__menu__list__bottom__item"
+            href="/"
+          >
+            <span>
+              Host your website <FontAwesomeIcon icon={faGlobe} />
+            </span>
+          </Link>
         </ul>
       </nav>
       <div className="navbar__hamburger__backdrop"></div>

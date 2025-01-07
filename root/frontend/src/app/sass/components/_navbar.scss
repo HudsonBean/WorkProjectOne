@@ -275,34 +275,61 @@
   .navbar__hamburger__menu__list__bottom {
     padding: 2rem 0 0 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    .navbar__hamburger__menu__list__bottom__item {
-      &:nth-child(1),
-      &:nth-child(2) {
-        a {
-          padding: 0.5rem 1rem;
-          border-radius: 1.25rem;
-          background-color: theme.$primaryCTA;
-          color: theme.$primaryBackground;
-          transition: all 0.15s ease-in-out;
-          border: 1px solid theme.$primaryCTA;
-          &:hover {
-            background-color: rgba(theme.$primaryCTA, 0.85);
+    .navbar__hamburger__menu__list__bottom__row-container {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      .navbar__hamburger__menu__list__bottom__row-container__item {
+        &:nth-child(1),
+        &:nth-child(2) {
+          a {
+            padding: 0.5rem 1rem;
+            border-radius: 1.25rem;
+            background-color: theme.$primaryCTA;
+            color: theme.$primaryBackground;
+            transition: all 0.15s ease-in-out;
+            border: 1px solid theme.$primaryCTA;
+            &:hover {
+              background-color: rgba(theme.$primaryCTA, 0.85);
+            }
+          }
+        }
+        &:nth-child(2) {
+          a {
+            background-color: theme.$primaryBackground;
+            border-color: theme.$secondaryBackground;
+            color: theme.$secondaryBackground;
+
+            &:hover {
+              background-color: rgba(theme.$secondaryBackground, 0.15);
+            }
           }
         }
       }
-      &:nth-child(2) {
-        a {
-          background-color: theme.$primaryBackground;
-          border-color: theme.$secondaryBackground;
-          color: theme.$secondaryBackground;
-
-          &:hover {
-            background-color: rgba(theme.$secondaryBackground, 0.15);
-          }
+    }
+    .navbar__hamburger__menu__list__bottom__item {
+      margin-top: 0.5rem;
+      position: relative;
+      transition: all 0.15s ease-in-out;
+      &::after {
+        position: absolute;
+        content: "";
+        width: 0%;
+        height: 2px;
+        background-color: theme.$primaryCTA;
+        right: 0;
+        bottom: -0.25rem;
+        transition: all 0.15s ease-in-out;
+      }
+      &:hover {
+        color: theme.$primaryCTA;
+        &::after {
+          left: 0;
+          width: 100%;
         }
       }
     }
