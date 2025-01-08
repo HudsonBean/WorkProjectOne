@@ -71,13 +71,18 @@ li {
 }
 
 .navbar__hamburger__button {
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0 0.55rem 0 0.35rem;
+  background-color: transparent;
+  border-radius: 50%;
   border: none;
   cursor: pointer;
   position: relative;
   z-index: 103;
+}
+.navbar__hamburger__button:hover {
+  background-color: rgba(30, 30, 30, 0.1);
 }
 .navbar__hamburger__button .navbar__hamburger__button__line-container {
   width: 100%;
