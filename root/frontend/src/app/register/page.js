@@ -12,31 +12,45 @@ const poppins = Poppins({
 export default function Register() {
   return (
     <div className={`register ${poppins.className}`}>
-      <div className="register__container">
-        <h1>Create Account</h1>
-        <form className="register__form">
-          <div className="register__form__input-group">
-            <input type="text" placeholder="Username" required />
+      <div className="register__left__container">
+        <div className="register__left__content">
+          <h1>Create Account</h1>
+          <form className="register__form">
+            <div className="register__form__input-group">
+              <input type="text" placeholder="Username" required />
+            </div>
+            <div className="register__form__input-group">
+              <input type="email" placeholder="Email" required />
+            </div>
+            <div className="register__form__input-group">
+              <input type="password" placeholder="Password" required />
+            </div>
+            <div className="register__form__input-group">
+              <input type="password" placeholder="Confirm Password" required />
+            </div>
+            <button type="submit">Register</button>
+          </form>
+          <div className="register__footer">
+            <p>
+              Already have an account?{" "}
+              <Link href="/login">
+                <span>Login</span>
+              </Link>
+            </p>
           </div>
-          <div className="register__form__input-group">
-            <input type="email" placeholder="Email" required />
-          </div>
-          <div className="register__form__input-group">
-            <input type="password" placeholder="Password" required />
-          </div>
-          <div className="register__form__input-group">
-            <input type="password" placeholder="Confirm Password" required />
-          </div>
-          <button type="submit">Register</button>
-        </form>
-        <div className="register__footer">
-          <p>
-            Already have an account?{" "}
-            <Link href="/login">
-              <span>Login</span>
-            </Link>
-          </p>
         </div>
+      </div>
+      <svg
+        width="100px"
+        height="100px"
+        className="register__divider"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <polygon points="0,100 0,40 100,0 100,100" fill={"red"} />
+      </svg>
+      <div className="register__right__container">
+        <span>Registers</span>
       </div>
     </div>
   );

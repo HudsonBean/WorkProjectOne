@@ -410,7 +410,30 @@ li {
   background-color: #ffffff;
   padding: 7rem 1rem 1rem 1rem;
 }
-.register .register__container {
+.register .register__left__container,
+.register .register__right__container,
+.register .register__divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+.register .register__left__container:nth-child(1),
+.register .register__right__container:nth-child(1),
+.register .register__divider:nth-child(1) {
+  flex: 1;
+}
+.register .register__left__container:nth-child(2),
+.register .register__right__container:nth-child(2),
+.register .register__divider:nth-child(2) {
+  flex: 0.25;
+}
+.register .register__left__container:nth-child(3),
+.register .register__right__container:nth-child(3),
+.register .register__divider:nth-child(3) {
+  flex: 0.75;
+}
+.register .register__left__container .register__left__content {
   background-color: #fffff8;
   padding: 2.5rem;
   border-radius: 1rem;
@@ -418,19 +441,19 @@ li {
   max-width: 450px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1215686275), 0 0 2px rgba(0, 0, 0, 0.2392156863);
 }
-.register .register__container h1 {
+.register .register__left__container .register__left__content h1 {
   text-align: center;
   color: #1e1e1e;
   font-weight: 300;
   font-size: 2rem;
   margin-bottom: 2rem;
 }
-.register .register__container .register__form {
+.register .register__left__container .register__left__content .register__form {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
-.register .register__container .register__form .register__form__input-group input {
+.register .register__left__container .register__left__content .register__form .register__form__input-group input {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid #2c2c2c;
@@ -440,17 +463,17 @@ li {
   font-size: 1rem;
   transition: all 0.15s ease-in-out;
 }
-.register .register__container .register__form .register__form__input-group input:focus {
+.register .register__left__container .register__left__content .register__form .register__form__input-group input:focus {
   outline: none;
   border-color: #0081a7;
 }
-.register .register__container .register__form .register__form__input-group input::-moz-placeholder {
+.register .register__left__container .register__left__content .register__form .register__form__input-group input::-moz-placeholder {
   color: #5a5a5a;
 }
-.register .register__container .register__form .register__form__input-group input::placeholder {
+.register .register__left__container .register__left__content .register__form .register__form__input-group input::placeholder {
   color: #5a5a5a;
 }
-.register .register__container .register__form button {
+.register .register__left__container .register__left__content .register__form button {
   margin-top: 1rem;
   padding: 0.75rem;
   border: none;
@@ -461,21 +484,21 @@ li {
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
-.register .register__container .register__form button:hover {
+.register .register__left__container .register__left__content .register__form button:hover {
   background-color: rgba(0, 129, 167, 0.85);
 }
-.register .register__container .register__footer {
+.register .register__left__container .register__left__content .register__footer {
   margin-top: 2rem;
   text-align: center;
   color: #5a5a5a;
   font-weight: 300;
 }
-.register .register__container .register__footer a {
+.register .register__left__container .register__left__content .register__footer a {
   color: #0081a7;
   font-weight: 400;
   position: relative;
 }
-.register .register__container .register__footer a::after {
+.register .register__left__container .register__left__content .register__footer a::after {
   content: "";
   position: absolute;
   width: 0;
@@ -485,6 +508,6 @@ li {
   bottom: -2px;
   transition: width 0.15s ease-in-out;
 }
-.register .register__container .register__footer a:hover::after {
+.register .register__left__container .register__left__content .register__footer a:hover::after {
   width: 100%;
 }/*# sourceMappingURL=globals.css.map */
