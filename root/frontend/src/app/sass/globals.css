@@ -418,7 +418,6 @@ li {
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  padding: 7rem 1rem 1rem 1rem;
 }
 .register .register__left__container,
 .register .register__right__container,
@@ -427,6 +426,7 @@ li {
   justify-content: center;
   align-items: center;
   background-color: black;
+  height: 100vh;
 }
 .register .register__left__container:nth-child(1),
 .register .register__right__container:nth-child(1),

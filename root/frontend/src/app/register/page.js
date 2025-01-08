@@ -2,6 +2,7 @@
 
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
 
 const poppins = Poppins({
   weight: ["100", "300", "400"],
@@ -40,15 +41,7 @@ export default function Register() {
           </div>
         </div>
       </div>
-      <svg
-        width="100px"
-        height="100px"
-        className="register__divider"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <polygon points="0,100 0,40 100,0 100,100" fill={"red"} />
-      </svg>
+      {/* Add svg */}
       <div className="register__right__container">
         <span>Registers</span>
       </div>

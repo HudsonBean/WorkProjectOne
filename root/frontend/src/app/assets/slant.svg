@@ -1,0 +1,9 @@
+<svg
+width="100px"
+height="100px"
+className="register__divider"
+viewBox="0 0 50 50"
+preserveAspectRatio="none"
+>
+<polygon points="0,50 50,0 50,50" fill={"red"} />
+</svg>
