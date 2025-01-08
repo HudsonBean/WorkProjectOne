@@ -90,10 +90,9 @@ export default function Navbar() {
             </Link>
           </li>
         </ul>
-        <button
-          onClick={handleClick}
-          className="navbar__hamburger__button"
-        ></button>
+        <button onClick={handleClick} className="navbar__hamburger__button">
+          <div className="navbar__hamburger__button__line-container"></div>
+        </button>
       </nav>
       <nav className="navbar__hamburger__menu">
         <ul className="navbar__hamburger__menu__list">
