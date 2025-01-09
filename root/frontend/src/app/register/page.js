@@ -3,6 +3,7 @@
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
+import slantSvg from "../assets/slant.svg";
 
 const poppins = Poppins({
   weight: ["100", "300", "400"],
@@ -41,7 +42,16 @@ export default function Register() {
           </div>
         </div>
       </div>
-      {/* Add svg */}
+      <svg
+        width="100px"
+        height="100px"
+        viewBox="0 0 50 50"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="register__divider"
+      >
+        <path d="M0 50 L50 0 L50 50 Z" className="left-side" fill="#0081a7" />
+      </svg>
       <div className="register__right__container">
         <span>Registers</span>
       </div>

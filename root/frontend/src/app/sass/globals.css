@@ -412,6 +412,15 @@ li {
 /**======================
  *    PAGES
  *========================**/
+/**========================================================================
+ *                           IMPORTS
+ *========================================================================**/
+/**========================================================================
+ *                           UTILITIES
+ *========================================================================**/
+/**========================================================================
+ *                           REGISTER PAGE
+ *========================================================================**/
 .register {
   min-height: 100vh;
   display: flex;
@@ -425,7 +434,6 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
   height: 100vh;
 }
 .register .register__left__container:nth-child(1),
@@ -438,10 +446,16 @@ li {
 .register .register__divider:nth-child(2) {
   flex: 0.25;
 }
+.register .register__left__container:nth-child(2) .left-side,
+.register .register__right__container:nth-child(2) .left-side,
+.register .register__divider:nth-child(2) .left-side {
+  filter: drop-shadow(-5px 5px 5px rgba(0, 0, 0, 0.5));
+}
 .register .register__left__container:nth-child(3),
 .register .register__right__container:nth-child(3),
 .register .register__divider:nth-child(3) {
   flex: 0.75;
+  background-color: #0081a7;
 }
 .register .register__left__container .register__left__content {
   background-color: #fffff8;

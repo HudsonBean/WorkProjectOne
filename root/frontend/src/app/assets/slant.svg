@@ -1,9 +1,9 @@
 <svg
-width="100px"
-height="100px"
-className="register__divider"
-viewBox="0 0 50 50"
-preserveAspectRatio="none"
+  width="100px"
+  height="100px"
+  viewBox="0 0 50 50"
+  preserveAspectRatio="none"
+  xmlns="http://www.w3.org/2000/svg"
 >
-<polygon points="0,50 50,0 50,50" fill={"red"} />
+  <polygon points="0,50 50,0 50,50" fill="#0081a7" />
 </svg>
