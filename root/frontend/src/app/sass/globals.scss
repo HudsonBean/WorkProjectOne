@@ -9,6 +9,11 @@
 @use "./components/navbar";
 
 /**======================
+ *    UTILITIES
+ *========================**/
+@use "./utilities/animate-fade-in";
+
+/**======================
  *    PAGES
  *========================**/
 @use "./pages/register";

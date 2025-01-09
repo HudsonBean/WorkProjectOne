@@ -410,6 +410,47 @@ li {
   }
 }
 /**======================
+ *    UTILITIES
+ *========================**/
+/* Animation Keyframes | HBD 03/21/2024 */
+@keyframes fadeInDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Base animation class | HBD 03/21/2024 */
+.animate-fade-in {
+  animation: fadeInDrop 0.65s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+/* Optional delay variants | HBD 03/21/2024 */
+.animate-fade-in-delay-1 {
+  animation-delay: 100ms;
+}
+
+.animate-fade-in-delay-2 {
+  animation-delay: 200ms;
+}
+
+.animate-fade-in-delay-3 {
+  animation-delay: 300ms;
+}
+
+.animate-fade-in-delay-4 {
+  animation-delay: 400ms;
+}
+
+.animate-fade-in-delay-5 {
+  animation-delay: 500ms;
+}
+
+/**======================
  *    PAGES
  *========================**/
 /**========================================================================
@@ -444,17 +485,17 @@ li {
 .register .register__left__container:nth-child(2),
 .register .register__right__container:nth-child(2),
 .register .register__divider:nth-child(2) {
-  flex: 0.25;
+  flex: 0.2;
 }
 .register .register__left__container:nth-child(2) .left-side,
 .register .register__right__container:nth-child(2) .left-side,
 .register .register__divider:nth-child(2) .left-side {
-  filter: drop-shadow(-5px 5px 5px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(-5px 0px 4.5px rgba(0, 0, 0, 0.3));
 }
 .register .register__left__container:nth-child(3),
 .register .register__right__container:nth-child(3),
 .register .register__divider:nth-child(3) {
-  flex: 0.75;
+  flex: 0.8;
   background-color: #0081a7;
 }
 .register .register__left__container .register__left__content {

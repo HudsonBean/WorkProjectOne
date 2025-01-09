@@ -1,0 +1,24 @@
+/* Animation Keyframes | HBD 03/21/2024 */
+@keyframes fadeInDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base animation class | HBD 03/21/2024 */
+.animate-fade-in {
+  animation: fadeInDrop 0.65s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+/* Optional delay variants | HBD 03/21/2024 */
+@for $i from 1 through 5 {
+  .animate-fade-in-delay-#{$i} {
+    animation-delay: #{$i * 100}ms;
+  }
+}

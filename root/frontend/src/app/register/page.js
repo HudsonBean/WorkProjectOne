@@ -15,7 +15,7 @@ export default function Register() {
   return (
     <div className={`register ${poppins.className}`}>
       <div className="register__left__container">
-        <div className="register__left__content">
+        <div className="register__left__content animate-fade-in">
           <h1>Create Account</h1>
           <form className="register__form">
             <div className="register__form__input-group">
@@ -45,12 +45,16 @@ export default function Register() {
       <svg
         width="100px"
         height="100px"
-        viewBox="0 0 50 50"
+        viewBox="0 0 100 100"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
         className="register__divider"
       >
-        <path d="M0 50 L50 0 L50 50 Z" className="left-side" fill="#0081a7" />
+        <path
+          d="M0 110 L110 0 L110 110 Z"
+          className="left-side"
+          fill="#0081a7"
+        />
       </svg>
       <div className="register__right__container">
         <span>Registers</span>
