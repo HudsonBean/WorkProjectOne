@@ -25,7 +25,6 @@
 .navbar__hamburger__button {
   width: 2.75rem;
   height: 2.75rem;
-  padding: 0 0.55rem 0 0.35rem;
   background-color: transparent;
   border-radius: 50%;
   border: none;
@@ -92,20 +91,6 @@
   background-color: theme.$primaryBackground;
   transition: right 0.3s ease-in-out;
   z-index: 99;
-
-  //   &::before {
-  //     content: "";
-  //     position: absolute;
-  //     top: 0;
-  //     left: 50%;
-  //     transform: translateX(-50%);
-  //     width: 0;
-  //     height: 1px;
-  //     background-color: theme.$secondaryBackground;
-  //     transition: width 0.3s ease-in-out 0s;
-  //     z-index: 1;
-  //     border-radius: 10px;
-  //   }
 }
 
 .navbar__hamburger__menu--active {
@@ -122,14 +107,20 @@
 }
 .navbar__hamburger__button--active {
   .navbar__hamburger__button__line-container {
-    &::before {
-      transform: translateY(0.25rem) rotate(45deg);
+    &::before,
+    &::after {
       width: 80%;
+      top: 50%;
+      right: 50%;
+      transform-origin: center;
+    }
+
+    &::before {
+      transform: translate(50%, -50%) rotate(45deg);
     }
 
     &::after {
-      transform: translateY(-0.25rem) rotate(-45deg);
-      width: 80%;
+      transform: translate(50%, -50%) rotate(-45deg);
     }
   }
 }

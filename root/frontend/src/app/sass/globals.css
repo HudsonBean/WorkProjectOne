@@ -73,7 +73,6 @@ li {
 .navbar__hamburger__button {
   width: 2.75rem;
   height: 2.75rem;
-  padding: 0 0.55rem 0 0.35rem;
   background-color: transparent;
   border-radius: 50%;
   border: none;
@@ -149,13 +148,17 @@ li {
   opacity: 1;
 }
 
-.navbar__hamburger__button--active .navbar__hamburger__button__line-container::before {
-  transform: translateY(0.25rem) rotate(45deg);
+.navbar__hamburger__button--active .navbar__hamburger__button__line-container::before, .navbar__hamburger__button--active .navbar__hamburger__button__line-container::after {
   width: 80%;
+  top: 50%;
+  right: 50%;
+  transform-origin: center;
+}
+.navbar__hamburger__button--active .navbar__hamburger__button__line-container::before {
+  transform: translate(50%, -50%) rotate(45deg);
 }
 .navbar__hamburger__button--active .navbar__hamburger__button__line-container::after {
-  transform: translateY(-0.25rem) rotate(-45deg);
-  width: 80%;
+  transform: translate(50%, -50%) rotate(-45deg);
 }
 
 /**======================
