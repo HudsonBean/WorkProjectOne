@@ -131,4 +131,31 @@
       }
     }
   }
+
+  .register__right__container {
+    .register__right__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      .register__right__content__profile-picture {
+        width: 350px;
+        height: 350px;
+        object-fit: cover; /* Ensure proper cropping */
+        border-radius: 50%; /* Make it circular */
+        border: 5px solid theme.$primaryBackground; /* Add border */
+      }
+      .register__right__content__user-name,
+      .register__right__content__user-email {
+        text-align: center;
+        color: theme.$primaryBackground;
+        font-weight: 300;
+        font-size: 2.5rem;
+      }
+      .register__right__content__user-email {
+        font-size: 1.5rem;
+      }
+    }
+  }
 }

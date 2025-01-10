@@ -578,4 +578,29 @@ li {
 }
 .register .register__left__container .register__left__content .register__footer a:hover::after {
   width: 100%;
+}
+.register .register__right__container .register__right__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.register .register__right__container .register__right__content .register__right__content__profile-picture {
+  width: 350px;
+  height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover; /* Ensure proper cropping */
+  border-radius: 50%; /* Make it circular */
+  border: 5px solid #fffff8; /* Add border */
+}
+.register .register__right__container .register__right__content .register__right__content__user-name,
+.register .register__right__container .register__right__content .register__right__content__user-email {
+  text-align: center;
+  color: #fffff8;
+  font-weight: 300;
+  font-size: 2.5rem;
+}
+.register .register__right__container .register__right__content .register__right__content__user-email {
+  font-size: 1.5rem;
 }/*# sourceMappingURL=globals.css.map */

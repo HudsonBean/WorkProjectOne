@@ -3,8 +3,7 @@
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
-import slantSvg from "../assets/slant.svg";
-
+import profilePic from "../assets/default-profile-picture.svg";
 const poppins = Poppins({
   weight: ["100", "300", "400"],
   style: "normal",
@@ -57,7 +56,20 @@ export default function Register() {
         />
       </svg>
       <div className="register__right__container">
-        <span>Registers</span>
+        <div className="register__right__content animate-fade-in">
+          <Image
+            src={profilePic}
+            alt="Profile Picture"
+            className="register__right__content__profile-picture"
+            priority={true}
+          />
+          <div className="register__right__content__user-name">
+            <span>John Doe</span>
+          </div>
+          <span className="register__right__content__user-email">
+            @johndoe@gmail.com
+          </span>
+        </div>
       </div>
     </div>
   );
