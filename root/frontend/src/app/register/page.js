@@ -19,10 +19,9 @@ const poppins = Poppins({
 export default function Register() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const fileInputRef = useRef(null);
-  const [tempProfilePic, setTempProfilePic] = useState(null);
   const [tempProfilePicUrl, setTempProfilePicUrl] = useState(null);
   const [crop, setCrop] = useState();
-  const [imgRef, setImgRef] = useState(null);
+  const imgRef = useRef(null);
 
   const formik = useFormik({
     initialValues: {
@@ -31,7 +30,6 @@ export default function Register() {
       lastName: "",
       password: "",
       confirmPassword: "",
-      profilePicture: null,
       profilePictureUrl: defaultProfilePic.src,
     },
     onSubmit: (values) => {
@@ -69,28 +67,39 @@ export default function Register() {
 
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
-    setCrop(centerAspectCrop(width, height, 1)); // 1 for square aspect ratio
-    setImgRef(e.currentTarget);
+    setCrop(centerAspectCrop(width, height, 1));
+    imgRef.current = e.currentTarget;
   };
 
   async function getCroppedImg(image, crop) {
     const canvas = document.createElement("canvas");
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    canvas.width = crop.width;
-    canvas.height = crop.height;
+
+    // Calculate dimensions based on percentage crop
+    const canvasWidth = (crop.width * image.width) / 100;
+    const canvasHeight = (crop.height * image.height) / 100;
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
     const ctx = canvas.getContext("2d");
+
+    // Ensure proper rendering on high DPI displays
+    ctx.scale(1, 1);
+
+    const cropX = (crop.x * image.width) / 100;
+    const cropY = (crop.y * image.height) / 100;
 
     ctx.drawImage(
       image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
+      cropX * scaleX,
+      cropY * scaleY,
+      canvasWidth * scaleX,
+      canvasHeight * scaleY,
       0,
       0,
-      crop.width,
-      crop.height
+      canvasWidth,
+      canvasHeight
     );
 
     return new Promise((resolve) => {
@@ -118,7 +127,6 @@ export default function Register() {
       }
 
       const fileUrl = URL.createObjectURL(file);
-      setTempProfilePic(file);
       setTempProfilePicUrl(fileUrl);
     }
   };
@@ -304,7 +312,7 @@ export default function Register() {
                   type="file"
                   accept="image/jpeg, image/png"
                   onChange={handleFileChange}
-                  name="profilePicture"
+                  name="profilePictureUrl"
                   className="dialog__content__upload-area__input"
                   aria-label="Upload profile picture"
                 />
@@ -319,7 +327,6 @@ export default function Register() {
           <div className="dialog__footer">
             <button
               onClick={() => {
-                setTempProfilePic(null);
                 setTempProfilePicUrl(null);
                 handleCloseDialog();
               }}
@@ -332,14 +339,16 @@ export default function Register() {
               type="button"
               className="dialog__footer__button dialog__footer__button--primary"
               onClick={async () => {
-                if (imgRef && crop) {
-                  const croppedImageUrl = await getCroppedImg(imgRef, crop);
+                if (imgRef.current && crop) {
+                  const croppedImageUrl = await getCroppedImg(
+                    imgRef.current,
+                    crop
+                  );
                   formik.setFieldValue("profilePictureUrl", croppedImageUrl);
 
                   // Create a blob from the cropped image URL
                   const response = await fetch(croppedImageUrl);
                   const blob = await response.blob();
-                  formik.setFieldValue("profilePicture", blob);
                 }
                 handleCloseDialog();
               }}
