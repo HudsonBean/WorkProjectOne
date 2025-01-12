@@ -586,21 +586,90 @@ li {
   align-items: center;
   gap: 1rem;
 }
-.register .register__right__container .register__right__content .register__right__content__profile-picture {
+.register .register__right__container .register__right__content__profile-picture-button {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
   width: 350px;
   height: 350px;
-  -o-object-fit: cover;
-     object-fit: cover; /* Ensure proper cropping */
-  border-radius: 50%; /* Make it circular */
-  border: 5px solid #fffff8; /* Add border */
+  transition: all 0.2s ease-in-out;
 }
-.register .register__right__container .register__right__content .register__right__content__user-name,
-.register .register__right__container .register__right__content .register__right__content__user-email {
+.register .register__right__container .register__right__content__profile-picture-button .register__right__content__profile-picture {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #fffff8;
+  transition: all 0.2s ease-in-out;
+}
+.register .register__right__container .register__right__content__profile-picture-button .profile-picture-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 44, 44, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+}
+.register .register__right__container .register__right__content__profile-picture-button .profile-picture-overlay svg {
+  padding: 0.55rem;
+  border: 2px solid #fffff8;
+  color: #fffff8;
+  font-size: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  transform: rotate(-45deg);
+}
+.register .register__right__container .register__right__content__profile-picture-button .profile-picture-overlay::after {
+  content: "";
+  position: absolute;
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 1px solid #fffff8;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.2s ease-in-out;
+  transform: rotate(45deg);
+}
+.register .register__right__container .register__right__content__profile-picture-button:hover .register__right__content__profile-picture {
+  filter: brightness(0.8);
+}
+.register .register__right__container .register__right__content__profile-picture-button:hover .profile-picture-overlay {
+  background-color: rgba(44, 44, 44, 0.3);
+}
+.register .register__right__container .register__right__content__profile-picture-button:hover .profile-picture-overlay svg {
+  border-radius: 50%;
+  opacity: 1;
+  transform: translateY(0);
+  transform: rotate(0);
+}
+.register .register__right__container .register__right__content__profile-picture-button:hover .profile-picture-overlay::after {
+  border-radius: 50%;
+  opacity: 1;
+  transform: scale(1);
+  transform: rotate(0);
+}
+.register .register__right__container .register__right__content__profile-picture-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 129, 167, 0.5);
+}
+.register .register__right__container .register__right__content__user-name, .register .register__right__container .register__right__content__user-email {
   text-align: center;
   color: #fffff8;
   font-weight: 300;
   font-size: 2.5rem;
 }
-.register .register__right__container .register__right__content .register__right__content__user-email {
+.register .register__right__container .register__right__content__user-email {
   font-size: 1.5rem;
 }/*# sourceMappingURL=globals.css.map */

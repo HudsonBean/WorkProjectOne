@@ -5,6 +5,8 @@ import { Poppins } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import profilePic from "../assets/default-profile-picture.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const poppins = Poppins({
   weight: ["100", "300", "400"],
   style: "normal",
@@ -24,6 +26,12 @@ export default function Register() {
       console.log(values);
     },
   });
+
+  const handleProfilePicChange = () => {
+    // Will implement file upload logic here later
+    console.log("Change profile picture clicked");
+  };
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -116,12 +124,22 @@ export default function Register() {
       </svg>
       <div className="register__right__container">
         <div className="register__right__content animate-fade-in">
-          <Image
-            src={profilePic}
-            alt="Profile Picture"
-            className="register__right__content__profile-picture"
-            priority={true}
-          />
+          <button
+            onClick={handleProfilePicChange}
+            className="register__right__content__profile-picture-button"
+            type="button" // Prevent form submission
+            aria-label="Change profile picture"
+          >
+            <Image
+              src={profilePic}
+              alt="Profile Picture"
+              className="register__right__content__profile-picture"
+              priority={true}
+            />
+            <div className="profile-picture-overlay">
+              <FontAwesomeIcon icon={faPlus} />
+            </div>
+          </button>
           <div className="register__right__content__user-name">
             <span>
               {formik.values.firstName} {formik.values.lastName}

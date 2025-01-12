@@ -139,21 +139,105 @@
       justify-content: center;
       align-items: center;
       gap: 1rem;
-      .register__right__content__profile-picture {
+
+      &__profile-picture-button {
+        position: relative;
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+        border-radius: 50%;
+        overflow: hidden;
         width: 350px;
         height: 350px;
-        object-fit: cover; /* Ensure proper cropping */
-        border-radius: 50%; /* Make it circular */
-        border: 5px solid theme.$primaryBackground; /* Add border */
+        transition: all 0.2s ease-in-out;
+
+        .register__right__content__profile-picture {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+          border: 5px solid theme.$primaryBackground;
+          transition: all 0.2s ease-in-out;
+        }
+
+        .profile-picture-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(theme.$secondaryBackground, 0);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: all 0.2s ease-in-out;
+          border-radius: 50%;
+
+          svg {
+            padding: 0.55rem;
+            border: 2px solid theme.$primaryBackground;
+            color: theme.$primaryBackground;
+            font-size: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.2s ease-in-out;
+            position: relative;
+            transform: rotate(-45deg);
+          }
+
+          &::after {
+            content: "";
+            position: absolute;
+            width: 4.5rem;
+            height: 4.5rem;
+            border: 1px solid theme.$primaryBackground;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.2s ease-in-out;
+            transform: rotate(45deg);
+          }
+        }
+
+        &:hover {
+          .register__right__content__profile-picture {
+            filter: brightness(0.8);
+          }
+
+          .profile-picture-overlay {
+            background-color: rgba(theme.$secondaryBackground, 0.3);
+
+            svg {
+              border-radius: 50%;
+              opacity: 1;
+              transform: translateY(0);
+              transform: rotate(0);
+            }
+
+            &::after {
+              border-radius: 50%;
+              opacity: 1;
+              transform: scale(1);
+              transform: rotate(0);
+            }
+          }
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(theme.$primaryCTA, 0.5);
+        }
       }
-      .register__right__content__user-name,
-      .register__right__content__user-email {
+
+      &__user-name,
+      &__user-email {
         text-align: center;
         color: theme.$primaryBackground;
         font-weight: 300;
         font-size: 2.5rem;
       }
-      .register__right__content__user-email {
+
+      &__user-email {
         font-size: 1.5rem;
       }
     }
