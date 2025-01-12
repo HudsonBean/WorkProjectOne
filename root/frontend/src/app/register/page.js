@@ -6,10 +6,10 @@ import Link from "next/link";
 import Image from "next/image";
 import defaultProfilePic from "../assets/default-profile-picture.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faPencil } from "@fortawesome/free-solid-svg-icons";
-import { useState, useRef, useEffect } from "react";
-import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import ProfilePictureDialog from "../components/ProfilePictureDialog";
+
 const poppins = Poppins({
   weight: ["100", "300", "400"],
   style: "normal",
@@ -18,10 +18,6 @@ const poppins = Poppins({
 
 export default function Register() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const fileInputRef = useRef(null);
-  const [tempProfilePicUrl, setTempProfilePicUrl] = useState(null);
-  const [crop, setCrop] = useState();
-  const imgRef = useRef(null);
 
   const formik = useFormik({
     initialValues: {
@@ -40,110 +36,6 @@ export default function Register() {
   const handleProfilePicChange = () => {
     setIsDialogOpen(true);
   };
-
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
-    setTempProfilePicUrl(null);
-    setCrop(undefined);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ""; // Reset file input
-    }
-  };
-
-  const handleUploadClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
-    return centerCrop(
-      makeAspectCrop(
-        {
-          unit: "%",
-          width: 90,
-        },
-        aspect,
-        mediaWidth,
-        mediaHeight
-      ),
-      mediaWidth,
-      mediaHeight
-    );
-  }
-
-  const onImageLoad = (e) => {
-    const { width, height } = e.currentTarget;
-    setCrop(centerAspectCrop(width, height, 1));
-    imgRef.current = e.currentTarget;
-  };
-
-  async function getCroppedImg(image, crop) {
-    const canvas = document.createElement("canvas");
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-
-    // Calculate dimensions based on percentage crop
-    const canvasWidth = (crop.width * image.width) / 100;
-    const canvasHeight = (crop.height * image.height) / 100;
-
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-    const ctx = canvas.getContext("2d");
-
-    // Ensure proper rendering on high DPI displays
-    ctx.scale(1, 1);
-
-    const cropX = (crop.x * image.width) / 100;
-    const cropY = (crop.y * image.height) / 100;
-
-    ctx.drawImage(
-      image,
-      cropX * scaleX,
-      cropY * scaleY,
-      canvasWidth * scaleX,
-      canvasHeight * scaleY,
-      0,
-      0,
-      canvasWidth,
-      canvasHeight
-    );
-
-    return new Promise((resolve) => {
-      canvas.toBlob(
-        (blob) => {
-          resolve(URL.createObjectURL(blob));
-        },
-        "image/jpeg",
-        1
-      );
-    });
-  }
-
-  const handleFileChange = (event) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (!file.type.match("image/(jpeg|png)")) {
-        alert("File type not supported. Please upload a JPG or PNG image.");
-        return;
-      }
-
-      if (file.size > 5 * 1024 * 1024) {
-        alert("File is too large. Please upload an image under 5MB.");
-        return;
-      }
-
-      const fileUrl = URL.createObjectURL(file);
-      setTempProfilePicUrl(fileUrl);
-    }
-  };
-
-  // Clean up temporary URL when dialog closes or component unmounts
-  useEffect(() => {
-    return () => {
-      if (tempProfilePicUrl) {
-        URL.revokeObjectURL(tempProfilePicUrl);
-      }
-    };
-  }, [tempProfilePicUrl]);
 
   return (
     <>
@@ -241,7 +133,7 @@ export default function Register() {
             <button
               onClick={handleProfilePicChange}
               className="register__right__content__profile-picture-button"
-              type="button" // Prevent form submission
+              type="button"
               aria-label="Change profile picture"
             >
               <Image
@@ -253,15 +145,7 @@ export default function Register() {
                 priority={true}
               />
               <div className="profile-picture-overlay">
-                <FontAwesomeIcon
-                  icon={
-                    formik.values.profilePictureUrl.includes(
-                      defaultProfilePic.src
-                    )
-                      ? faPlus
-                      : faPencil
-                  }
-                />
+                <FontAwesomeIcon icon={faPlus} />
               </div>
             </button>
             <div className="register__right__content__user-name">
@@ -276,101 +160,18 @@ export default function Register() {
         </div>
       </form>
 
-      {/* Dialog overlay */}
-      <div
-        className={`dialog-overlay ${
-          isDialogOpen ? "dialog-overlay--active" : ""
-        }`}
-      >
-        <div className="dialog animate-fade-in">
-          <div className="dialog__header">
-            <h2>Change Profile Picture</h2>
-            <button
-              onClick={handleCloseDialog}
-              className="dialog__close-button"
-              type="button"
-              aria-label="Close dialog"
-            >
-              ×
-            </button>
-          </div>
-          <div className="dialog__content">
-            {tempProfilePicUrl ? (
-              <div className="dialog__content__crop-container">
-                <ReactCrop
-                  crop={crop}
-                  onChange={(_, percentCrop) => setCrop(percentCrop)}
-                  aspect={1}
-                  circularCrop
-                >
-                  <img
-                    ref={imgRef}
-                    src={tempProfilePicUrl}
-                    onLoad={onImageLoad}
-                    alt="Crop me"
-                    className="dialog__content__crop-image"
-                  />
-                </ReactCrop>
-              </div>
-            ) : (
-              <div
-                className="dialog__content__upload-area"
-                onClick={handleUploadClick}
-                onKeyDown={(e) => e.key === "Enter" && handleUploadClick()}
-                role="button"
-                tabIndex={0}
-              >
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/jpeg, image/png"
-                  onChange={handleFileChange}
-                  name="profilePictureUrl"
-                  className="dialog__content__upload-area__input"
-                  aria-label="Upload profile picture"
-                />
-                <FontAwesomeIcon icon={faPlus} />
-                <span>Click to upload</span>
-                <span className="dialog__content__upload-area__subtitle">
-                  Supported formats: JPG, PNG
-                </span>
-              </div>
-            )}
-          </div>
-          <div className="dialog__footer">
-            <button
-              onClick={handleCloseDialog}
-              type="button"
-              className="dialog__footer__button dialog__footer__button--secondary"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              className="dialog__footer__button dialog__footer__button--primary"
-              onClick={async () => {
-                if (imgRef.current && crop) {
-                  const croppedImageUrl = await getCroppedImg(
-                    imgRef.current,
-                    crop
-                  );
-                  formik.setFieldValue("profilePictureUrl", croppedImageUrl);
-
-                  // Clean up the old profile picture URL if it's not the default
-                  if (
-                    formik.values.profilePictureUrl !== defaultProfilePic.src
-                  ) {
-                    URL.revokeObjectURL(formik.values.profilePictureUrl);
-                  }
-                }
-                handleCloseDialog();
-              }}
-            >
-              Save Changes
-            </button>
-          </div>
-        </div>
-      </div>
+      <ProfilePictureDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onSave={(croppedImageUrl) => {
+          // Clean up the old profile picture URL if it's not the default
+          if (formik.values.profilePictureUrl !== defaultProfilePic.src) {
+            URL.revokeObjectURL(formik.values.profilePictureUrl);
+          }
+          formik.setFieldValue("profilePictureUrl", croppedImageUrl);
+        }}
+        defaultImage={defaultProfilePic.src}
+      />
     </>
   );
 }
