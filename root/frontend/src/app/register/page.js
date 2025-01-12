@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import defaultProfilePic from "../assets/default-profile-picture.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef, useEffect } from "react";
 import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
@@ -43,6 +43,11 @@ export default function Register() {
 
   const handleCloseDialog = () => {
     setIsDialogOpen(false);
+    setTempProfilePicUrl(null);
+    setCrop(undefined);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""; // Reset file input
+    }
   };
 
   const handleUploadClick = () => {
@@ -248,7 +253,15 @@ export default function Register() {
                 priority={true}
               />
               <div className="profile-picture-overlay">
-                <FontAwesomeIcon icon={faPlus} />
+                <FontAwesomeIcon
+                  icon={
+                    formik.values.profilePictureUrl.includes(
+                      defaultProfilePic.src
+                    )
+                      ? faPlus
+                      : faPencil
+                  }
+                />
               </div>
             </button>
             <div className="register__right__content__user-name">
@@ -326,10 +339,7 @@ export default function Register() {
           </div>
           <div className="dialog__footer">
             <button
-              onClick={() => {
-                setTempProfilePicUrl(null);
-                handleCloseDialog();
-              }}
+              onClick={handleCloseDialog}
               type="button"
               className="dialog__footer__button dialog__footer__button--secondary"
             >
@@ -346,9 +356,12 @@ export default function Register() {
                   );
                   formik.setFieldValue("profilePictureUrl", croppedImageUrl);
 
-                  // Create a blob from the cropped image URL
-                  const response = await fetch(croppedImageUrl);
-                  const blob = await response.blob();
+                  // Clean up the old profile picture URL if it's not the default
+                  if (
+                    formik.values.profilePictureUrl !== defaultProfilePic.src
+                  ) {
+                    URL.revokeObjectURL(formik.values.profilePictureUrl);
+                  }
                 }
                 handleCloseDialog();
               }}
