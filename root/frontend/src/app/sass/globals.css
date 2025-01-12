@@ -665,6 +665,7 @@ li {
   box-shadow: 0 0 0 3px rgba(0, 129, 167, 0.5);
 }
 .register .register__right__container .register__right__content__user-name, .register .register__right__container .register__right__content__user-email {
+  height: 3rem;
   text-align: center;
   color: #fffff8;
   font-weight: 300;
