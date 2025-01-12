@@ -25,25 +25,71 @@ export default function Register() {
     },
   });
   return (
-    <formik className={`register ${poppins.className}`}>
+    <form
+      onSubmit={formik.handleSubmit}
+      className={`register ${poppins.className}`}
+    >
       <div className="register__left__container">
         <div className="register__left__content animate-fade-in">
           <h1>Create Account</h1>
-          <form className="register__form">
+          <div className="register__form">
             <div className="register__form__input-group">
-              <input type="text" placeholder="Username" required />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email Address"
+                required
+                onChange={formik.handleChange}
+                value={formik.values.email}
+              />
             </div>
             <div className="register__form__input-group">
-              <input type="email" placeholder="Email" required />
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                placeholder="First Name"
+                required
+                onChange={formik.handleChange}
+                value={formik.values.firstName}
+              />
             </div>
             <div className="register__form__input-group">
-              <input type="password" placeholder="Password" required />
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Last Name"
+                required
+                onChange={formik.handleChange}
+                value={formik.values.lastName}
+              />
             </div>
             <div className="register__form__input-group">
-              <input type="password" placeholder="Confirm Password" required />
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                required
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+            </div>
+            <div className="register__form__input-group">
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                required
+                onChange={formik.handleChange}
+                value={formik.values.confirmPassword}
+              />
             </div>
             <button type="submit">Register</button>
-          </form>
+          </div>
           <div className="register__footer">
             <p>
               Already have an account?{" "}
@@ -77,13 +123,15 @@ export default function Register() {
             priority={true}
           />
           <div className="register__right__content__user-name">
-            <span>John Doe</span>
+            <span>
+              {formik.values.firstName} {formik.values.lastName}
+            </span>
           </div>
           <span className="register__right__content__user-email">
-            @johndoe@gmail.com
+            {formik.values.email}
           </span>
         </div>
       </div>
-    </formik>
+    </form>
   );
 }

@@ -524,7 +524,7 @@ li {
 .register .register__left__container .register__left__content .register__form .register__form__input-group input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 1px solid #2c2c2c;
+  border: 2px solid #2c2c2c;
   border-radius: 0.75rem;
   background-color: transparent;
   color: #1e1e1e;
