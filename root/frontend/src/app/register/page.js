@@ -1,5 +1,6 @@
 "use client";
 
+import { useFormik } from "formik";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,8 +12,20 @@ const poppins = Poppins({
 });
 
 export default function Register() {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+      confirmPassword: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
-    <div className={`register ${poppins.className}`}>
+    <formik className={`register ${poppins.className}`}>
       <div className="register__left__container">
         <div className="register__left__content animate-fade-in">
           <h1>Create Account</h1>
@@ -71,6 +84,6 @@ export default function Register() {
           </span>
         </div>
       </div>
-    </div>
+    </formik>
   );
 }
