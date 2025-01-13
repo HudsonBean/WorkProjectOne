@@ -475,19 +475,28 @@ li {
   position: relative;
 }
 .register .register__left__container,
-.register .register__right__container,
-.register .register__divider {
+.register .register__right__container {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .register.right-only {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.register.right-only .register__right__container {
+.register.right-only .register__right__container,
+.register.right-only .register__left__container,
+.register.right-only .register__divider {
   position: absolute;
-  top: 0;
+}
+.register.right-only .register__right__container {
   right: 0;
   width: 100vw;
   height: 100vh;
+}
+.register.right-only .register__divider {
+  transition: all 0s ease !important;
+  transform: translateX(5.5rem) !important;
+}
+.register.right-only .register__left__container {
+  left: 9.55rem;
 }
 .register .register__left__container,
 .register .register__right__container,
@@ -501,11 +510,12 @@ li {
 .register .register__right__container:nth-child(1),
 .register .register__divider:nth-child(1) {
   flex: 1;
+  opacity: 1;
 }
 .register .register__left__container:nth-child(2),
 .register .register__right__container:nth-child(2),
 .register .register__divider:nth-child(2) {
-  flex: 0.2;
+  width: 8rem;
 }
 .register .register__left__container:nth-child(2) .left-side,
 .register .register__right__container:nth-child(2) .left-side,
@@ -522,7 +532,7 @@ li {
   background-color: #fffff8;
   padding: 2.5rem;
   border-radius: 1rem;
-  width: 100%;
+  width: 450px;
   max-width: 450px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1215686275), 0 0 2px rgba(0, 0, 0, 0.2392156863);
 }
@@ -771,7 +781,8 @@ li {
   margin-top: 2.5rem;
 }
 .register .register__right__container .register__right__content__confirm-buttons button {
-  pointer-events: auto;
+  pointer-events: none;
+  cursor: none;
   padding: 1rem 2rem;
   border-radius: 1.25rem;
   font-size: 1.1rem;
@@ -811,9 +822,11 @@ li {
   transform: translateX(-5px);
 }
 .register .register__right__container .register__right__content__confirm-buttons__active {
+  opacity: 1;
+}
+.register .register__right__container .register__right__content__confirm-buttons__active button {
   cursor: pointer;
   pointer-events: auto;
-  opacity: 1;
 }
 
 @media (max-width: 960px) {

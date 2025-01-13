@@ -21,19 +21,28 @@
   position: relative;
 
   .register__left__container,
-  .register__right__container,
-  .register__divider {
+  .register__right__container {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &.right-only {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    .register__right__container {
+    .register__right__container,
+    .register__left__container,
+    .register__divider {
       position: absolute;
-      top: 0;
+    }
+    .register__right__container {
       right: 0;
       width: 100vw;
       height: 100vh;
+    }
+    .register__divider {
+      transition: all 0s ease !important;
+      transform: translateX(5.5rem) !important;
+    }
+    .register__left__container {
+      left: 9.55rem;
     }
   }
 
@@ -46,10 +55,11 @@
     height: 100vh;
     &:nth-child(1) {
       flex: 1;
+      opacity: 1;
     }
 
     &:nth-child(2) {
-      flex: 0.2;
+      width: 8rem;
       .left-side {
         filter: drop-shadow(-5px 0px 4.5px rgba(0, 0, 0, 0.3));
       }
@@ -65,7 +75,7 @@
       background-color: theme.$primaryBackground;
       padding: 2.5rem;
       border-radius: 1rem;
-      width: 100%;
+      width: 450px;
       max-width: 450px;
       box-shadow: 0 1px 4px #0000001f, 0 0 2px #0000003d;
 
@@ -346,7 +356,8 @@
         margin-top: 2.5rem;
 
         button {
-          pointer-events: auto;
+          pointer-events: none;
+          cursor: none;
           padding: 1rem 2rem;
           border-radius: 1.25rem;
           font-size: 1.1rem;
@@ -392,9 +403,11 @@
         }
       }
       &__confirm-buttons__active {
-        cursor: pointer;
-        pointer-events: auto;
         opacity: 1;
+        button {
+          cursor: pointer;
+          pointer-events: auto;
+        }
       }
     }
   }

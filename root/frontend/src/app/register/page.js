@@ -105,6 +105,10 @@ export default function Register() {
     setIsConfirming(!isConfirming);
   };
 
+  const submitToBackend = () => {
+    //TODO: Implement submitting to backend
+  };
+
   // Formik setup | HBD 01/12/2025
   const formik = useFormik({
     initialValues: {
@@ -117,18 +121,13 @@ export default function Register() {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
+      if (isMobile) {
+        submitToBackend();
+      } else {
+        toggleConfirm();
+      }
     },
   });
-
-  const handleRegisterButtonClick = () => {
-    //TODO: Implement submitting for mobile view
-    if (isMobile) {
-      formik.submitForm();
-    } else {
-      toggleConfirm();
-    }
-  };
 
   // Function to open the profile picture dialog | HBD 01/12/2025
   const handleProfilePicChange = () => {
@@ -278,7 +277,7 @@ export default function Register() {
                   </p>
                 )}
               </div>
-              <button onClick={toggleConfirm}>Register</button>
+              <button type="submit">Register</button>
             </div>
             <div className="register__footer">
               <p>
@@ -352,7 +351,7 @@ export default function Register() {
                   : ""
               }`}
             >
-              <button type="submit">
+              <button type="button" onClick={submitToBackend}>
                 Looks Good! <FontAwesomeIcon icon={faArrowRight} />
               </button>
               <button onClick={toggleConfirm} type="button">
