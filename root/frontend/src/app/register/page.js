@@ -130,9 +130,6 @@ export default function Register() {
         </svg>
         <div className="register__right__container">
           <div className="register__right__content animate-fade-in">
-            <div className="register__right__content__profile-picture-edit-icon">
-              <FontAwesomeIcon icon={faPencil} />
-            </div>
             <button
               onClick={handleProfilePicChange}
               className="register__right__content__profile-picture-button"
@@ -147,6 +144,9 @@ export default function Register() {
                 height={350}
                 priority={true}
               />
+              <div className="register__right__content__profile-picture-edit-icon">
+                <FontAwesomeIcon icon={faPencil} />
+              </div>
               <div className="profile-picture-overlay">
                 <FontAwesomeIcon
                   className="profile-picture-overlay__icon-plus"

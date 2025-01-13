@@ -587,35 +587,6 @@ li {
   gap: 1rem;
   position: relative;
 }
-.register .register__right__container .register__right__content .register__right__content__profile-picture-edit-icon {
-  padding: 0.75rem;
-  background-color: #fffff8;
-  position: absolute;
-  bottom: 10rem;
-  right: 2rem;
-  z-index: 2;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-.register .register__right__container .register__right__content .register__right__content__profile-picture-edit-icon svg {
-  color: #2c2c2c;
-  font-size: 1.5rem;
-  z-index: 2;
-}
-.register .register__right__container .register__right__content .register__right__content__profile-picture-edit-icon::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #2c2c2c;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
 .register .register__right__container .register__right__content__profile-picture-button {
   position: relative;
   padding: 0;
@@ -628,6 +599,25 @@ li {
   height: 350px;
   transition: all 0.2s ease-in-out;
 }
+.register .register__right__container .register__right__content__profile-picture-button .register__right__content__profile-picture-edit-icon {
+  padding: 0.75rem;
+  background-color: #fffff8;
+  position: absolute;
+  bottom: 3rem;
+  right: 2.5rem;
+  z-index: 1.5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+.register .register__right__container .register__right__content__profile-picture-button .register__right__content__profile-picture-edit-icon svg {
+  color: #2c2c2c;
+  font-size: 1.5rem;
+  z-index: 2;
+}
 .register .register__right__container .register__right__content__profile-picture-button .register__right__content__profile-picture {
   width: 100%;
   height: 100%;
@@ -636,6 +626,7 @@ li {
   border-radius: 50%;
   border: 5px solid #fffff8;
   transition: all 0.2s ease-in-out;
+  background-color: #fffff8;
 }
 .register .register__right__container .register__right__content__profile-picture-button .profile-picture-overlay {
   position: absolute;
@@ -676,6 +667,9 @@ li {
 .register .register__right__container .register__right__content__profile-picture-button:hover .register__right__content__profile-picture {
   filter: brightness(0.8);
 }
+.register .register__right__container .register__right__content__profile-picture-button:hover .register__right__content__profile-picture-edit-icon {
+  filter: brightness(0.8);
+}
 .register .register__right__container .register__right__content__profile-picture-button:hover .profile-picture-overlay {
   background-color: rgba(44, 44, 44, 0.3);
 }
@@ -704,9 +698,6 @@ li {
 }
 .register .register__right__container .register__right__content__user-email {
   font-size: 1.5rem;
-}
-.register .register__right__container .register__right__content:hover .register__right__content__profile-picture-edit-icon::before {
-  opacity: 0.4;
 }
 
 @media (max-width: 960px) {

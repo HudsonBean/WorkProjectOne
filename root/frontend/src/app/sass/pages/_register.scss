@@ -141,38 +141,6 @@
       gap: 1rem;
       position: relative;
 
-      .register__right__content__profile-picture-edit-icon {
-        padding: 0.75rem;
-        background-color: theme.$primaryBackground;
-        position: absolute;
-        bottom: 10rem;
-        right: 2rem;
-        z-index: 2;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-
-        svg {
-          color: theme.$secondaryBackground;
-          font-size: 1.5rem;
-          z-index: 2;
-        }
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: theme.$secondaryBackground;
-          opacity: 0;
-          transition: opacity 0.2s ease-in-out;
-        }
-      }
-
       &__profile-picture-button {
         position: relative;
         padding: 0;
@@ -185,6 +153,27 @@
         height: 350px;
         transition: all 0.2s ease-in-out;
 
+        .register__right__content__profile-picture-edit-icon {
+          padding: 0.75rem;
+          background-color: theme.$primaryBackground;
+          position: absolute;
+          bottom: 3rem;
+          right: 2.5rem;
+          z-index: 1.5;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          transition: all 0.2s ease-in-out;
+
+          svg {
+            color: theme.$secondaryBackground;
+            font-size: 1.5rem;
+            z-index: 2;
+          }
+        }
+
         .register__right__content__profile-picture {
           width: 100%;
           height: 100%;
@@ -192,6 +181,7 @@
           border-radius: 50%;
           border: 5px solid theme.$primaryBackground;
           transition: all 0.2s ease-in-out;
+          background-color: theme.$primaryBackground;
         }
 
         .profile-picture-overlay {
@@ -238,6 +228,10 @@
             filter: brightness(0.8);
           }
 
+          .register__right__content__profile-picture-edit-icon {
+            filter: brightness(0.8);
+          }
+
           .profile-picture-overlay {
             background-color: rgba(theme.$secondaryBackground, 0.3);
 
@@ -274,14 +268,6 @@
 
       &__user-email {
         font-size: 1.5rem;
-      }
-
-      &:hover {
-        .register__right__content__profile-picture-edit-icon {
-          &::before {
-            opacity: 0.4;
-          }
-        }
       }
     }
   }
