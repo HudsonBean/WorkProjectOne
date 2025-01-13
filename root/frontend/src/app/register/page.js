@@ -19,6 +19,42 @@ const poppins = Poppins({
 export default function Register() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email address!";
+    }
+    if (!values.firstName) {
+      errors.firstName = "First name is required!";
+    } else if (values.firstName.length < 2) {
+      errors.firstName = "First name must be at least 2 characters!";
+    } else if (values.firstName.length > 20) {
+      errors.firstName = "First name must be less than 20 characters!";
+    }
+    if (!values.lastName) {
+      errors.lastName = "Last name is required!";
+    } else if (values.lastName.length < 2) {
+      errors.lastName = "Last name must be at least 2 characters!";
+    } else if (values.lastName.length > 20) {
+      errors.lastName = "Last name must be less than 20 characters!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    }
+    if (!values.confirmPassword) {
+      errors.confirmPassword = "Confirm password is required!";
+    }
+    if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match!";
+    }
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -28,6 +64,7 @@ export default function Register() {
       confirmPassword: "",
       profilePictureUrl: defaultProfilePic.src,
     },
+    validate,
     onSubmit: (values) => {
       console.log(values);
     },
@@ -50,57 +87,82 @@ export default function Register() {
               <div className="register__form__input-group">
                 <input
                   id="email"
+                  onBlur={formik.handleBlur}
                   name="email"
                   type="email"
                   placeholder="Email Address"
-                  required
                   onChange={formik.handleChange}
                   value={formik.values.email}
                 />
+                {formik.errors.email && (
+                  <p className="register__form__input-group__error animate-fade-in">
+                    {formik.touched.email && formik.errors.email}
+                  </p>
+                )}
               </div>
               <div className="register__form__input-group">
                 <input
                   id="firstName"
+                  onBlur={formik.handleBlur}
                   name="firstName"
                   type="text"
                   placeholder="First Name"
-                  required
                   onChange={formik.handleChange}
                   value={formik.values.firstName}
                 />
+                {formik.errors.firstName && (
+                  <p className="register__form__input-group__error animate-fade-in">
+                    {formik.touched.firstName && formik.errors.firstName}
+                  </p>
+                )}
               </div>
               <div className="register__form__input-group">
                 <input
                   id="lastName"
+                  onBlur={formik.handleBlur}
                   name="lastName"
                   type="text"
                   placeholder="Last Name"
-                  required
                   onChange={formik.handleChange}
                   value={formik.values.lastName}
                 />
+                {formik.errors.lastName && (
+                  <p className="register__form__input-group__error animate-fade-in">
+                    {formik.touched.lastName && formik.errors.lastName}
+                  </p>
+                )}
               </div>
               <div className="register__form__input-group">
                 <input
                   id="password"
+                  onBlur={formik.handleBlur}
                   name="password"
                   type="password"
                   placeholder="Password"
-                  required
                   onChange={formik.handleChange}
                   value={formik.values.password}
                 />
+                {formik.errors.password && (
+                  <p className="register__form__input-group__error animate-fade-in">
+                    {formik.touched.password && formik.errors.password}
+                  </p>
+                )}
               </div>
               <div className="register__form__input-group">
                 <input
                   id="confirmPassword"
+                  onBlur={formik.handleBlur}
                   name="confirmPassword"
                   type="password"
                   placeholder="Confirm Password"
-                  required
                   onChange={formik.handleChange}
                   value={formik.values.confirmPassword}
                 />
+                {formik.touched.confirmPassword && (
+                  <p className="register__form__input-group__error animate-fade-in">
+                    {formik.errors.confirmPassword}
+                  </p>
+                )}
               </div>
               <button type="submit">Register</button>
             </div>
