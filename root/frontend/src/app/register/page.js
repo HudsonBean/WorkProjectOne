@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import defaultProfilePic from "../assets/default-profile-picture.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import ProfilePictureDialog from "../components/ProfilePictureDialog";
 
@@ -130,6 +130,9 @@ export default function Register() {
         </svg>
         <div className="register__right__container">
           <div className="register__right__content animate-fade-in">
+            <div className="register__right__content__profile-picture-edit-icon">
+              <FontAwesomeIcon icon={faPencil} />
+            </div>
             <button
               onClick={handleProfilePicChange}
               className="register__right__content__profile-picture-button"
@@ -145,7 +148,10 @@ export default function Register() {
                 priority={true}
               />
               <div className="profile-picture-overlay">
-                <FontAwesomeIcon icon={faPlus} />
+                <FontAwesomeIcon
+                  className="profile-picture-overlay__icon-plus"
+                  icon={faPlus}
+                />
               </div>
             </button>
             <div className="register__right__content__user-name">
