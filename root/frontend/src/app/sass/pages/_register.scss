@@ -83,8 +83,18 @@
               color: theme.$secondaryText;
             }
           }
+          &__field-error {
+            input {
+              border-color: theme.$primaryError;
+            }
+          }
+          &__field-success {
+            input {
+              border-color: theme.$primaryCTA;
+            }
+          }
           &__error {
-            color: red;
+            color: theme.$primaryError;
             font-size: 0.8rem;
             margin-top: 0.25rem;
           }

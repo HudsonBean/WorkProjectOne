@@ -33,6 +33,7 @@ import { useState } from "react";
 import ProfilePictureDialog from "../components/ProfilePictureDialog";
 export default function Register() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [matchedPassword, setMatchedPassword] = useState(false);
 
   // Validation function for formik | HBD 01/12/2025
   const validate = (values) => {
@@ -61,12 +62,20 @@ export default function Register() {
     }
     if (!values.password) {
       errors.password = "Password is required!";
+    } else if (values.password.length < 8) {
+      errors.password = "Password must be at least 8 characters!";
     }
     if (!values.confirmPassword) {
       errors.confirmPassword = "Confirm password is required!";
+    } else if (values.confirmPassword.length < 8) {
+      errors.confirmPassword =
+        "Confirm password must be at least 8 characters!";
     }
     if (values.password !== values.confirmPassword) {
       errors.confirmPassword = "Passwords do not match!";
+      setMatchedPassword(false);
+    } else {
+      setMatchedPassword(true);
     }
     return errors;
   };
@@ -102,7 +111,13 @@ export default function Register() {
           <div className="register__left__content animate-fade-in">
             <h1>Create Account</h1>
             <div className="register__form">
-              <div className="register__form__input-group">
+              <div
+                className={`register__form__input-group ${
+                  formik.errors.email && formik.touched.email
+                    ? "register__form__input-group__field-error"
+                    : ""
+                }`}
+              >
                 <input
                   id="email"
                   onBlur={formik.handleBlur}
@@ -118,7 +133,13 @@ export default function Register() {
                   </p>
                 )}
               </div>
-              <div className="register__form__input-group">
+              <div
+                className={`register__form__input-group ${
+                  formik.errors.firstName && formik.touched.firstName
+                    ? "register__form__input-group__field-error"
+                    : ""
+                }`}
+              >
                 <input
                   id="firstName"
                   onBlur={formik.handleBlur}
@@ -127,6 +148,8 @@ export default function Register() {
                   placeholder="First Name"
                   onChange={formik.handleChange}
                   value={formik.values.firstName}
+                  maxLength={20}
+                  minLength={2}
                 />
                 {formik.errors.firstName && (
                   <p className="register__form__input-group__error animate-fade-in">
@@ -134,7 +157,13 @@ export default function Register() {
                   </p>
                 )}
               </div>
-              <div className="register__form__input-group">
+              <div
+                className={`register__form__input-group ${
+                  formik.errors.lastName && formik.touched.lastName
+                    ? "register__form__input-group__field-error"
+                    : ""
+                }`}
+              >
                 <input
                   id="lastName"
                   onBlur={formik.handleBlur}
@@ -143,6 +172,8 @@ export default function Register() {
                   placeholder="Last Name"
                   onChange={formik.handleChange}
                   value={formik.values.lastName}
+                  maxLength={20}
+                  minLength={2}
                 />
                 {formik.errors.lastName && (
                   <p className="register__form__input-group__error animate-fade-in">
@@ -150,7 +181,19 @@ export default function Register() {
                   </p>
                 )}
               </div>
-              <div className="register__form__input-group">
+              <div
+                className={`register__form__input-group ${
+                  formik.errors.password && formik.touched.password
+                    ? "register__form__input-group__field-error"
+                    : ""
+                } ${
+                  matchedPassword &&
+                  formik.touched.password &&
+                  !formik.errors.password
+                    ? "register__form__input-group__field-success"
+                    : ""
+                }`}
+              >
                 <input
                   id="password"
                   onBlur={formik.handleBlur}
@@ -159,6 +202,8 @@ export default function Register() {
                   placeholder="Password"
                   onChange={formik.handleChange}
                   value={formik.values.password}
+                  maxLength={20}
+                  minLength={8}
                 />
                 {formik.errors.password && (
                   <p className="register__form__input-group__error animate-fade-in">
@@ -166,7 +211,20 @@ export default function Register() {
                   </p>
                 )}
               </div>
-              <div className="register__form__input-group">
+              <div
+                className={`register__form__input-group ${
+                  formik.errors.confirmPassword &&
+                  formik.touched.confirmPassword
+                    ? "register__form__input-group__field-error"
+                    : ""
+                } ${
+                  matchedPassword &&
+                  formik.touched.confirmPassword &&
+                  !formik.errors.confirmPassword
+                    ? "register__form__input-group__field-success"
+                    : ""
+                }`}
+              >
                 <input
                   id="confirmPassword"
                   onBlur={formik.handleBlur}
@@ -175,6 +233,8 @@ export default function Register() {
                   placeholder="Confirm Password"
                   onChange={formik.handleChange}
                   value={formik.values.confirmPassword}
+                  maxLength={20}
+                  minLength={8}
                 />
                 {formik.touched.confirmPassword && (
                   <p className="register__form__input-group__error animate-fade-in">

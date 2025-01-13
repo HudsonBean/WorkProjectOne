@@ -541,8 +541,14 @@ li {
 .register .register__left__container .register__left__content .register__form .register__form__input-group input::placeholder {
   color: #5a5a5a;
 }
+.register .register__left__container .register__left__content .register__form .register__form__input-group__field-error input {
+  border-color: #ff3333;
+}
+.register .register__left__container .register__left__content .register__form .register__form__input-group__field-success input {
+  border-color: #0081a7;
+}
 .register .register__left__container .register__left__content .register__form .register__form__input-group__error {
-  color: red;
+  color: #ff3333;
   font-size: 0.8rem;
   margin-top: 0.25rem;
 }
