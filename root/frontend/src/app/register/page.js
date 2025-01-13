@@ -13,7 +13,12 @@ import Image from "next/image";
  *    STYLE IMPORTS
  *========================**/
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faPencil } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faPencil,
+  faArrowRight,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { Poppins } from "next/font/google";
 const poppins = Poppins({
   weight: ["100", "300", "400"],
@@ -34,6 +39,7 @@ import ProfilePictureDialog from "../components/ProfilePictureDialog";
 export default function Register() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [matchedPassword, setMatchedPassword] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
 
   // Validation function for formik | HBD 01/12/2025
   const validate = (values) => {
@@ -93,6 +99,8 @@ export default function Register() {
     validate,
     onSubmit: (values) => {
       console.log(values);
+      document.querySelector(".register").classList.add("right-only");
+      setIsConfirming(true);
     },
   });
 
@@ -304,6 +312,21 @@ export default function Register() {
             <span className="register__right__content__user-email">
               {formik.values.email}
             </span>
+            <div
+              className={`register__right__content__confirm-buttons ${
+                isConfirming
+                  ? "register__right__content__confirm-buttons__active"
+                  : ""
+              }`}
+            >
+              <button type="button">
+                Looks Good! <FontAwesomeIcon icon={faArrowRight} />
+              </button>
+              <button type="button">
+                <FontAwesomeIcon icon={faArrowLeft} />
+                Not Quite Finished
+              </button>
+            </div>
           </div>
         </div>
       </form>
