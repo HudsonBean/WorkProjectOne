@@ -39,7 +39,7 @@ export default function Navbar() {
         <ul className="navbar__nav__left">
           <li className="navbar__nav__left__item">
             <Link href="/">
-              <Image width={65} height={65} alt="logo" src={logo} />
+              <Image width={65} height={65} alt="logo" src={logo} priority />
             </Link>
           </li>
           <li
