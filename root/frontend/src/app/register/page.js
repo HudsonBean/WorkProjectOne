@@ -101,6 +101,10 @@ export default function Register() {
     return errors;
   };
 
+  const toggleConfirm = () => {
+    setIsConfirming(!isConfirming);
+  };
+
   // Formik setup | HBD 01/12/2025
   const formik = useFormik({
     initialValues: {
@@ -114,15 +118,17 @@ export default function Register() {
     validate,
     onSubmit: (values) => {
       console.log(values);
-      //TODO: Implement submitting for mobile view
-      if (isMobile) {
-        console.log("Mobile view");
-      } else {
-        document.querySelector(".register").classList.add("right-only");
-        setIsConfirming(true);
-      }
     },
   });
+
+  const handleRegisterButtonClick = () => {
+    //TODO: Implement submitting for mobile view
+    if (isMobile) {
+      formik.submitForm();
+    } else {
+      toggleConfirm();
+    }
+  };
 
   // Function to open the profile picture dialog | HBD 01/12/2025
   const handleProfilePicChange = () => {
@@ -133,7 +139,9 @@ export default function Register() {
     <>
       <form
         onSubmit={formik.handleSubmit}
-        className={`register ${poppins.className}`}
+        className={`register ${poppins.className} ${
+          isConfirming ? "right-only" : ""
+        }`}
       >
         <div className="register__left__container">
           <div className="register__left__content animate-fade-in">
@@ -270,7 +278,7 @@ export default function Register() {
                   </p>
                 )}
               </div>
-              <button type="submit">Register</button>
+              <button onClick={toggleConfirm}>Register</button>
             </div>
             <div className="register__footer">
               <p>
@@ -289,7 +297,7 @@ export default function Register() {
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="register__divider right-only-divider"
+          className="register__divider"
         >
           <path
             d="M0 110 L110 0 L110 110 Z"
@@ -299,6 +307,13 @@ export default function Register() {
         </svg>
         <div className="register__right__container">
           <div className="register__right__content animate-fade-in">
+            <h1
+              className={`register__right__content__title ${
+                isConfirming ? "register__right__content__title__active" : ""
+              }`}
+            >
+              Is this you?
+            </h1>
             {/* Profile picture button | HBD 01/12/2025 */}
             <button
               onClick={handleProfilePicChange}
@@ -312,7 +327,8 @@ export default function Register() {
                 className="register__right__content__profile-picture"
                 width={350}
                 height={350}
-                priority={true}
+                placeholder="blur"
+                blurDataURL={formik.values.profilePictureUrl}
               />
               <div className="register__right__content__profile-picture-edit-icon">
                 <FontAwesomeIcon icon={faPencil} />
@@ -329,9 +345,6 @@ export default function Register() {
                 {formik.values.firstName} {formik.values.lastName}
               </span>
             </div>
-            <span className="register__right__content__user-email">
-              {formik.values.email}
-            </span>
             <div
               className={`register__right__content__confirm-buttons ${
                 isConfirming
@@ -339,12 +352,12 @@ export default function Register() {
                   : ""
               }`}
             >
-              <button type="button">
+              <button type="submit">
                 Looks Good! <FontAwesomeIcon icon={faArrowRight} />
               </button>
-              <button type="button">
+              <button onClick={toggleConfirm} type="button">
                 <FontAwesomeIcon icon={faArrowLeft} />
-                Not Quite Finished
+                Not Quite Finished.
               </button>
             </div>
           </div>

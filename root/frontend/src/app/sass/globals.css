@@ -618,11 +618,40 @@ li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
   position: relative;
   margin-top: 2rem;
 }
+.register .register__right__container .register__right__content .register__right__content__title {
+  color: #fffff8;
+  font-weight: 500;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  position: relative;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+.register .register__right__container .register__right__content .register__right__content__title::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #fffff8;
+  transform: translateX(-50%);
+  transition: width 0.3s ease-in-out;
+}
+.register .register__right__container .register__right__content .register__right__content__title__active {
+  opacity: 1;
+  animation: fadeInDown 0.5s ease-out forwards;
+}
+.register .register__right__container .register__right__content .register__right__content__title__active::after {
+  width: 100%;
+}
 .register .register__right__container .register__right__content__profile-picture-button {
+  margin-top: 2rem;
   position: relative;
   padding: 0;
   border: none;
@@ -724,15 +753,12 @@ li {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 129, 167, 0.5);
 }
-.register .register__right__container .register__right__content__user-name, .register .register__right__container .register__right__content__user-email {
+.register .register__right__container .register__right__content__user-name {
   height: 3rem;
   text-align: center;
   color: #fffff8;
   font-weight: 300;
   font-size: 2.5rem;
-}
-.register .register__right__container .register__right__content__user-email {
-  font-size: 1.5rem;
 }
 .register .register__right__container .register__right__content__confirm-buttons {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -742,8 +768,10 @@ li {
   width: 100%;
   max-width: 300px;
   opacity: 0;
+  margin-top: 2.5rem;
 }
 .register .register__right__container .register__right__content__confirm-buttons button {
+  pointer-events: auto;
   padding: 1rem 2rem;
   border-radius: 1.25rem;
   font-size: 1.1rem;
@@ -783,6 +811,8 @@ li {
   transform: translateX(-5px);
 }
 .register .register__right__container .register__right__content__confirm-buttons__active {
+  cursor: pointer;
+  pointer-events: auto;
   opacity: 1;
 }
 
