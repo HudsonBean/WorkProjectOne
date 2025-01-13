@@ -30,7 +30,7 @@ import defaultProfilePic from "../assets/default-profile-picture.svg";
 /**======================
  *    REACT IMPORTS
  *========================**/
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /**======================
  *    COMPONENTS
@@ -40,6 +40,21 @@ export default function Register() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [matchedPassword, setMatchedPassword] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 960);
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
 
   // Validation function for formik | HBD 01/12/2025
   const validate = (values) => {
@@ -99,8 +114,13 @@ export default function Register() {
     validate,
     onSubmit: (values) => {
       console.log(values);
-      document.querySelector(".register").classList.add("right-only");
-      setIsConfirming(true);
+      //TODO: Implement submitting for mobile view
+      if (isMobile) {
+        console.log("Mobile view");
+      } else {
+        document.querySelector(".register").classList.add("right-only");
+        setIsConfirming(true);
+      }
     },
   });
 
@@ -269,7 +289,7 @@ export default function Register() {
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="register__divider"
+          className="register__divider right-only-divider"
         >
           <path
             d="M0 110 L110 0 L110 110 Z"

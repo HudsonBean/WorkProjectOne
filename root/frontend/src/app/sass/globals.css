@@ -620,6 +620,7 @@ li {
   align-items: center;
   gap: 1rem;
   position: relative;
+  margin-top: 2rem;
 }
 .register .register__right__container .register__right__content__profile-picture-button {
   position: relative;
