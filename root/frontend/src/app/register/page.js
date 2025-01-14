@@ -306,13 +306,6 @@ export default function Register() {
         </svg>
         <div className="register__right__container">
           <div className="register__right__content animate-fade-in">
-            <h1
-              className={`register__right__content__title ${
-                isConfirming ? "register__right__content__title__active" : ""
-              }`}
-            >
-              Is this you?
-            </h1>
             {/* Profile picture button | HBD 01/12/2025 */}
             <button
               onClick={handleProfilePicChange}
@@ -339,10 +332,15 @@ export default function Register() {
                 />
               </div>
             </button>
-            <div className="register__right__content__user-name">
-              <span>
+            <div
+              className={`register__right__content__details ${
+                isConfirming ? "register__right__content__details__active" : ""
+              } `}
+            >
+              <h1>
                 {formik.values.firstName} {formik.values.lastName}
-              </span>
+              </h1>
+              <span>{formik.values.email}</span>
             </div>
             <div
               className={`register__right__content__confirm-buttons ${

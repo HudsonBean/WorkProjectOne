@@ -631,35 +631,6 @@ li {
   position: relative;
   margin-top: 2rem;
 }
-.register .register__right__container .register__right__content .register__right__content__title {
-  color: #fffff8;
-  font-weight: 500;
-  font-size: 2.5rem;
-  letter-spacing: 0.05em;
-  position: relative;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0;
-}
-.register .register__right__container .register__right__content .register__right__content__title::after {
-  content: "";
-  position: absolute;
-  bottom: -0.5rem;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: #fffff8;
-  transform: translateX(-50%);
-  transition: width 0.3s ease-in-out;
-}
-.register .register__right__container .register__right__content .register__right__content__title__active {
-  opacity: 1;
-  animation: fadeInDown 0.5s ease-out forwards;
-}
-.register .register__right__container .register__right__content .register__right__content__title__active::after {
-  width: 100%;
-}
 .register .register__right__container .register__right__content__profile-picture-button {
   margin-top: 2rem;
   position: relative;
@@ -763,12 +734,39 @@ li {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 129, 167, 0.5);
 }
-.register .register__right__container .register__right__content__user-name {
+.register .register__right__container .register__right__content__details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.register .register__right__container .register__right__content__details h1 {
   height: 3rem;
   text-align: center;
   color: #fffff8;
   font-weight: 300;
-  font-size: 2.5rem;
+  font-size: 3rem;
+  position: relative;
+}
+.register .register__right__container .register__right__content__details h1::after {
+  transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -1rem;
+  left: 0;
+  background-color: #fffff8;
+}
+.register .register__right__container .register__right__content__details span {
+  color: #fffff8;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+.register .register__right__container .register__right__content__details__active h1::after {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+  width: 100%;
 }
 .register .register__right__container .register__right__content__confirm-buttons {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -781,17 +779,16 @@ li {
   margin-top: 2.5rem;
 }
 .register .register__right__container .register__right__content__confirm-buttons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   pointer-events: none;
   cursor: none;
   padding: 1rem 2rem;
   border-radius: 1.25rem;
   font-size: 1.1rem;
   font-weight: 300;
-  cursor: pointer;
   transition: all 0.2s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 0.75rem;
   border: 2px solid transparent;
 }
