@@ -48,12 +48,15 @@ li {
  *========================**/
 /**========================================================================
  *                           IMPORTS
+ *                           | HBD 01/14/2025
  *========================================================================**/
 /**========================================================================
  *                           VARIABLES
+ *                           | HBD 01/14/2025
  *========================================================================**/
 /**========================================================================
- *                           STYLES
+ *                           DIALOG BOX STYLES
+ *                           | HBD 01/14/2025
  *========================================================================**/
 .dialog-box-overlay {
   position: fixed;
@@ -70,32 +73,33 @@ li {
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .dialog-box-overlay--active {
   opacity: 1;
   pointer-events: auto;
 }
-.dialog-box-overlay .dialog-box {
+
+.dialog-box {
   background-color: #fffff8;
   border-radius: 1rem;
   width: 90%;
   max-width: 500px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.dialog-box-overlay .dialog-box__header {
+.dialog-box__header {
   padding: 1.5rem;
   border-bottom: 1px solid rgba(44, 44, 44, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.dialog-box-overlay .dialog-box__header h2 {
+.dialog-box__header h2 {
   font-weight: 300;
   font-size: 1.5rem;
   color: #1e1e1e;
 }
-.dialog-box-overlay .dialog-box__header__close-button {
+.dialog-box__header__close-button {
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -107,30 +111,31 @@ li {
   height: 2.5rem;
   transition: all 0.2s ease-in-out;
 }
-.dialog-box-overlay .dialog-box__header__close-button:hover {
+.dialog-box__header__close-button:hover {
   background-color: rgba(44, 44, 44, 0.1);
 }
-.dialog-box-overlay .dialog-box__content {
+.dialog-box__content {
   padding: 2rem;
 }
-.dialog-box-overlay .dialog-box__footer {
+.dialog-box__footer {
   padding: 1.5rem;
   border-top: 1px solid rgba(44, 44, 44, 0.2);
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
 }
-.dialog-box-overlay .dialog-box__footer__button {
+.dialog-box__footer__button {
   padding: 0.5rem 1rem;
   border-radius: 1.25rem;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  /* Default button style */
   background-color: #fffff8;
   color: #5a5a5a;
   border: 1px solid #2c2c2c;
 }
-.dialog-box-overlay .dialog-box__footer__button:hover {
+.dialog-box__footer__button:hover {
   background-color: rgba(44, 44, 44, 0.15);
 }
 
@@ -622,30 +627,21 @@ li {
  *                           PROFILE PICTURE DIALOG STYLES
  *                           | HBD 01/14/2025
  *========================================================================**/
-/* Profile Picture specific dialog styles | HBD 01/14/2025 */
-.dialog-box.profile-picture-dialog {
-  /* Content styles | HBD 01/14/2025 */
-  /* Footer button styles | HBD 01/14/2025 */
-  /* ReactCrop custom styles | HBD 01/14/2025 */
-}
-.dialog-box.profile-picture-dialog .dialog-box__content {
-  /* Crop container styles | HBD 01/14/2025 */
-  /* Upload area styles | HBD 01/14/2025 */
-}
-.dialog-box.profile-picture-dialog .dialog-box__content__crop-container {
+/* Content specific styles | HBD 01/14/2025 */
+.profile-picture-dialog__content__crop-container {
   width: 100%;
   max-height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.dialog-box.profile-picture-dialog .dialog-box__content__crop-image {
+.profile-picture-dialog__content__crop-image {
   max-width: 100%;
   max-height: 400px;
   -o-object-fit: contain;
      object-fit: contain;
 }
-.dialog-box.profile-picture-dialog .dialog-box__content__upload-area {
+.profile-picture-dialog__content__upload-area {
   border: 2px dashed rgba(44, 44, 44, 0.5);
   border-radius: 0.75rem;
   padding: 3rem 2rem;
@@ -655,55 +651,55 @@ li {
   gap: 0.5rem;
   cursor: pointer;
   transition: all 0.15s ease-in-out;
-  /* Icon styles | HBD 01/14/2025 */
-  /* Subtitle text | HBD 01/14/2025 */
-  /* Hide file input | HBD 01/14/2025 */
-  /* Interactive states | HBD 01/14/2025 */
 }
-.dialog-box.profile-picture-dialog .dialog-box__content__upload-area svg {
+.profile-picture-dialog__content__upload-area svg {
   font-size: 2rem;
   color: #0081a7;
   margin-bottom: 0.5rem;
 }
-.dialog-box.profile-picture-dialog .dialog-box__content__upload-area__subtitle {
+.profile-picture-dialog__content__upload-area__subtitle {
   font-size: 0.9rem;
   color: #5a5a5a !important;
 }
-.dialog-box.profile-picture-dialog .dialog-box__content__upload-area__input {
+.profile-picture-dialog__content__upload-area__input {
   display: none;
 }
-.dialog-box.profile-picture-dialog .dialog-box__content__upload-area:hover, .dialog-box.profile-picture-dialog .dialog-box__content__upload-area:focus {
+.profile-picture-dialog__content__upload-area:hover, .profile-picture-dialog__content__upload-area:focus {
   border-color: #0081a7;
   background-color: rgba(0, 129, 167, 0.05);
 }
-.dialog-box.profile-picture-dialog .dialog-box__content__upload-area:focus {
+.profile-picture-dialog__content__upload-area:focus {
   outline: none;
 }
-.dialog-box.profile-picture-dialog .dialog-box__content__upload-area:focus-visible {
+.profile-picture-dialog__content__upload-area:focus-visible {
   outline: 2px solid #0081a7;
   outline-offset: 2px;
 }
-.dialog-box.profile-picture-dialog .dialog-box__footer .dialog-box__footer__button--primary {
+
+/* Footer specific styles | HBD 01/14/2025 */
+.profile-picture-dialog__footer .dialog-box__footer__button--primary {
   background-color: #0081a7;
   color: #fffff8;
   border: 1px solid #0081a7;
 }
-.dialog-box.profile-picture-dialog .dialog-box__footer .dialog-box__footer__button--primary:hover {
+.profile-picture-dialog__footer .dialog-box__footer__button--primary:hover {
   background-color: rgba(0, 129, 167, 0.85);
 }
-.dialog-box.profile-picture-dialog .dialog-box__footer .dialog-box__footer__button--secondary {
+.profile-picture-dialog__footer .dialog-box__footer__button--secondary {
   background-color: #fffff8;
   color: #5a5a5a;
   border: 1px solid #2c2c2c;
 }
-.dialog-box.profile-picture-dialog .dialog-box__footer .dialog-box__footer__button--secondary:hover {
+.profile-picture-dialog__footer .dialog-box__footer__button--secondary:hover {
   background-color: rgba(44, 44, 44, 0.15);
 }
-.dialog-box.profile-picture-dialog .ReactCrop {
+
+/* ReactCrop custom styles | HBD 01/14/2025 */
+.ReactCrop {
   max-width: 100%;
   max-height: 400px;
 }
-.dialog-box.profile-picture-dialog .ReactCrop__crop-selection {
+.ReactCrop__crop-selection {
   border-radius: 50%;
 }
 

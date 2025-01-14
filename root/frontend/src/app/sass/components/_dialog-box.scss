@@ -1,17 +1,21 @@
 /**========================================================================
  *                           IMPORTS
+ *                           | HBD 01/14/2025
  *========================================================================**/
 @use "../themes/temp" as theme;
 
 /**========================================================================
  *                           VARIABLES
+ *                           | HBD 01/14/2025
  *========================================================================**/
 $transition-duration: 0.2s;
-$transition-timing-function: ease-in-out;
+$transition-timing: ease-in-out;
 
 /**========================================================================
- *                           STYLES
+ *                           DIALOG BOX STYLES
+ *                           | HBD 01/14/2025
  *========================================================================**/
+
 .dialog-box-overlay {
   position: fixed;
   top: 0;
@@ -26,73 +30,77 @@ $transition-timing-function: ease-in-out;
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
-  transition: opacity $transition-duration $transition-timing-function;
+  transition: all $transition-duration $transition-timing;
+
   &--active {
     opacity: 1;
     pointer-events: auto;
   }
-  .dialog-box {
-    background-color: theme.$primaryBackground;
-    border-radius: 1rem;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-    &__header {
-      padding: 1.5rem;
-      border-bottom: 1px solid rgba(theme.$secondaryBackground, 0.2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+.dialog-box {
+  background-color: theme.$primaryBackground;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-      h2 {
-        font-weight: 300;
-        font-size: 1.5rem;
-        color: theme.$primaryText;
-      }
+  &__header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(theme.$secondaryBackground, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-      &__close-button {
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        color: theme.$secondaryText;
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 50%;
-        width: 2.5rem;
-        height: 2.5rem;
-        transition: all $transition-duration $transition-timing-function;
-
-        &:hover {
-          background-color: rgba(theme.$secondaryBackground, 0.1);
-        }
-      }
+    h2 {
+      font-weight: 300;
+      font-size: 1.5rem;
+      color: theme.$primaryText;
     }
 
-    &__content {
-      padding: 2rem;
+    &__close-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: theme.$secondaryText;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      transition: all $transition-duration $transition-timing;
+
+      &:hover {
+        background-color: rgba(theme.$secondaryBackground, 0.1);
+      }
     }
+  }
 
-    &__footer {
-      padding: 1.5rem;
-      border-top: 1px solid rgba(theme.$secondaryBackground, 0.2);
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
+  &__content {
+    padding: 2rem;
+  }
 
-      &__button {
-        padding: 0.5rem 1rem;
-        border-radius: 1.25rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all $transition-duration $transition-timing-function;
-        background-color: theme.$primaryBackground;
-        color: theme.$secondaryText;
-        border: 1px solid theme.$secondaryBackground;
+  &__footer {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(theme.$secondaryBackground, 0.2);
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
 
-        &:hover {
-          background-color: rgba(theme.$secondaryBackground, 0.15);
-        }
+    &__button {
+      padding: 0.5rem 1rem;
+      border-radius: 1.25rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all $transition-duration $transition-timing;
+
+      /* Default button style */
+      background-color: theme.$primaryBackground;
+      color: theme.$secondaryText;
+      border: 1px solid theme.$secondaryBackground;
+
+      &:hover {
+        background-color: rgba(theme.$secondaryBackground, 0.15);
       }
     }
   }

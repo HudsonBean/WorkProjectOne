@@ -163,7 +163,7 @@ export default function ProfilePictureDialog({ isOpen, onClose, onSave }) {
 
   // Dialog content based on image state | HBD 01/14/2025
   const dialogContent = tempProfilePicUrl ? (
-    <div className="dialog-box__content__crop-container">
+    <div className="profile-picture-dialog__content__crop-container">
       <ReactCrop
         crop={crop}
         onChange={(_, percentCrop) => setCrop(percentCrop)}
@@ -175,13 +175,13 @@ export default function ProfilePictureDialog({ isOpen, onClose, onSave }) {
           src={tempProfilePicUrl}
           onLoad={onImageLoad}
           alt="Crop me"
-          className="dialog-box__content__crop-image"
+          className="profile-picture-dialog__content__crop-image"
         />
       </ReactCrop>
     </div>
   ) : (
     <div
-      className="dialog-box__content__upload-area"
+      className="profile-picture-dialog__content__upload-area"
       onClick={handleUploadClick}
       onKeyDown={(e) => e.key === "Enter" && handleUploadClick()}
       role="button"
@@ -193,12 +193,12 @@ export default function ProfilePictureDialog({ isOpen, onClose, onSave }) {
         accept="image/jpeg, image/png"
         onChange={handleFileChange}
         name="profilePictureUrl"
-        className="dialog-box__content__upload-area__input"
+        className="profile-picture-dialog__content__upload-area__input"
         aria-label="Upload profile picture"
       />
       <FontAwesomeIcon icon={faPlus} />
       <span>Click to upload</span>
-      <span className="dialog-box__content__upload-area__subtitle">
+      <span className="profile-picture-dialog__content__upload-area__subtitle">
         Supported formats: JPG, PNG
       </span>
     </div>

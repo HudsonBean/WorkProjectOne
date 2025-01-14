@@ -2,6 +2,7 @@
 /**========================================================================
  *                           IMPORTS
  *========================================================================**/
+import { useState } from "react";
 import DialogBox from "./components/DialogBox";
 import ProfilePictureButton from "./components/ProfilePictureButton";
 import defaultProfilePic from "./assets/default-profile-picture.svg";
@@ -12,6 +13,9 @@ export default function Index() {
       profilePictureUrl: defaultProfilePic.src,
     },
   });
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="index">
       {/* <button onClick={() => setIsOpen(true)}>Open Dialog</button>
