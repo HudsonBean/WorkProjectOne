@@ -13,14 +13,17 @@ export default function DialogBox({
   footer,
   children,
   title,
+  showDefaultFooterButton,
+  className,
 }) {
+  console.log(isOpen);
   return (
     <div
       className={`dialog-box-overlay ${
         isOpen ? "dialog-box-overlay--active" : ""
       } animate-fade-in`}
     >
-      <div className="dialog-box">
+      <div className={`dialog-box ${className}`}>
         <div className="dialog-box__header">
           <h2>{title}</h2>
           {header}
@@ -35,10 +38,14 @@ export default function DialogBox({
         </div>
         <div className="dialog-box__content">{children}</div>
         <div className="dialog-box__footer">
-          {footer}
-          <button className="dialog-box__footer__button" onClick={onClose}>
+          <button
+            style={{ display: showDefaultFooterButton ? "block" : "none" }}
+            className="dialog-box__footer__button"
+            onClick={onClose}
+          >
             Close
           </button>
+          {footer}
         </div>
       </div>
     </div>
