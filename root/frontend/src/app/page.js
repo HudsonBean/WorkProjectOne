@@ -18,15 +18,14 @@ export default function Index() {
 
   return (
     <div className="index">
-      {/* <button onClick={() => setIsOpen(true)}>Open Dialog</button>
+      <button onClick={() => setIsOpen(true)}>Open Dialog</button>
       <DialogBox
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         title="Dialog Box"
         header={<p>Dialog Box</p>}
         footer={<p>Dialog Box</p>}
-      ></DialogBox> */}
-      <ProfilePictureButton formik={formik} />
+      ></DialogBox>
     </div>
   );
 }

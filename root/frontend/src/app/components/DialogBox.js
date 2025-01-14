@@ -2,6 +2,7 @@
  *                           IMPORTS
  *========================================================================**/
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
 /**========================================================================
  *                           COMPONENT
@@ -16,7 +17,7 @@ export default function DialogBox({
   showDefaultFooterButton = true,
   className,
 }) {
-  return (
+  const dialogContent = (
     <div
       className={`dialog-box-overlay ${
         isOpen ? "dialog-box-overlay--active" : ""
@@ -51,4 +52,6 @@ export default function DialogBox({
       </div>
     </div>
   );
+
+  return createPortal(dialogContent, document.body);
 }

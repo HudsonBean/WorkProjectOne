@@ -180,14 +180,12 @@
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     width: 40vw;
     height: 100vh;
-    position: relative;
 
     .register__right__content {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      position: relative;
       margin-top: 2rem;
 
       &__details {
