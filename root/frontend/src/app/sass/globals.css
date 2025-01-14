@@ -113,19 +113,25 @@ li {
 .dialog-box-overlay .dialog-box__content {
   padding: 2rem;
 }
-.dialog-box-overlay .dialog-box .dialog__footer {
+.dialog-box-overlay .dialog-box__footer {
   padding: 1.5rem;
   border-top: 1px solid rgba(44, 44, 44, 0.2);
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
 }
-.dialog-box-overlay .dialog-box .dialog__footer__button {
+.dialog-box-overlay .dialog-box__footer__button {
   padding: 0.5rem 1rem;
   border-radius: 1.25rem;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  background-color: #fffff8;
+  color: #5a5a5a;
+  border: 1px solid #2c2c2c;
+}
+.dialog-box-overlay .dialog-box__footer__button:hover {
+  background-color: rgba(44, 44, 44, 0.15);
 }
 
 /**========================================================================

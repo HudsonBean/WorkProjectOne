@@ -1,9 +1,24 @@
+/**========================================================================
+ *                           IMPORTS
+ *========================================================================**/
+/**========================================================================
+ *                           REACT IMPORTS
+ *========================================================================**/
 import { useState, useRef, useEffect } from "react";
 import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+/**========================================================================
+ *                           FONTAWESOME IMPORTS
+ *========================================================================**/
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-
+/**========================================================================
+ *                           COMPONENTS
+ *========================================================================**/
+import DialogBox from "./DialogBox";
+/**========================================================================
+ *                           COMPONENT
+ *========================================================================**/
 export default function ProfilePictureDialog({ isOpen, onClose, onSave }) {
   const fileInputRef = useRef(null);
   const [tempProfilePicUrl, setTempProfilePicUrl] = useState(null);

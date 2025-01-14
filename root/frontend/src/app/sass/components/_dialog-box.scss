@@ -73,7 +73,7 @@ $transition-timing-function: ease-in-out;
       padding: 2rem;
     }
 
-    .dialog__footer {
+    &__footer {
       padding: 1.5rem;
       border-top: 1px solid rgba(theme.$secondaryBackground, 0.2);
       display: flex;
@@ -86,6 +86,13 @@ $transition-timing-function: ease-in-out;
         font-size: 1rem;
         cursor: pointer;
         transition: all $transition-duration $transition-timing-function;
+        background-color: theme.$primaryBackground;
+        color: theme.$secondaryText;
+        border: 1px solid theme.$secondaryBackground;
+
+        &:hover {
+          background-color: rgba(theme.$secondaryBackground, 0.15);
+        }
       }
     }
   }

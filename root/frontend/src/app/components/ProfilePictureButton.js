@@ -31,11 +31,11 @@ import ProfilePictureDialog from "./ProfilePictureDialog";
 export default function ProfilePictureButton({ formik }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleProfilePicChange = () => {
+  const openDialog = () => {
     setIsDialogOpen(true);
   };
 
-  const handleDialogClose = () => {
+  const closeDialog = () => {
     setIsDialogOpen(false);
   };
 
@@ -50,7 +50,7 @@ export default function ProfilePictureButton({ formik }) {
   return (
     <>
       <button
-        onClick={handleProfilePicChange}
+        onClick={openDialog}
         className="profile-picture-button"
         type="button"
         aria-label="Change profile picture"
@@ -73,12 +73,10 @@ export default function ProfilePictureButton({ formik }) {
           <FontAwesomeIcon icon={faPencil} />
         </div>
       </button>
-
       <ProfilePictureDialog
         isOpen={isDialogOpen}
-        onClose={handleDialogClose}
+        onClose={closeDialog}
         onSave={handleSaveImage}
-        defaultImage={defaultProfilePic.src}
       />
     </>
   );
