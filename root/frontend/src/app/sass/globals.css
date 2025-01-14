@@ -60,10 +60,7 @@ li {
  *========================================================================**/
 .dialog-box-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background-color: rgba(44, 44, 44, 0.75);
   -webkit-backdrop-filter: blur(4px);
           backdrop-filter: blur(4px);
@@ -73,7 +70,7 @@ li {
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 .dialog-box-overlay--active {
   opacity: 1;
@@ -83,8 +80,7 @@ li {
 .dialog-box {
   background-color: #fffff8;
   border-radius: 1rem;
-  width: 90%;
-  max-width: 500px;
+  width: min(90%, 500px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .dialog-box__header {
@@ -109,7 +105,7 @@ li {
   border-radius: 50%;
   width: 2.5rem;
   height: 2.5rem;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 }
 .dialog-box__header__close-button:hover {
   background-color: rgba(44, 44, 44, 0.1);
@@ -129,8 +125,7 @@ li {
   border-radius: 1.25rem;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  /* Default button style */
+  transition: background-color 0.2s ease-in-out;
   background-color: #fffff8;
   color: #5a5a5a;
   border: 1px solid #2c2c2c;
@@ -627,7 +622,6 @@ li {
  *                           PROFILE PICTURE DIALOG STYLES
  *                           | HBD 01/14/2025
  *========================================================================**/
-/* Content specific styles | HBD 01/14/2025 */
 .profile-picture-dialog__content__crop-container {
   width: 100%;
   max-height: 400px;
@@ -676,25 +670,19 @@ li {
   outline-offset: 2px;
 }
 
-/* Footer specific styles | HBD 01/14/2025 */
 .profile-picture-dialog__footer .dialog-box__footer__button--primary {
   background-color: #0081a7;
   color: #fffff8;
-  border: 1px solid #0081a7;
+  border-color: #0081a7;
 }
 .profile-picture-dialog__footer .dialog-box__footer__button--primary:hover {
   background-color: rgba(0, 129, 167, 0.85);
-}
-.profile-picture-dialog__footer .dialog-box__footer__button--secondary {
-  background-color: #fffff8;
-  color: #5a5a5a;
-  border: 1px solid #2c2c2c;
 }
 .profile-picture-dialog__footer .dialog-box__footer__button--secondary:hover {
   background-color: rgba(44, 44, 44, 0.15);
 }
 
-/* ReactCrop custom styles | HBD 01/14/2025 */
+/* ReactCrop styles */
 .ReactCrop {
   max-width: 100%;
   max-height: 400px;
@@ -964,6 +952,7 @@ li {
   color: #fffff8;
   font-size: 1.25rem;
   font-weight: 300;
+  height: 1rem;
 }
 .register .register__right__container .register__right__content__details__active h1::after {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;

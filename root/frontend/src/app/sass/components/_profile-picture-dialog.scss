@@ -11,13 +11,13 @@
 $transition-duration: 0.15s;
 $transition-timing: ease-in-out;
 $max-content-height: 400px;
+$upload-area-border: 2px dashed rgba(theme.$secondaryBackground, 0.5);
 
 /**========================================================================
  *                           PROFILE PICTURE DIALOG STYLES
  *                           | HBD 01/14/2025
  *========================================================================**/
 
-/* Content specific styles | HBD 01/14/2025 */
 .profile-picture-dialog__content {
   &__crop-container {
     width: 100%;
@@ -34,7 +34,7 @@ $max-content-height: 400px;
   }
 
   &__upload-area {
-    border: 2px dashed rgba(theme.$secondaryBackground, 0.5);
+    border: $upload-area-border;
     border-radius: 0.75rem;
     padding: 3rem 2rem;
     display: flex;
@@ -76,13 +76,12 @@ $max-content-height: 400px;
   }
 }
 
-/* Footer specific styles | HBD 01/14/2025 */
 .profile-picture-dialog__footer {
   .dialog-box__footer__button {
     &--primary {
       background-color: theme.$primaryCTA;
       color: theme.$primaryBackground;
-      border: 1px solid theme.$primaryCTA;
+      border-color: theme.$primaryCTA;
 
       &:hover {
         background-color: rgba(theme.$primaryCTA, 0.85);
@@ -90,10 +89,6 @@ $max-content-height: 400px;
     }
 
     &--secondary {
-      background-color: theme.$primaryBackground;
-      color: theme.$secondaryText;
-      border: 1px solid theme.$secondaryBackground;
-
       &:hover {
         background-color: rgba(theme.$secondaryBackground, 0.15);
       }
@@ -101,7 +96,7 @@ $max-content-height: 400px;
   }
 }
 
-/* ReactCrop custom styles | HBD 01/14/2025 */
+/* ReactCrop styles */
 .ReactCrop {
   max-width: 100%;
   max-height: $max-content-height;

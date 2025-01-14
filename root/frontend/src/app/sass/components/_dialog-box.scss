@@ -10,6 +10,8 @@
  *========================================================================**/
 $transition-duration: 0.2s;
 $transition-timing: ease-in-out;
+$border-radius: 1rem;
+$border-color: rgba(theme.$secondaryBackground, 0.2);
 
 /**========================================================================
  *                           DIALOG BOX STYLES
@@ -18,10 +20,7 @@ $transition-timing: ease-in-out;
 
 .dialog-box-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background-color: rgba(theme.$secondaryBackground, 0.75);
   backdrop-filter: blur(4px);
   display: flex;
@@ -30,7 +29,7 @@ $transition-timing: ease-in-out;
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
-  transition: all $transition-duration $transition-timing;
+  transition: opacity $transition-duration $transition-timing;
 
   &--active {
     opacity: 1;
@@ -39,15 +38,16 @@ $transition-timing: ease-in-out;
 }
 
 .dialog-box {
+  $padding: 1.5rem;
+
   background-color: theme.$primaryBackground;
-  border-radius: 1rem;
-  width: 90%;
-  max-width: 500px;
+  border-radius: $border-radius;
+  width: min(90%, 500px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   &__header {
-    padding: 1.5rem;
-    border-bottom: 1px solid rgba(theme.$secondaryBackground, 0.2);
+    padding: $padding;
+    border-bottom: 1px solid $border-color;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,7 +68,7 @@ $transition-timing: ease-in-out;
       border-radius: 50%;
       width: 2.5rem;
       height: 2.5rem;
-      transition: all $transition-duration $transition-timing;
+      transition: background-color $transition-duration $transition-timing;
 
       &:hover {
         background-color: rgba(theme.$secondaryBackground, 0.1);
@@ -81,8 +81,8 @@ $transition-timing: ease-in-out;
   }
 
   &__footer {
-    padding: 1.5rem;
-    border-top: 1px solid rgba(theme.$secondaryBackground, 0.2);
+    padding: $padding;
+    border-top: 1px solid $border-color;
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
@@ -92,9 +92,7 @@ $transition-timing: ease-in-out;
       border-radius: 1.25rem;
       font-size: 1rem;
       cursor: pointer;
-      transition: all $transition-duration $transition-timing;
-
-      /* Default button style */
+      transition: background-color $transition-duration $transition-timing;
       background-color: theme.$primaryBackground;
       color: theme.$secondaryText;
       border: 1px solid theme.$secondaryBackground;
