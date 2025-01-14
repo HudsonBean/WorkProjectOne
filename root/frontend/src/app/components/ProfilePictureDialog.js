@@ -4,12 +4,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function ProfilePictureDialog({
-  isOpen,
-  onClose,
-  onSave,
-  defaultImage,
-}) {
+export default function ProfilePictureDialog({ isOpen, onClose, onSave }) {
   const fileInputRef = useRef(null);
   const [tempProfilePicUrl, setTempProfilePicUrl] = useState(null);
   const [crop, setCrop] = useState();

@@ -1,0 +1,124 @@
+/**========================================================================
+ *                           IMPORTS
+ *========================================================================**/
+@use "../themes/temp" as theme;
+
+/**========================================================================
+ *                           COMPONENT
+ *========================================================================**/
+.profile-picture-button {
+  margin-top: 2rem;
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 350px;
+  height: 350px;
+  transition: all 0.2s ease-in-out;
+
+  &__profile-picture-edit-icon {
+    padding: 0.75rem;
+    background-color: theme.$primaryBackground;
+    position: absolute;
+    bottom: 3rem;
+    right: 2.5rem;
+    z-index: 1.5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+
+    svg {
+      color: theme.$secondaryBackground;
+      font-size: 1.5rem;
+      z-index: 2;
+    }
+  }
+
+  &__profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid theme.$primaryBackground;
+    transition: all 0.2s ease-in-out;
+    background-color: theme.$primaryBackground;
+  }
+
+  &__profile-picture-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(theme.$secondaryBackground, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    border-radius: 50%;
+    overflow: visible;
+
+    &__icon-plus {
+      padding: 0.55rem;
+      border: 2px solid theme.$primaryBackground;
+      color: theme.$primaryBackground;
+      font-size: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.2s ease-in-out;
+      position: relative;
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 4.5rem;
+      height: 4.5rem;
+      border: 1px solid theme.$primaryBackground;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.2s ease-in-out;
+      transform: rotate(45deg);
+    }
+  }
+
+  &:hover {
+    .profile-picture-button__profile-picture {
+      filter: brightness(0.8);
+    }
+
+    .profile-picture-button__profile-picture-edit-icon {
+      filter: brightness(0.6);
+    }
+
+    .profile-picture-button__profile-picture-overlay {
+      background-color: rgba(theme.$secondaryBackground, 0.3);
+
+      .profile-picture-button__profile-picture-overlay__icon-plus {
+        border-radius: 50%;
+        opacity: 1;
+        transform: translateY(0);
+        transform: rotate(0);
+      }
+
+      &::after {
+        border-radius: 50%;
+        opacity: 1;
+        transform: scale(1);
+        transform: rotate(0);
+      }
+    }
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(theme.$primaryCTA, 0.5);
+  }
+}

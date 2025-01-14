@@ -412,6 +412,267 @@ li {
     width: 60%;
   }
 }
+/**========================================================================
+ *                           IMPORTS
+ *========================================================================**/
+/**========================================================================
+ *                           COMPONENT
+ *========================================================================**/
+.profile-picture-button {
+  margin-top: 2rem;
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 350px;
+  height: 350px;
+  transition: all 0.2s ease-in-out;
+}
+.profile-picture-button__profile-picture-edit-icon {
+  padding: 0.75rem;
+  background-color: #fffff8;
+  position: absolute;
+  bottom: 3rem;
+  right: 2.5rem;
+  z-index: 1.5;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+.profile-picture-button__profile-picture-edit-icon svg {
+  color: #2c2c2c;
+  font-size: 1.5rem;
+  z-index: 2;
+}
+.profile-picture-button__profile-picture {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #fffff8;
+  transition: all 0.2s ease-in-out;
+  background-color: #fffff8;
+}
+.profile-picture-button__profile-picture-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 44, 44, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+  overflow: visible;
+}
+.profile-picture-button__profile-picture-overlay__icon-plus {
+  padding: 0.55rem;
+  border: 2px solid #fffff8;
+  color: #fffff8;
+  font-size: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  transform: rotate(-45deg);
+}
+.profile-picture-button__profile-picture-overlay::after {
+  content: "";
+  position: absolute;
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 1px solid #fffff8;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.2s ease-in-out;
+  transform: rotate(45deg);
+}
+.profile-picture-button:hover .profile-picture-button__profile-picture {
+  filter: brightness(0.8);
+}
+.profile-picture-button:hover .profile-picture-button__profile-picture-edit-icon {
+  filter: brightness(0.6);
+}
+.profile-picture-button:hover .profile-picture-button__profile-picture-overlay {
+  background-color: rgba(44, 44, 44, 0.3);
+}
+.profile-picture-button:hover .profile-picture-button__profile-picture-overlay .profile-picture-button__profile-picture-overlay__icon-plus {
+  border-radius: 50%;
+  opacity: 1;
+  transform: translateY(0);
+  transform: rotate(0);
+}
+.profile-picture-button:hover .profile-picture-button__profile-picture-overlay::after {
+  border-radius: 50%;
+  opacity: 1;
+  transform: scale(1);
+  transform: rotate(0);
+}
+.profile-picture-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 129, 167, 0.5);
+}
+
+/**========================================================================
+ *                           IMPORTS
+ *========================================================================**/
+/**========================================================================
+ *                           COMPONENT
+ *========================================================================**/
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(44, 44, 44, 0.75);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+}
+.dialog-overlay--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.dialog-overlay .dialog {
+  background-color: #fffff8;
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.dialog-overlay .dialog .dialog__header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(44, 44, 44, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dialog-overlay .dialog .dialog__header h2 {
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: #1e1e1e;
+}
+.dialog-overlay .dialog .dialog__header .dialog__close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #5a5a5a;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  transition: all 0.15s ease-in-out;
+}
+.dialog-overlay .dialog .dialog__header .dialog__close-button:hover {
+  background-color: rgba(44, 44, 44, 0.1);
+}
+.dialog-overlay .dialog .dialog__content {
+  padding: 2rem;
+}
+.dialog-overlay .dialog .dialog__content__crop-container {
+  width: 100%;
+  max-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dialog-overlay .dialog .dialog__content__crop-container .ReactCrop {
+  max-width: 100%;
+  max-height: 400px;
+}
+.dialog-overlay .dialog .dialog__content__crop-container .ReactCrop__crop-selection {
+  border-radius: 50%;
+}
+.dialog-overlay .dialog .dialog__content__crop-image {
+  max-width: 100%;
+  max-height: 400px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.dialog-overlay .dialog .dialog__content__upload-area {
+  border: 2px dashed rgba(44, 44, 44, 0.5);
+  border-radius: 0.75rem;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.dialog-overlay .dialog .dialog__content__upload-area svg {
+  font-size: 2rem;
+  color: #0081a7;
+  margin-bottom: 0.5rem;
+}
+.dialog-overlay .dialog .dialog__content__upload-area__subtitle {
+  font-size: 0.9rem;
+  color: #5a5a5a !important;
+}
+.dialog-overlay .dialog .dialog__content__upload-area:hover {
+  border-color: #0081a7;
+  background-color: rgba(0, 129, 167, 0.05);
+}
+.dialog-overlay .dialog .dialog__content__upload-area__input {
+  display: none;
+}
+.dialog-overlay .dialog .dialog__content__upload-area:focus {
+  outline: none;
+  border-color: #0081a7;
+  background-color: rgba(0, 129, 167, 0.05);
+}
+.dialog-overlay .dialog .dialog__content__upload-area:focus-visible {
+  outline: 2px solid #0081a7;
+  outline-offset: 2px;
+}
+.dialog-overlay .dialog .dialog__footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(44, 44, 44, 0.2);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.dialog-overlay .dialog .dialog__footer__button {
+  padding: 0.5rem 1rem;
+  border-radius: 1.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+.dialog-overlay .dialog .dialog__footer__button--primary {
+  background-color: #0081a7;
+  color: #fffff8;
+  border: 1px solid #0081a7;
+}
+.dialog-overlay .dialog .dialog__footer__button--primary:hover {
+  background-color: rgba(0, 129, 167, 0.85);
+}
+.dialog-overlay .dialog .dialog__footer__button--secondary {
+  background-color: #fffff8;
+  color: #5a5a5a;
+  border: 1px solid #2c2c2c;
+}
+.dialog-overlay .dialog .dialog__footer__button--secondary:hover {
+  background-color: rgba(44, 44, 44, 0.15);
+}
+
 /**======================
  *    UTILITIES
  *========================**/
@@ -631,109 +892,6 @@ li {
   position: relative;
   margin-top: 2rem;
 }
-.register .register__right__container .register__right__content__profile-picture-button {
-  margin-top: 2rem;
-  position: relative;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: 50%;
-  overflow: hidden;
-  width: 350px;
-  height: 350px;
-  transition: all 0.2s ease-in-out;
-}
-.register .register__right__container .register__right__content__profile-picture-button .register__right__content__profile-picture-edit-icon {
-  padding: 0.75rem;
-  background-color: #fffff8;
-  position: absolute;
-  bottom: 3rem;
-  right: 2.5rem;
-  z-index: 1.5;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  transition: all 0.2s ease-in-out;
-}
-.register .register__right__container .register__right__content__profile-picture-button .register__right__content__profile-picture-edit-icon svg {
-  color: #2c2c2c;
-  font-size: 1.5rem;
-  z-index: 2;
-}
-.register .register__right__container .register__right__content__profile-picture-button .register__right__content__profile-picture {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid #fffff8;
-  transition: all 0.2s ease-in-out;
-  background-color: #fffff8;
-}
-.register .register__right__container .register__right__content__profile-picture-button .profile-picture-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(44, 44, 44, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease-in-out;
-  border-radius: 50%;
-  overflow: visible;
-}
-.register .register__right__container .register__right__content__profile-picture-button .profile-picture-overlay .profile-picture-overlay__icon-plus {
-  padding: 0.55rem;
-  border: 2px solid #fffff8;
-  color: #fffff8;
-  font-size: 2rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.2s ease-in-out;
-  position: relative;
-  transform: rotate(-45deg);
-}
-.register .register__right__container .register__right__content__profile-picture-button .profile-picture-overlay::after {
-  content: "";
-  position: absolute;
-  width: 4.5rem;
-  height: 4.5rem;
-  border: 1px solid #fffff8;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.2s ease-in-out;
-  transform: rotate(45deg);
-}
-.register .register__right__container .register__right__content__profile-picture-button:hover .register__right__content__profile-picture {
-  filter: brightness(0.8);
-}
-.register .register__right__container .register__right__content__profile-picture-button:hover .register__right__content__profile-picture-edit-icon {
-  filter: brightness(0.8);
-}
-.register .register__right__container .register__right__content__profile-picture-button:hover .profile-picture-overlay {
-  background-color: rgba(44, 44, 44, 0.3);
-}
-.register .register__right__container .register__right__content__profile-picture-button:hover .profile-picture-overlay .profile-picture-overlay__icon-plus {
-  border-radius: 50%;
-  opacity: 1;
-  transform: translateY(0);
-  transform: rotate(0);
-}
-.register .register__right__container .register__right__content__profile-picture-button:hover .profile-picture-overlay::after {
-  border-radius: 50%;
-  opacity: 1;
-  transform: scale(1);
-  transform: rotate(0);
-}
-.register .register__right__container .register__right__content__profile-picture-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 129, 167, 0.5);
-}
 .register .register__right__container .register__right__content__details {
   display: flex;
   justify-content: center;
@@ -831,148 +989,4 @@ li {
   .register .register__right__container {
     display: none;
   }
-}
-.dialog-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(44, 44, 44, 0.75);
-  -webkit-backdrop-filter: blur(4px);
-          backdrop-filter: blur(4px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease-in-out;
-}
-.dialog-overlay--active {
-  opacity: 1;
-  pointer-events: auto;
-}
-.dialog-overlay .dialog {
-  background-color: #fffff8;
-  border-radius: 1rem;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.dialog-overlay .dialog .dialog__header {
-  padding: 1.5rem;
-  border-bottom: 1px solid rgba(44, 44, 44, 0.2);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.dialog-overlay .dialog .dialog__header h2 {
-  font-weight: 300;
-  font-size: 1.5rem;
-  color: #1e1e1e;
-}
-.dialog-overlay .dialog .dialog__header .dialog__close-button {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #5a5a5a;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  transition: all 0.15s ease-in-out;
-}
-.dialog-overlay .dialog .dialog__header .dialog__close-button:hover {
-  background-color: rgba(44, 44, 44, 0.1);
-}
-.dialog-overlay .dialog .dialog__content {
-  padding: 2rem;
-}
-.dialog-overlay .dialog .dialog__content__crop-container {
-  width: 100%;
-  max-height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.dialog-overlay .dialog .dialog__content__crop-container .ReactCrop {
-  max-width: 100%;
-  max-height: 400px;
-}
-.dialog-overlay .dialog .dialog__content__crop-container .ReactCrop__crop-selection {
-  border-radius: 50%;
-}
-.dialog-overlay .dialog .dialog__content__crop-image {
-  max-width: 100%;
-  max-height: 400px;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-.dialog-overlay .dialog .dialog__content__upload-area {
-  border: 2px dashed rgba(44, 44, 44, 0.5);
-  border-radius: 0.75rem;
-  padding: 3rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
-}
-.dialog-overlay .dialog .dialog__content__upload-area svg {
-  font-size: 2rem;
-  color: #0081a7;
-  margin-bottom: 0.5rem;
-}
-.dialog-overlay .dialog .dialog__content__upload-area__subtitle {
-  font-size: 0.9rem;
-  color: #5a5a5a !important;
-}
-.dialog-overlay .dialog .dialog__content__upload-area:hover {
-  border-color: #0081a7;
-  background-color: rgba(0, 129, 167, 0.05);
-}
-.dialog-overlay .dialog .dialog__content__upload-area__input {
-  display: none;
-}
-.dialog-overlay .dialog .dialog__content__upload-area:focus {
-  outline: none;
-  border-color: #0081a7;
-  background-color: rgba(0, 129, 167, 0.05);
-}
-.dialog-overlay .dialog .dialog__content__upload-area:focus-visible {
-  outline: 2px solid #0081a7;
-  outline-offset: 2px;
-}
-.dialog-overlay .dialog .dialog__footer {
-  padding: 1.5rem;
-  border-top: 1px solid rgba(44, 44, 44, 0.2);
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-.dialog-overlay .dialog .dialog__footer__button {
-  padding: 0.5rem 1rem;
-  border-radius: 1.25rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
-}
-.dialog-overlay .dialog .dialog__footer__button--primary {
-  background-color: #0081a7;
-  color: #fffff8;
-  border: 1px solid #0081a7;
-}
-.dialog-overlay .dialog .dialog__footer__button--primary:hover {
-  background-color: rgba(0, 129, 167, 0.85);
-}
-.dialog-overlay .dialog .dialog__footer__button--secondary {
-  background-color: #fffff8;
-  color: #5a5a5a;
-  border: 1px solid #2c2c2c;
-}
-.dialog-overlay .dialog .dialog__footer__button--secondary:hover {
-  background-color: rgba(44, 44, 44, 0.15);
 }/*# sourceMappingURL=globals.css.map */

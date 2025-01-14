@@ -35,7 +35,7 @@ import { useState, useEffect } from "react";
 /**======================
  *    COMPONENTS
  *========================**/
-import ProfilePictureDialog from "../components/ProfilePictureDialog";
+import ProfilePictureButton from "../components/ProfilePictureButton";
 export default function Register() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [matchedPassword, setMatchedPassword] = useState(false);
@@ -128,11 +128,6 @@ export default function Register() {
       }
     },
   });
-
-  // Function to open the profile picture dialog | HBD 01/12/2025
-  const handleProfilePicChange = () => {
-    setIsDialogOpen(true);
-  };
 
   return (
     <>
@@ -306,32 +301,7 @@ export default function Register() {
         </svg>
         <div className="register__right__container">
           <div className="register__right__content animate-fade-in">
-            {/* Profile picture button | HBD 01/12/2025 */}
-            <button
-              onClick={handleProfilePicChange}
-              className="register__right__content__profile-picture-button"
-              type="button"
-              aria-label="Change profile picture"
-            >
-              <Image
-                src={formik.values.profilePictureUrl}
-                alt="Profile Picture"
-                className="register__right__content__profile-picture"
-                width={350}
-                height={350}
-                placeholder="blur"
-                blurDataURL={formik.values.profilePictureUrl}
-              />
-              <div className="register__right__content__profile-picture-edit-icon">
-                <FontAwesomeIcon icon={faPencil} />
-              </div>
-              <div className="profile-picture-overlay">
-                <FontAwesomeIcon
-                  className="profile-picture-overlay__icon-plus"
-                  icon={faPlus}
-                />
-              </div>
-            </button>
+            <ProfilePictureButton formik={formik} />
             <div
               className={`register__right__content__details ${
                 isConfirming ? "register__right__content__details__active" : ""
@@ -360,20 +330,6 @@ export default function Register() {
           </div>
         </div>
       </form>
-
-      {/* Profile picture dialog | HBD 01/12/2025 */}
-      <ProfilePictureDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        onSave={(croppedImageUrl) => {
-          // TODO: Later set up a file storage service to retrieve the image
-          if (formik.values.profilePictureUrl !== defaultProfilePic.src) {
-            URL.revokeObjectURL(formik.values.profilePictureUrl);
-          }
-          formik.setFieldValue("profilePictureUrl", croppedImageUrl);
-        }}
-        defaultImage={defaultProfilePic.src}
-      />
     </>
   );
 }
