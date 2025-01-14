@@ -1,0 +1,92 @@
+/**========================================================================
+ *                           IMPORTS
+ *========================================================================**/
+@use "../themes/temp" as theme;
+
+/**========================================================================
+ *                           VARIABLES
+ *========================================================================**/
+$transition-duration: 0.2s;
+$transition-timing-function: ease-in-out;
+
+/**========================================================================
+ *                           STYLES
+ *========================================================================**/
+.dialog-box-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(theme.$secondaryBackground, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-duration $transition-timing-function;
+  &--active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .dialog-box {
+    background-color: theme.$primaryBackground;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &__header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(theme.$secondaryBackground, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        font-weight: 300;
+        font-size: 1.5rem;
+        color: theme.$primaryText;
+      }
+
+      &__close-button {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: theme.$secondaryText;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        transition: all $transition-duration $transition-timing-function;
+
+        &:hover {
+          background-color: rgba(theme.$secondaryBackground, 0.1);
+        }
+      }
+    }
+
+    &__content {
+      padding: 2rem;
+    }
+
+    .dialog__footer {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(theme.$secondaryBackground, 0.2);
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+
+      &__button {
+        padding: 0.5rem 1rem;
+        border-radius: 1.25rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all $transition-duration $transition-timing-function;
+      }
+    }
+  }
+}

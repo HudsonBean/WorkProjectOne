@@ -6,6 +6,7 @@
 /**======================
  *    COMPONENTS
  *========================**/
+@use "./components/dialog-box";
 @use "./components/navbar";
 @use "./components/profile-picture-button";
 @use "./components/profile-picture-dialog";
@@ -18,4 +19,5 @@
 /**======================
  *    PAGES
  *========================**/
+@use "./pages/home";
 @use "./pages/register";
