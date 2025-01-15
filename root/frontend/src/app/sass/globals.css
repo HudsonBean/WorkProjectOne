@@ -1031,26 +1031,26 @@ li {
   transition: transform 0.2s ease-in-out;
 }
 .register .register__right__container .register__right__content__confirm-buttons button:first-child {
-  background-color: #fffff8;
-  color: #0081a7;
-  border-color: #fffff8;
-}
-.register .register__right__container .register__right__content__confirm-buttons button:first-child:hover {
-  background-color: rgba(255, 255, 248, 0.9);
-}
-.register .register__right__container .register__right__content__confirm-buttons button:first-child:hover svg {
-  transform: translateX(5px);
-}
-.register .register__right__container .register__right__content__confirm-buttons button:last-child {
   background-color: transparent;
   color: #fffff8;
   border-color: #fffff8;
 }
-.register .register__right__container .register__right__content__confirm-buttons button:last-child:hover {
+.register .register__right__container .register__right__content__confirm-buttons button:first-child:hover {
   background-color: rgba(255, 255, 248, 0.1);
 }
-.register .register__right__container .register__right__content__confirm-buttons button:last-child:hover svg {
+.register .register__right__container .register__right__content__confirm-buttons button:first-child:hover svg {
   transform: translateX(-5px);
+}
+.register .register__right__container .register__right__content__confirm-buttons button:last-child {
+  background-color: #fffff8;
+  color: #0081a7;
+  border-color: #0081a7;
+}
+.register .register__right__container .register__right__content__confirm-buttons button:last-child:hover {
+  background-color: rgba(255, 255, 248, 0.9);
+}
+.register .register__right__container .register__right__content__confirm-buttons button:last-child:hover svg {
+  transform: translateX(5px);
 }
 .register .register__right__container .register__right__content__confirm-buttons__active {
   opacity: 1;

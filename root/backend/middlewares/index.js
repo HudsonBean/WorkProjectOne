@@ -10,6 +10,7 @@ import compression from "compression";
 import rateLimit from "express-rate-limit";
 import colorsTheme from "../config/colors.js";
 import configurePassport from "../config/passport-config.js";
+import path from "path";
 
 /**======================
  *    INJECT MIDDLEWARES
@@ -51,6 +52,8 @@ const injectMiddleware = (app) => {
     console.error(`Error: ${error.message}`.failure);
     res.status(500).json({ message: "Server error" });
   });
+  // Serve static files from the uploads directory | HBD 01/15/2025
+  app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
 };
 
 export default injectMiddleware;

@@ -217,19 +217,6 @@
           }
 
           &:first-child {
-            background-color: theme.$primaryBackground;
-            color: theme.$primaryCTA;
-            border-color: theme.$primaryBackground;
-
-            &:hover {
-              background-color: rgba(theme.$primaryBackground, 0.9);
-              svg {
-                transform: translateX(5px);
-              }
-            }
-          }
-
-          &:last-child {
             background-color: transparent;
             color: theme.$primaryBackground;
             border-color: theme.$primaryBackground;
@@ -238,6 +225,19 @@
               background-color: rgba(theme.$primaryBackground, 0.1);
               svg {
                 transform: translateX(-5px);
+              }
+            }
+          }
+
+          &:last-child {
+            background-color: theme.$primaryBackground;
+            color: theme.$primaryCTA;
+            border-color: theme.$primaryCTA;
+
+            &:hover {
+              background-color: rgba(theme.$primaryBackground, 0.9);
+              svg {
+                transform: translateX(5px);
               }
             }
           }

@@ -20,7 +20,6 @@ const poppins = Poppins({
   style: "normal",
   display: "swap",
 });
-import defaultProfilePic from "../assets/default-profile-picture.svg";
 
 /**======================
  *    REACT IMPORTS
@@ -34,7 +33,6 @@ import ProfilePictureButton from "../components/ProfilePictureButton";
 import Button from "../components/Button";
 
 export default function Register() {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [matchedPassword, setMatchedPassword] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -105,7 +103,7 @@ export default function Register() {
   const submitToBackend = () => {
     console.log(formik.values);
     axios
-      .post("http://localhost:8000/api/register", formik.values)
+      .post("http://localhost:8000/register", formik.values)
       .then((res) => {
         console.log(res);
       })
@@ -122,7 +120,8 @@ export default function Register() {
       lastName: "",
       password: "",
       confirmPassword: "",
-      profilePictureUrl: defaultProfilePic.src,
+      profilePictureUrl:
+        "http://localhost:8000/profile-picture/default-profile.png",
     },
     validate,
     onSubmit: (values) => {
@@ -319,7 +318,14 @@ export default function Register() {
               } `}
             >
               <h1>
-                {formik.values.firstName} {formik.values.lastName}
+                {formik.values.firstName.length +
+                  formik.values.lastName.length >=
+                20
+                  ? `${formik.values.firstName} ${formik.values.lastName.slice(
+                      0,
+                      19 - formik.values.firstName.length
+                    )}...`
+                  : `${formik.values.firstName} ${formik.values.lastName}`}
               </h1>
               <span>{formik.values.email}</span>
             </div>
@@ -330,15 +336,11 @@ export default function Register() {
                   : ""
               }`}
             >
-              <Button
-                variant="primary"
-                icon={faArrowLeft}
-                onClick={toggleConfirm}
-              >
+              <Button variant="text" icon={faArrowLeft} onClick={toggleConfirm}>
                 Back
               </Button>
               <Button
-                variant="text"
+                variant="primary"
                 icon={faArrowRight}
                 iconPosition="right"
                 onClick={submitToBackend}

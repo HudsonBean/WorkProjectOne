@@ -3,6 +3,7 @@
 /**========================================================================
  *                           IMPORTS
  *========================================================================**/
+
 /**======================
  *    REACT IMPORTS
  *========================**/
@@ -21,7 +22,6 @@ import { faPlus, faPencil } from "@fortawesome/free-solid-svg-icons";
 /**======================
  *    ASSETS
  *========================**/
-import defaultProfilePic from "../assets/default-profile-picture.svg";
 
 /**======================
  *    COMPONENTS
@@ -46,6 +46,8 @@ export default function ProfilePictureButton({ formik }) {
     }
     formik.setFieldValue("profilePictureUrl", croppedImageUrl);
   };
+  //TODO: Setup redux so I can get user from state | HBD 01/15/2025
+  //TODO: Get user from state and set profile picture to user's profile picture | HBD 01/15/2025
 
   return (
     <>
