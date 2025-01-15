@@ -6,8 +6,9 @@
 /**======================
  *    COMPONENTS
  *========================**/
-@use "./components/dialog-box";
+@use "./components/button";
 @use "./components/navbar";
+@use "./components/dialog-box";
 @use "./components/profile-picture-button";
 @use "./components/profile-picture-dialog";
 
@@ -15,7 +16,8 @@
  *    UTILITIES
  *========================**/
 @use "./utilities/animate-fade-in";
-
+@use "./utilities/transitions";
+@use "./utilities/forms";
 /**======================
  *    PAGES
  *========================**/

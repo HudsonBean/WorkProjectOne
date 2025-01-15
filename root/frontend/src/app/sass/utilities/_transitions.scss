@@ -1,0 +1,24 @@
+@mixin smooth-transition(
+  $properties: all,
+  $duration: 0.5s,
+  $timing: cubic-bezier(0.4, 0, 0.2, 1)
+) {
+  transition: $properties $duration $timing;
+}
+
+@mixin hover-underline($color, $height: 2px, $bottom: -2px) {
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: $height;
+    background-color: $color;
+    left: 0;
+    bottom: $bottom;
+    @include smooth-transition(width, 0.15s, ease-in-out);
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}

@@ -8,7 +8,7 @@ import { init } from "./app.js";
  *                           START SERVER
  *========================================================================**/
 // Inject app instance and start the server.
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 init()
   .then((app) => {
     app.listen(port, () => {

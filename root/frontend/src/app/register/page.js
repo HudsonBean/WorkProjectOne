@@ -3,22 +3,17 @@
 /**========================================================================
  *                           IMPORTS
  *========================================================================**/
+import axios from "axios";
 /**======================
  *    NEXTJS IMPORTS
  *========================**/
 import { useFormik } from "formik";
 import Link from "next/link";
-import Image from "next/image";
+
 /**======================
  *    STYLE IMPORTS
  *========================**/
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlus,
-  faPencil,
-  faArrowRight,
-  faArrowLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Poppins } from "next/font/google";
 const poppins = Poppins({
   weight: ["100", "300", "400"],
@@ -36,6 +31,8 @@ import { useState, useEffect } from "react";
  *    COMPONENTS
  *========================**/
 import ProfilePictureButton from "../components/ProfilePictureButton";
+import Button from "../components/Button";
+
 export default function Register() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [matchedPassword, setMatchedPassword] = useState(false);
@@ -106,7 +103,15 @@ export default function Register() {
   };
 
   const submitToBackend = () => {
-    //TODO: Implement submitting to backend
+    console.log(formik.values);
+    axios
+      .post("http://localhost:8000/api/register", formik.values)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   // Formik setup | HBD 01/12/2025
@@ -272,7 +277,13 @@ export default function Register() {
                   </p>
                 )}
               </div>
-              <button type="submit">Register</button>
+              <Button
+                type="submit"
+                variant="primary"
+                className="register__form__submit"
+              >
+                Register
+              </Button>
             </div>
             <div className="register__footer">
               <p>
@@ -319,13 +330,21 @@ export default function Register() {
                   : ""
               }`}
             >
-              <button type="button" onClick={submitToBackend}>
-                Looks Good! <FontAwesomeIcon icon={faArrowRight} />
-              </button>
-              <button onClick={toggleConfirm} type="button">
-                <FontAwesomeIcon icon={faArrowLeft} />
-                Not Quite Finished.
-              </button>
+              <Button
+                variant="primary"
+                icon={faArrowLeft}
+                onClick={toggleConfirm}
+              >
+                Back
+              </Button>
+              <Button
+                variant="text"
+                icon={faArrowRight}
+                iconPosition="right"
+                onClick={submitToBackend}
+              >
+                Looks Good!
+              </Button>
             </div>
           </div>
         </div>

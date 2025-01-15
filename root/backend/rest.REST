@@ -1,12 +1,35 @@
 # DEV
 # DEV-GET
-GET http://localhost:3000/api/dev-get
+GET http://localhost:8000/api/dev-get
 
 ###
 #DEV-POST
-POST http://localhost:3000/api/dev-post
+POST http://localhost:8000/api/dev-post
 Content-Type: application/json
 
 {
     "message": "Hello World!"
+}
+
+###
+# REGISTER
+POST http://localhost:8000/register
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "firstName": "Test",
+    "lastName": "User",
+    "password": "password",
+    "confirmPassword": "password"
+}
+
+###
+# LOGIN
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+  "username": "your_username",
+  "password": "your_password"
 }

@@ -1,0 +1,72 @@
+@use "../themes/temp" as theme;
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  // Variants
+  &--primary {
+    background-color: theme.$primaryCTA;
+    color: theme.$primaryText;
+
+    &:hover:not(:disabled) {
+      background-color: darken(theme.$primaryCTA, 10%);
+    }
+  }
+
+  &--secondary {
+    background-color: theme.$secondaryBackground;
+    color: theme.$primaryText;
+
+    &:hover:not(:disabled) {
+      background-color: darken(theme.$secondaryBackground, 5%);
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border: 2px solid theme.$primaryBackground;
+    color: theme.$primaryBackground;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(theme.$primaryBackground, 0.1);
+    }
+  }
+
+  &--text {
+    background-color: transparent;
+    padding: 0.5rem;
+    color: theme.$primaryText;
+
+    &:hover:not(:disabled) {
+      color: theme.$primaryCTA;
+    }
+  }
+
+  // Icon styles
+  &--with-icon {
+    .button__icon {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover .button__icon {
+      transform: translateX(-2px); // For left icons
+      &:last-child {
+        transform: translateX(2px); // For right icons
+      }
+    }
+  }
+}

@@ -30,7 +30,7 @@ const init = async () => {
 
     return app;
   } catch (error) {
-    console.error(`Error: ${error.message}`.failure);
+    console.error(`UH OH! Error: ${error.message}`.failure);
     process.exit(1);
   }
 };

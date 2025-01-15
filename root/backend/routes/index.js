@@ -19,13 +19,15 @@ const injectRoute = (app) => {
    *    DEFAULT ENDPOINTS
    *========================**/
   // Register
-  app.get("/register", async (req, res) => {
-    res.status(100).json({ message: "register endpoint hit" });
+  app.post("/register", async (req, res) => {
+    res.status(200).json("Register successful! Welcome " + req.body.firstName);
   });
 
   // Login
-  app.get("/login", passport.authenticate("local"), (req, res) => {
-    res.status(100).json({ message: "login endpoint hit" });
+  app.post("/login", passport.authenticate("local"), (req, res) => {
+    res.status(200).json({
+      message: "Successfully logged in!",
+    });
   });
 
   /**======================
