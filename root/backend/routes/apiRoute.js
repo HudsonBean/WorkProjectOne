@@ -3,6 +3,7 @@
  *========================================================================**/
 import express from "express";
 const router = express.Router();
+import { fileURLToPath } from "url";
 import path from "path";
 /**======================
  *    MIDDLEWARES
@@ -52,8 +53,12 @@ const apiRoute = () => {
     }
   );
   // Endpoint to serve profile pictures | HBD 01/15/2025
-  app.get("/profile-picture/:filename", (req, res) => {
-    const filePath = path.join(__dirname, "../uploads", req.params.filename);
+  router.get("/profile-picture/:filename", (req, res) => {
+    const filePath = path.join(
+      path.dirname(fileURLToPath(import.meta.url)),
+      "../uploads",
+      req.params.filename
+    );
 
     // Ensure the file exists
     res.sendFile(filePath, (err) => {

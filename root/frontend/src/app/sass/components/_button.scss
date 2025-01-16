@@ -20,7 +20,7 @@
   // Variants
   &--primary {
     background-color: theme.$primaryCTA;
-    color: theme.$primaryText;
+    color: theme.$primaryBackground;
 
     &:hover:not(:disabled) {
       background-color: darken(theme.$primaryCTA, 10%);

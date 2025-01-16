@@ -10,6 +10,7 @@ import compression from "compression";
 import rateLimit from "express-rate-limit";
 import colorsTheme from "../config/colors.js";
 import configurePassport from "../config/passport-config.js";
+import { fileURLToPath } from "url";
 import path from "path";
 
 /**======================
@@ -53,7 +54,12 @@ const injectMiddleware = (app) => {
     res.status(500).json({ message: "Server error" });
   });
   // Serve static files from the uploads directory | HBD 01/15/2025
-  app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
+  app.use(
+    "/uploads",
+    express.static(
+      path.join(path.dirname(fileURLToPath(import.meta.url)), "../../uploads")
+    )
+  );
 };
 
 export default injectMiddleware;

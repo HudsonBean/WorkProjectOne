@@ -27,6 +27,11 @@ import { faPlus, faPencil } from "@fortawesome/free-solid-svg-icons";
  *    COMPONENTS
  *========================**/
 import ProfilePictureDialog from "./ProfilePictureDialog";
+/**======================
+ *    CONSTANTS
+ *========================**/
+const defaultProfilePic =
+  "http://localhost:8000/api/profile-picture/default-profile.png";
 
 export default function ProfilePictureButton({ formik }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -41,13 +46,11 @@ export default function ProfilePictureButton({ formik }) {
 
   const handleSaveImage = (croppedImageUrl) => {
     // Clean up old object URL if it exists and isn't the default
-    if (formik.values.profilePictureUrl !== defaultProfilePic.src) {
+    if (formik.values.profilePictureUrl !== defaultProfilePic) {
       URL.revokeObjectURL(formik.values.profilePictureUrl);
     }
     formik.setFieldValue("profilePictureUrl", croppedImageUrl);
   };
-  //TODO: Setup redux so I can get user from state | HBD 01/15/2025
-  //TODO: Get user from state and set profile picture to user's profile picture | HBD 01/15/2025
 
   return (
     <>

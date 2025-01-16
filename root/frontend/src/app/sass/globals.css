@@ -65,7 +65,7 @@ li {
 }
 .button--primary {
   background-color: #0081a7;
-  color: #1e1e1e;
+  color: #fffff8;
 }
 .button--primary:hover:not(:disabled) {
   background-color: #005a74;
@@ -941,6 +941,11 @@ li {
   text-align: center;
   color: #5a5a5a;
   font-weight: 300;
+}
+.register .register__left__container .register__left__content .register__footer a {
+  margin-left: 0.35rem;
+  position: relative;
+  color: #0081a7;
 }
 .register .register__left__container .register__left__content .register__footer a::after {
   content: "";

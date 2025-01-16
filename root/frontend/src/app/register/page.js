@@ -36,6 +36,11 @@ export default function Register() {
   const [matchedPassword, setMatchedPassword] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  /**======================
+   *    CONSTANTS
+   *========================**/
+  const defaultProfilePic =
+    "http://localhost:8000/api/profile-picture/default-profile.png";
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -101,9 +106,20 @@ export default function Register() {
   };
 
   const submitToBackend = () => {
-    console.log(formik.values);
+    const formData = new FormData();
+
+    formData.append("email", formik.values.email);
+    formData.append("firstName", formik.values.firstName);
+    formData.append("lastName", formik.values.lastName);
+    formData.append("password", formik.values.password);
+
+    // Check if profile picture is not default | HBD 01/15/2025
+    if (formik.values.profilePictureUrl !== defaultProfilePic) {
+      formData.append("profilePictureUrl", formik.values.profilePictureUrl);
+    }
+
     axios
-      .post("http://localhost:8000/register", formik.values)
+      .post("http://localhost:8000/register", formData)
       .then((res) => {
         console.log(res);
       })
@@ -120,8 +136,7 @@ export default function Register() {
       lastName: "",
       password: "",
       confirmPassword: "",
-      profilePictureUrl:
-        "http://localhost:8000/profile-picture/default-profile.png",
+      profilePictureUrl: defaultProfilePic,
     },
     validate,
     onSubmit: (values) => {
@@ -286,7 +301,7 @@ export default function Register() {
             </div>
             <div className="register__footer">
               <p>
-                Already have an account?{" "}
+                Already have an account?
                 <Link href="/login">
                   <span>Login</span>
                 </Link>

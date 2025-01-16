@@ -8,30 +8,39 @@ import multer from "multer";
  *========================================================================**/
 // Multer middleware for profile picture upload | HBD 01/15/2025
 const storage = multer.diskStorage({
+  // Destination for the file upload
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, "uploads/"); // Save files in the 'uploads/' directory
   },
+
+  // Filename setup
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now() + ".jpg");
+    // Generate a unique filename using the field name and timestamp
+    cb(null, file.fieldname + path.extname(file.originalname)); // e.g. 'profilePicture-1630000000000.jpg'
   },
 });
-// Configure multer for profile picture upload | HBD 01/15/2025
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
-  fileFilter: (req, file, cb) => {
-    const filetypes = /jpeg|jpg|png/;
-    const extname = filetypes.test(
-      path.extname(file.originalname).toLowerCase()
-    );
-    const mimetype = filetypes.test(file.mimetype);
 
-    if (extname && mimetype) {
-      cb(null, true);
-    } else {
-      cb(new Error("Only image files are allowed!"));
-    }
-  },
+// File validation (allowed image types)
+const fileFilter = (req, file, cb) => {
+  const filetypes = /jpeg|jpg|png/; // Allow PNG, JPG, and SVG
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase()); // Check file extension
+  const mimetype = filetypes.test(file.mimetype); // Check MIME type
+
+  if (extname && mimetype) {
+    return cb(null, true); // Accept the file
+  } else {
+    return cb(
+      new Error("Only image files (JPG, PNG, SVG) are allowed!"),
+      false
+    ); // Reject the file
+  }
+};
+
+// Multer configuration
+const upload = multer({
+  storage: storage, // Use the custom storage configuration
+  limits: { fileSize: 5 * 1024 * 1024 }, // Limit to 5MB file size
+  fileFilter: fileFilter, // Apply the file validation
 });
 
 /**

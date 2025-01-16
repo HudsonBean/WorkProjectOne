@@ -121,6 +121,9 @@
         font-weight: 300;
 
         a {
+          margin-left: 0.35rem;
+          position: relative;
+          color: theme.$primaryCTA;
           @include hover-underline(theme.$primaryCTA);
         }
       }
