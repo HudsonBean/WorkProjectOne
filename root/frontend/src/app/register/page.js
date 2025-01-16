@@ -31,16 +31,15 @@ import { useState, useEffect } from "react";
  *========================**/
 import ProfilePictureButton from "../components/ProfilePictureButton";
 import Button from "../components/Button";
+/**======================
+ *    CONSTANTS
+ *========================**/
+const defaultProfilePic = process.env.DEFAULT_PROFILE_PICTURE;
 
 export default function Register() {
   const [matchedPassword, setMatchedPassword] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  /**======================
-   *    CONSTANTS
-   *========================**/
-  const defaultProfilePic =
-    "http://localhost:8000/api/profile-picture/default-profile.png";
 
   useEffect(() => {
     const checkScreenSize = () => {

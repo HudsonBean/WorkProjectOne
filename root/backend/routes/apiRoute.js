@@ -25,15 +25,15 @@ const apiRoute = () => {
       .json({ message: "Post route hit! Message: " + req.reversedMessage });
   });
 
-  // Endpoint to serve static profile pictures | HBD 01/15/2025
-  router.get("/profile-picture/:filename", (req, res) => {
+  // Endpoint to serve static pictures | HBD 01/15/2025
+  router.get("/uploads/:filename", (req, res) => {
     const filePath = path.join(
       path.dirname(fileURLToPath(import.meta.url)),
       "../uploads",
       req.params.filename
     );
 
-    // Ensure the file exists
+    // Serve the file if it exists
     res.sendFile(filePath, (err) => {
       if (err) {
         console.error("Error serving file:", err);

@@ -4,16 +4,7 @@
  *========================================================================**/
 import { useState } from "react";
 import DialogBox from "./components/DialogBox";
-import ProfilePictureButton from "./components/ProfilePictureButton";
-import defaultProfilePic from "./assets/default-profile-picture.svg";
-import { useFormik } from "formik";
 export default function Index() {
-  const formik = useFormik({
-    initialValues: {
-      file: defaultProfilePic.src,
-    },
-  });
-
   const [isOpen, setIsOpen] = useState(false);
 
   return (

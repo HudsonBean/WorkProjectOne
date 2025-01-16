@@ -1,11 +1,15 @@
 module.exports = {
+  env: {
+    DEFAULT_PROFILE_PICTURE:
+      "http://localhost:8000/api/uploads/default-profile.png",
+  },
   images: {
     remotePatterns: [
       {
         protocol: "http",
         hostname: "localhost",
-        port: "8000", // Optional: if your images are served from a specific port
-        pathname: "/api/profile-picture/*", // This restricts the pattern to the profile picture endpoint
+        port: "8000",
+        pathname: "/api/uploads/*", // This restricts the pattern to the profile picture endpoint
       },
     ],
   },

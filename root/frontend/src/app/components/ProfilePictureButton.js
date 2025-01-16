@@ -30,8 +30,7 @@ import ProfilePictureDialog from "./ProfilePictureDialog";
 /**======================
  *    CONSTANTS
  *========================**/
-const defaultProfilePic =
-  "http://localhost:8000/api/profile-picture/default-profile.png";
+const defaultProfilePic = process.env.DEFAULT_PROFILE_PICTURE;
 
 export default function ProfilePictureButton({ formik }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -42,6 +41,7 @@ export default function ProfilePictureButton({ formik }) {
 
   const closeDialog = () => {
     setIsDialogOpen(false);
+    Is;
   };
 
   const handleSaveImage = (croppedImageUrl) => {
