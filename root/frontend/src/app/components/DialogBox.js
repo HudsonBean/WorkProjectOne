@@ -1,7 +1,9 @@
+"use client";
+
 /**========================================================================
  *                           IMPORTS
  *========================================================================**/
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 /**========================================================================
@@ -17,6 +19,14 @@ export default function DialogBox({
   showDefaultFooterButton = true,
   className,
 }) {
+  // State to track if we're in the browser
+  const [mounted, setMounted] = useState(false);
+
+  // Only run after component mounts in browser
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const dialogContent = (
     <div
       className={`dialog-box-overlay ${
@@ -53,5 +63,6 @@ export default function DialogBox({
     </div>
   );
 
-  return createPortal(dialogContent, document.body);
+  // Only create portal after component has mounted in browser
+  return mounted ? createPortal(dialogContent, document.body) : null;
 }

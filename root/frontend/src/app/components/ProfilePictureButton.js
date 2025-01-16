@@ -46,10 +46,10 @@ export default function ProfilePictureButton({ formik }) {
 
   const handleSaveImage = (croppedImageUrl) => {
     // Clean up old object URL if it exists and isn't the default
-    if (formik.values.profilePictureUrl !== defaultProfilePic) {
-      URL.revokeObjectURL(formik.values.profilePictureUrl);
+    if (formik.values.file !== defaultProfilePic) {
+      URL.revokeObjectURL(formik.values.file);
     }
-    formik.setFieldValue("profilePictureUrl", croppedImageUrl);
+    formik.setFieldValue("file", croppedImageUrl);
   };
 
   return (
@@ -61,7 +61,7 @@ export default function ProfilePictureButton({ formik }) {
         aria-label="Change profile picture"
       >
         <Image
-          src={formik.values.profilePictureUrl}
+          src={formik.values.file}
           alt="Profile Picture"
           className="profile-picture-button__profile-picture"
           width={350}

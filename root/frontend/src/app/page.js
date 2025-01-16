@@ -10,7 +10,7 @@ import { useFormik } from "formik";
 export default function Index() {
   const formik = useFormik({
     initialValues: {
-      profilePictureUrl: defaultProfilePic.src,
+      file: defaultProfilePic.src,
     },
   });
 

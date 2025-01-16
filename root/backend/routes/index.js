@@ -4,7 +4,6 @@
 import express from "express";
 import apiRoute from "./apiRoute.js";
 import passport from "passport";
-import { upload, handleProfilePictureUpload } from "../config/multer-config.js";
 
 const router = express.Router();
 
@@ -29,24 +28,18 @@ const injectRoute = (app) => {
    *    ENDPOINTS
    *========================**/
   // Register
-  app.post("/register", upload.single("profilePicture"), async (req, res) => {
+  app.post("/register", async (req, res) => {
     try {
       const { firstName, lastName, email, password } = req.body;
       const hashedPassword = bcrypt.hashSync(password, 10);
-
-      // Save profile picture if uploaded | HBD 01/15/2025
-      const profilePicture =
-        (await handleProfilePictureUpload(req)) ||
-        process.env.DEFAULT_PROFILE_PIC;
 
       const newUser = new User({
         firstName,
         lastName,
         email,
         password: hashedPassword,
-        profilePicture,
       });
-      await newUser.save();
+      // await newUser.save();
       res.status(200).json("Register successful! Welcome " + firstName);
     } catch (error) {
       console.error(`Error registering user: ${error.message}`);

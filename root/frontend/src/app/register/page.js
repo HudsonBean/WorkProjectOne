@@ -114,8 +114,8 @@ export default function Register() {
     formData.append("password", formik.values.password);
 
     // Check if profile picture is not default | HBD 01/15/2025
-    if (formik.values.profilePictureUrl !== defaultProfilePic) {
-      formData.append("profilePictureUrl", formik.values.profilePictureUrl);
+    if (formik.values.file !== defaultProfilePic) {
+      formData.append("file", formik.values.file);
     }
 
     axios
@@ -136,7 +136,7 @@ export default function Register() {
       lastName: "",
       password: "",
       confirmPassword: "",
-      profilePictureUrl: defaultProfilePic,
+      file: defaultProfilePic,
     },
     validate,
     onSubmit: (values) => {

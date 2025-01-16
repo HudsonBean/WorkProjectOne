@@ -192,7 +192,7 @@ export default function ProfilePictureDialog({ isOpen, onClose, onSave }) {
         type="file"
         accept="image/jpeg, image/png"
         onChange={handleFileChange}
-        name="profilePictureUrl"
+        name="file"
         className="profile-picture-dialog__content__upload-area__input"
         aria-label="Upload profile picture"
       />
