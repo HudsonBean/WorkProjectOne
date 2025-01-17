@@ -4,6 +4,7 @@
 import express from "express";
 import apiRoute from "./apiRoute.js";
 import passport from "passport";
+import upload from "../config/multer-config.js";
 
 const router = express.Router();
 
@@ -27,22 +28,25 @@ const injectRoute = (app) => {
   /**======================
    *    ENDPOINTS
    *========================**/
-  // Register
-  app.post("/register", async (req, res) => {
+  // Register Route
+  app.post("/register", upload.single("file"), async (req, res) => {
     try {
       const { firstName, lastName, email, password } = req.body;
       const hashedPassword = bcrypt.hashSync(password, 10);
 
+      // Create the new user in the database
       const newUser = new User({
         firstName,
         lastName,
         email,
         password: hashedPassword,
       });
-      // await newUser.save();
-      res.status(200).json("Register successful! Welcome " + firstName);
+
+      // await newUser.save(); // Save user to DB | HBD 01/16/2025
+
+      res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
-      console.error(`Error registering user: ${error.message}`);
+      console.error("Error registering user:", error);
       res.status(500).json({ message: "Server error" });
     }
   });

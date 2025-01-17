@@ -105,20 +105,13 @@ export default function Register() {
   };
 
   const submitToBackend = () => {
-    const formData = new FormData();
-
-    formData.append("email", formik.values.email);
-    formData.append("firstName", formik.values.firstName);
-    formData.append("lastName", formik.values.lastName);
-    formData.append("password", formik.values.password);
-
     // Check if profile picture is not default | HBD 01/15/2025
     if (formik.values.file !== defaultProfilePic) {
       formData.append("file", formik.values.file);
     }
 
     axios
-      .post("http://localhost:8000/register", formData)
+      .post("http://localhost:8000/register", formik.values)
       .then((res) => {
         console.log(res);
       })

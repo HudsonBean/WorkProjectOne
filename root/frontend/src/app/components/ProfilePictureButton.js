@@ -41,7 +41,6 @@ export default function ProfilePictureButton({ formik }) {
 
   const closeDialog = () => {
     setIsDialogOpen(false);
-    Is;
   };
 
   const handleSaveImage = (croppedImageUrl) => {

@@ -5,6 +5,7 @@ import express from "express";
 const router = express.Router();
 import { fileURLToPath } from "url";
 import path from "path";
+import upload from "../config/multer-config.js";
 /**======================
  *    MIDDLEWARES
  *========================**/
@@ -41,6 +42,17 @@ const apiRoute = () => {
       }
     });
   });
+
+  // Endpoint for users to upload pictures | HBD 01/16/2025
+  router.post(
+    "/uploads/:filename",
+    ensureAuthenticated,
+    upload.single("file"),
+    (req, res) => {
+      console.log(req.file);
+      res.status(200).json({ message: "File uploaded successfully" });
+    }
+  );
 
   return router;
 };
